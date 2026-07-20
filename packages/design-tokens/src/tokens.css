@@ -1,0 +1,48 @@
+/*
+  Nova Impact Energy -- design tokens
+  Source: Master Build Brief Section 1 + UI/UX Engineering Handoff Section 1.
+  Do not edit values here without updating the source-of-truth documents first --
+  per the Build Charter constitution, brand tokens are never approximated.
+*/
+:root {
+  /* Primary palette */
+  --nova-forest: #0B3B37;      /* dominant bg -- header, footer, hero, dark sections */
+  --nova-mint: #7FE3A8;        /* accent -- logo mark, links, highlights, icons */
+  --nova-yellow: #F7E6A0;      /* CTA only -- buttons, signup prompts, never decorative */
+  --nova-white: #FFFFFF;       /* cards, light sections */
+
+  /* Supporting neutrals */
+  --nova-text: #0A2422;        /* ALL body text and headings on light backgrounds -- never pure black */
+  --nova-offwhite: #F4F1E9;    /* alternate light section background */
+  --nova-sage: #5FA98A;        /* dividers, secondary icons, muted labels */
+  --nova-teal: #2C6B5F;        /* hover/active states, eyebrow labels */
+
+  /* Derived, for consistency */
+  --nova-border: #E4E0D3;      /* hairline borders on light backgrounds */
+  --nova-text-on-dark: #F4F1E9; /* body text on --nova-forest backgrounds */
+
+  /* Status (not brand colors -- reserved strictly for the muted "planned/latent" treatment) */
+  --nova-muted-bg: #EDEAE0;
+  --nova-muted-text: #7A8C86;
+  --nova-error: #B5533C;       /* the one muted coral introduced per UI/UX Handoff 4.5, form errors only */
+
+  /* Typography */
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+  /* Spacing scale */
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 1.5rem;
+  --space-lg: 2.5rem;
+  --space-xl: 4rem;
+  --space-2xl: 6rem;
+
+  /* Radius */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+
+  /* Layout */
+  --content-max: 1120px;
+  --side-padding-desktop: 48px;
+  --side-padding-mobile: 20px;
+}

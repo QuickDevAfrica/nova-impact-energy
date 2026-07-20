@@ -1,0 +1,8 @@
+{
+  "name": "@nova/seed-scripts",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "@sanity/client": "^6.24.1"
+  }
+}
