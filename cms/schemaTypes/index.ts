@@ -4,6 +4,7 @@ import project from './objects/project';
 import industry from './objects/industry';
 import download from './objects/download';
 import platform from './objects/platform';
+import faq from './objects/faq';
 import siteSettings from './singletons/siteSettings';
 import homePage from './singletons/homePage';
 import aboutPage from './singletons/aboutPage';
@@ -27,6 +28,7 @@ export const schemaTypes = [
   industry,
   download,
   platform,
+  faq,
   // singletons
   siteSettings,
   homePage,

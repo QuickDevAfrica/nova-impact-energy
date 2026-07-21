@@ -29,7 +29,9 @@ export const aboutPageQuery = groq`*[_type == "aboutPage"][0]{
 export const servicesPageQuery = groq`*[_type == "servicesPage"][0]{
   introText,
   "featuredSolutions": featuredSolutions[]->{
-    nucid, name, slug, summaryText, ctaLabel, ctaLink, status
+    nucid, name, slug, summaryText, ctaLabel, ctaLink, status,
+    processSteps,
+    "faqs": faqs[]->{ nucid, question, answer }
   }
 }`;
 

@@ -33,7 +33,29 @@ export default defineType({
       type: 'array',
       of: [{ type: 'string' }],
     }),
-    defineField({ name: 'process', title: 'Process', type: 'text' }),
+    defineField({ name: 'process', title: 'Process (legacy short text -- superseded by processSteps below)', type: 'text' }),
+    defineField({
+      name: 'processSteps',
+      title: 'How it works -- step-by-step breakdown (Ecosystem Review Section 3)',
+      type: 'array',
+      of: [
+        {
+          type: 'object',
+          name: 'processStep',
+          fields: [
+            defineField({ name: 'title', title: 'Step title', type: 'string', validation: (Rule) => Rule.required() }),
+            defineField({ name: 'description', title: 'Step description', type: 'text', validation: (Rule) => Rule.required() }),
+          ],
+          preview: { select: { title: 'title', subtitle: 'description' } },
+        },
+      ],
+    }),
+    defineField({
+      name: 'faqs',
+      title: 'FAQ (Content OS Core Object 14 -- reusable faq documents, not hardcoded per page)',
+      type: 'array',
+      of: [{ type: 'reference', to: [{ type: 'faq' }] }],
+    }),
     defineField({ name: 'pricingModel', title: 'Pricing model', type: 'string' }),
     defineField({
       name: 'summaryText',

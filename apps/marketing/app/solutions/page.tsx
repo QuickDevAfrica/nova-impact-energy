@@ -15,6 +15,17 @@ export const dynamic = 'force-dynamic'; // CMS-driven pages -- not statically pr
  * schema type names are internal-only per Build Charter rule 6 anyway, so
  * nothing user-facing is affected by keeping the internal name as-is.
  */
+interface ProcessStep {
+  title: string;
+  description: string;
+}
+
+interface SolutionFaq {
+  nucid: string;
+  question: string;
+  answer: string;
+}
+
 interface ServiceSolution {
   nucid: string;
   name: string;
@@ -23,6 +34,8 @@ interface ServiceSolution {
   ctaLabel: string;
   ctaLink: string;
   status: 'live' | 'planned';
+  processSteps?: ProcessStep[];
+  faqs?: SolutionFaq[];
 }
 
 interface ServicesPageDoc {
@@ -69,6 +82,45 @@ export default async function SolutionsPage() {
                 )}
               </div>
             </Reveal>
+
+            {/* How it works -- step breakdown (Ecosystem Review Section 3).
+                Only shown for live solutions; a planned solution stays
+                honestly minimal rather than describing a process that
+                doesn't operate yet. */}
+            {isLive && solution.processSteps && solution.processSteps.length > 0 && (
+              <Reveal className="mt-12">
+                <h3 className="mb-6 text-[length:var(--type-h3)] font-semibold">How it works</h3>
+                <ol className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+                  {solution.processSteps.map((step, stepIndex) => (
+                    <li key={step.title} className="flex flex-col gap-1">
+                      <span className="text-[length:var(--type-label)] font-semibold text-muted-text">
+                        {String(stepIndex + 1).padStart(2, '0')}
+                      </span>
+                      <span className="text-[length:var(--type-h3)] font-semibold">{step.title}</span>
+                      <span className="text-[length:var(--type-body)] leading-normal">{step.description}</span>
+                    </li>
+                  ))}
+                </ol>
+              </Reveal>
+            )}
+
+            {/* FAQ -- real reusable faq documents (Content OS Core Object 14),
+                not hardcoded per page. */}
+            {isLive && solution.faqs && solution.faqs.length > 0 && (
+              <Reveal className="mt-12 max-w-[720px]">
+                <h3 className="mb-6 text-[length:var(--type-h3)] font-semibold">Frequently asked questions</h3>
+                <div className="flex flex-col divide-y divide-border">
+                  {solution.faqs.map((faq) => (
+                    <details key={faq.nucid} className="group py-4">
+                      <summary className="cursor-pointer list-none text-[length:var(--type-body)] font-semibold">
+                        {faq.question}
+                      </summary>
+                      <p className="mt-2 text-[length:var(--type-body)] leading-normal text-muted-text">{faq.answer}</p>
+                    </details>
+                  ))}
+                </div>
+              </Reveal>
+            )}
           </Section>
         );
       })}
