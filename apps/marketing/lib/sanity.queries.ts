@@ -7,7 +7,9 @@ export const siteSettingsQuery = groq`*[_type == "siteSettings"][0]{
 
 export const homePageQuery = groq`*[_type == "homePage"][0]{
   heroHeadline, heroSubtext, heroCtaPrimaryLabel, heroCtaPrimaryHref,
+  whyNowHeadline, whyNowBody,
   servicesTeaserHeadline,
+  proofPreviewHeadline, proofPreviewBody, proofPreviewButtonLabel, proofPreviewButtonHref,
   finalCtaHeadline, finalCtaSubtext, finalCtaButtonLabel, finalCtaButtonHref,
   "featuredSolutions": featuredSolutions[]->{
     nucid, name, slug, painPoint, ctaLabel, ctaLink, status
@@ -18,7 +20,10 @@ export const homePageQuery = groq`*[_type == "homePage"][0]{
 }`;
 
 export const aboutPageQuery = groq`*[_type == "aboutPage"][0]{
-  headline, bodyBlocks, whatWeBelieveQuote
+  headline, bodyBlocks,
+  founderStoryHeadline, founderStoryBody,
+  howWeWorkHeadline, howWeWorkBody,
+  whatWeBelieveQuote
 }`;
 
 export const servicesPageQuery = groq`*[_type == "servicesPage"][0]{

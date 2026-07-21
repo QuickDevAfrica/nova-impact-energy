@@ -1,4 +1,5 @@
-import { Section, SolutionCard, StatStrip, Button, Reveal } from '@nova/ui';
+import { PortableText, type PortableTextBlock } from '@portabletext/react';
+import { Section, SolutionCard, EcosystemCard, StatStrip, Button, Reveal } from '@nova/ui';
 import { sanityClient } from '@/lib/sanity.client';
 import { homePageQuery, siteSettingsQuery } from '@/lib/sanity.queries';
 import { getDerivedStats, formatStatStrip } from '@/lib/getStats';
@@ -13,7 +14,13 @@ interface HomePageDoc {
   heroSubtext: string;
   heroCtaPrimaryLabel: string;
   heroCtaPrimaryHref: string;
+  whyNowHeadline: string;
+  whyNowBody: PortableTextBlock[];
   servicesTeaserHeadline: string;
+  proofPreviewHeadline: string;
+  proofPreviewBody: string;
+  proofPreviewButtonLabel: string;
+  proofPreviewButtonHref: string;
   finalCtaHeadline: string;
   finalCtaSubtext?: string;
   finalCtaButtonLabel: string;
@@ -36,8 +43,14 @@ export default async function HomePage() {
   requireField(page?.heroHeadline, 'homePage.heroHeadline');
   requireField(page?.heroSubtext, 'homePage.heroSubtext');
   requireField(page?.heroCtaPrimaryLabel, 'homePage.heroCtaPrimaryLabel');
+  requireField(page?.whyNowHeadline, 'homePage.whyNowHeadline');
+  requireField(page?.whyNowBody, 'homePage.whyNowBody');
   requireField(page?.servicesTeaserHeadline, 'homePage.servicesTeaserHeadline');
   requireField(page?.featuredSolutions, 'homePage.featuredSolutions');
+  requireField(page?.proofPreviewHeadline, 'homePage.proofPreviewHeadline');
+  requireField(page?.proofPreviewBody, 'homePage.proofPreviewBody');
+  requireField(page?.proofPreviewButtonLabel, 'homePage.proofPreviewButtonLabel');
+  requireField(page?.proofPreviewButtonHref, 'homePage.proofPreviewButtonHref');
   requireField(page?.finalCtaHeadline, 'homePage.finalCtaHeadline');
   requireField(page?.finalCtaButtonLabel, 'homePage.finalCtaButtonLabel');
   requireField(settings?.statesLabel, 'siteSettings.statesLabel');
@@ -59,9 +72,14 @@ export default async function HomePage() {
         </div>
       </Section>
 
-      {/* Stat strip */}
+      {/* Why now -- Nigeria energy-transition context (Ecosystem Review Section 3) */}
       <Section tone="white">
-        <StatStrip stats={formatStatStrip(stats)} />
+        <Reveal className="mx-auto max-w-[640px]">
+          <h2 className="mb-4 text-[length:var(--type-h2)] font-semibold tracking-[-0.01em]">{page!.whyNowHeadline}</h2>
+          <div className="prose-nova flex flex-col gap-4 text-[length:var(--type-body)] leading-normal">
+            <PortableText value={page!.whyNowBody} />
+          </div>
+        </Reveal>
       </Section>
 
       {/* Solutions teaser */}
@@ -80,6 +98,47 @@ export default async function HomePage() {
               />
             ))}
           </div>
+        </Reveal>
+      </Section>
+
+      {/* Ecosystem section -- every planned Platform, each with a real
+          one-paragraph explanation of why it matters (Ecosystem Review
+          Section 3). Status-driven: EcosystemCard mutes anything not live,
+          and nothing here is live yet -- that stays accurate automatically. */}
+      {page!.featuredPlatforms && page!.featuredPlatforms.length > 0 && (
+        <Section tone="white">
+          <Reveal>
+            <h2 className="mb-2 text-[length:var(--type-h2)] font-semibold tracking-[-0.01em]">
+              What we&rsquo;re building next.
+            </h2>
+            <p className="mb-8 text-[length:var(--type-body)] leading-normal text-muted-text">
+              None of this is live yet -- shown honestly as planned, not a claim.
+            </p>
+            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+              {page!.featuredPlatforms.map((platform) => (
+                <EcosystemCard key={platform.nucid} platform={platform} />
+              ))}
+            </div>
+          </Reveal>
+        </Section>
+      )}
+
+      {/* Proof preview -- previews the Proof page with a real derived stat,
+          rather than just linking to it (Ecosystem Review Section 3). */}
+      <Section tone="offwhite">
+        <Reveal className="text-center">
+          <h2 className="mb-2 text-[length:var(--type-h2)] font-semibold tracking-[-0.01em]">
+            {page!.proofPreviewHeadline}
+          </h2>
+          <p className="mx-auto mb-6 max-w-[560px] text-[length:var(--type-body)] leading-normal">
+            {page!.proofPreviewBody}
+          </p>
+          <div className="mb-8">
+            <StatStrip stats={formatStatStrip(stats)} />
+          </div>
+          <Button href={page!.proofPreviewButtonHref} variant="primary">
+            {page!.proofPreviewButtonLabel}
+          </Button>
         </Reveal>
       </Section>
 

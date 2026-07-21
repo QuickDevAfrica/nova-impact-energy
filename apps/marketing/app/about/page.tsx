@@ -10,6 +10,10 @@ export const dynamic = 'force-dynamic'; // CMS-driven pages -- not statically pr
 interface AboutPageDoc {
   headline: string;
   bodyBlocks: PortableTextBlock[];
+  founderStoryHeadline: string;
+  founderStoryBody: PortableTextBlock[];
+  howWeWorkHeadline: string;
+  howWeWorkBody: PortableTextBlock[];
   whatWeBelieveQuote: string;
 }
 
@@ -19,6 +23,10 @@ export default async function AboutPage() {
   requireField(page, 'aboutPage');
   requireField(page?.headline, 'aboutPage.headline');
   requireField(page?.bodyBlocks, 'aboutPage.bodyBlocks');
+  requireField(page?.founderStoryHeadline, 'aboutPage.founderStoryHeadline');
+  requireField(page?.founderStoryBody, 'aboutPage.founderStoryBody');
+  requireField(page?.howWeWorkHeadline, 'aboutPage.howWeWorkHeadline');
+  requireField(page?.howWeWorkBody, 'aboutPage.howWeWorkBody');
   requireField(page?.whatWeBelieveQuote, 'aboutPage.whatWeBelieveQuote');
 
   return (
@@ -32,6 +40,25 @@ export default async function AboutPage() {
         <div className="prose-nova mb-10 flex flex-col gap-4 text-[length:var(--type-body)] leading-normal">
           <PortableText value={page!.bodyBlocks} />
         </div>
+
+        <Reveal>
+          <h2 className="mb-4 text-[length:var(--type-h2)] font-semibold tracking-[-0.01em]">
+            {page!.founderStoryHeadline}
+          </h2>
+          <div className="prose-nova mb-10 flex flex-col gap-4 text-[length:var(--type-body)] leading-normal">
+            <PortableText value={page!.founderStoryBody} />
+          </div>
+        </Reveal>
+
+        <Reveal>
+          <h2 className="mb-4 text-[length:var(--type-h2)] font-semibold tracking-[-0.01em]">
+            {page!.howWeWorkHeadline}
+          </h2>
+          <div className="prose-nova mb-10 flex flex-col gap-4 text-[length:var(--type-body)] leading-normal">
+            <PortableText value={page!.howWeWorkBody} />
+          </div>
+        </Reveal>
+
         <PulledQuote>{page!.whatWeBelieveQuote}</PulledQuote>
       </div>
     </Section>
