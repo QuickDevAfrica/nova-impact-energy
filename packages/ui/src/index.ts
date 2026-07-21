@@ -6,6 +6,7 @@ export * from './IllustrationFrame';
 export * from './SolutionCard';
 export * from './EcosystemCard';
 export * from './ProjectCard';
+export * from './ProjectCaseStudy';
 export * from './StatStrip';
 export * from './Nav';
 export * from './Footer';

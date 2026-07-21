@@ -76,6 +76,11 @@ export interface Project extends ContentMeta {
   technology?: string;
   capacity?: string;
   scope?: string;
+  /** Phase 2, Ecosystem Review Section 3 -- full case-study depth: what the
+   * client needed and how we solved it, alongside the existing scope/results/
+   * testimonial fields. */
+  problem?: string;
+  technicalApproach?: string;
   images?: { url: string; alt: string; isPlaceholder: boolean }[];
   videos?: string[];
   results?: string;

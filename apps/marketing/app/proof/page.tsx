@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { Section, ProjectCard, StatStrip, Button, Reveal } from '@nova/ui';
+import { Section, ProjectCaseStudy, StatStrip, Button, Reveal } from '@nova/ui';
 import { sanityClient } from '@/lib/sanity.client';
 import { projectsQuery, siteSettingsQuery, proofPageQuery } from '@/lib/sanity.queries';
 import { getDerivedStats, formatStatStrip } from '@/lib/getStats';
@@ -14,12 +14,26 @@ export const dynamic = 'force-dynamic'; // CMS-driven pages -- not statically pr
  * doing this rename: the page's headline and closing CTA were previously
  * hardcoded directly in this component rather than coming from Sanity --
  * they now come from the new `proofPage` singleton instead.
+ *
+ * Phase 2 task 6 (Ecosystem Review Section 3): each project now renders as
+ * a full case study (problem, technical approach, results, testimonial
+ * where available) via ProjectCaseStudy instead of the compact ProjectCard.
+ * The image gallery renders every image on the project, not just the
+ * first -- "multiple images (not one)" -- but still honestly shows
+ * whatever number of real images actually exist rather than padding with
+ * placeholders.
  */
 interface ProjectDoc {
   nucid: string;
   title: string;
   location: string;
   scope: string;
+  problem?: string;
+  technicalApproach?: string;
+  results?: string;
+  testimonial?: string;
+  capacityKw?: number;
+  storageKwh?: number;
   featured: boolean;
   order: number;
   images?: { url: string; alt: string; isPlaceholder: boolean }[];
@@ -67,20 +81,23 @@ export default async function ProofPage() {
       <Section tone="offwhite">
         <div className="grid gap-6 md:grid-cols-2">
           {projects.map((project) => {
-            const image = project.images?.[0];
+            const images = project.images ?? [];
             // Build Charter rule 6: NUCIDs never reach user-facing copy.
             // Strip one here in case it was typed into a CMS text field
             // (alt text, title) -- don't just rely on editors remembering.
             const safeProject = { ...project, title: stripLeakedNucid(project.title) };
-            const safeAlt = image ? stripLeakedNucid(image.alt) : undefined;
             return (
-              <Reveal key={project.nucid}>
-                <ProjectCard
+              <Reveal key={project.nucid} className={project.featured ? 'md:col-span-2' : ''}>
+                <ProjectCaseStudy
                   project={safeProject}
-                  imageSlot={
-                    image ? (
-                      <div className="relative h-full w-full">
-                        <Image src={image.url} alt={safeAlt!} fill className="object-cover" />
+                  imagesSlot={
+                    images.length > 0 ? (
+                      <div className={`grid gap-1 ${images.length > 1 ? 'grid-cols-2' : 'grid-cols-1'}`}>
+                        {images.map((image, i) => (
+                          <div key={image.url} className="relative aspect-[16/9] w-full bg-offwhite">
+                            <Image src={image.url} alt={stripLeakedNucid(image.alt)} fill className="object-cover" priority={i === 0} />
+                          </div>
+                        ))}
                       </div>
                     ) : undefined
                   }

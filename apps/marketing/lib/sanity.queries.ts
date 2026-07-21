@@ -48,7 +48,8 @@ export const proofPageQuery = groq`*[_type == "proofPage"][0]{
  * derived stat strip (getStats.ts). Never fetch a hand-typed stats object.
  */
 export const projectsQuery = groq`*[_type == "project"] | order(order asc){
-  nucid, title, location, scope, results, capacityKw, storageKwh,
+  nucid, title, location, scope, problem, technicalApproach, results, testimonial,
+  capacityKw, storageKwh,
   featured, order,
   images[]{ "url": asset->url, alt, isPlaceholder }
 }`;

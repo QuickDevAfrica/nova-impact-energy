@@ -30,6 +30,16 @@ export default defineType({
     }),
     defineField({ name: 'scope', title: 'Scope / description', type: 'text', validation: (Rule) => Rule.required() }),
     defineField({
+      name: 'problem',
+      title: 'Problem (full case study -- Ecosystem Review Section 3)',
+      type: 'text',
+    }),
+    defineField({
+      name: 'technicalApproach',
+      title: 'Technical approach (full case study)',
+      type: 'text',
+    }),
+    defineField({
       name: 'images',
       title: 'Images',
       type: 'array',
