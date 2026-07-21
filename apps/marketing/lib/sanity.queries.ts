@@ -32,6 +32,10 @@ export const contactPageQuery = groq`*[_type == "contactPage"][0]{
   headline, bodyText, formOptions
 }`;
 
+export const proofPageQuery = groq`*[_type == "proofPage"][0]{
+  headline, closingCtaHeadline, closingCtaButtonLabel, closingCtaButtonHref
+}`;
+
 /**
  * Every project doc, ordered -- feeds both the Our Impact page and the
  * derived stat strip (getStats.ts). Never fetch a hand-typed stats object.

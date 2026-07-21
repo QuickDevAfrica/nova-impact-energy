@@ -1,4 +1,4 @@
-import { Section, SolutionCard, StatStrip, Button } from '@nova/ui';
+import { Section, SolutionCard, StatStrip, Button, Reveal } from '@nova/ui';
 import { sanityClient } from '@/lib/sanity.client';
 import { homePageQuery, siteSettingsQuery } from '@/lib/sanity.queries';
 import { getDerivedStats, formatStatStrip } from '@/lib/getStats';
@@ -48,11 +48,11 @@ export default async function HomePage() {
     <>
       {/* Hero */}
       <Section tone="forest">
-        <div className="max-w-[480px]">
-          <h1 className="mb-5 text-[40px] font-semibold leading-[1.05] tracking-[-0.015em] md:text-[64px]">
+        <div className="max-w-[560px]">
+          <h1 className="mb-5 text-[length:var(--type-hero)] font-semibold leading-[1.05] tracking-[-0.015em]">
             {page!.heroHeadline}
           </h1>
-          <p className="mb-8 text-[16px] leading-normal text-text-on-dark md:text-[17px]">{page!.heroSubtext}</p>
+          <p className="mb-8 text-[length:var(--type-body)] leading-normal text-text-on-dark">{page!.heroSubtext}</p>
           <Button href={page!.heroCtaPrimaryHref} variant="primary">
             {page!.heroCtaPrimaryLabel}
           </Button>
@@ -64,32 +64,34 @@ export default async function HomePage() {
         <StatStrip stats={formatStatStrip(stats)} />
       </Section>
 
-      {/* Services teaser */}
+      {/* Solutions teaser */}
       <Section tone="offwhite">
-        <h2 className="mb-8 text-[22px] font-semibold tracking-[-0.01em] md:text-[26px]">
-          {page!.servicesTeaserHeadline}
-        </h2>
-        <div className="grid gap-6 md:grid-cols-2">
-          {page!.featuredSolutions.map((solution) => (
-            <SolutionCard
-              key={solution.nucid}
-              solution={solution}
-              ctaLabelOverride={solution.status === 'live' ? 'Learn more' : undefined}
-              ctaHrefOverride={solution.status === 'live' ? `/services#${solution.slug}` : undefined}
-            />
-          ))}
-        </div>
+        <Reveal>
+          <h2 className="mb-8 text-[length:var(--type-h2)] font-semibold tracking-[-0.01em]">
+            {page!.servicesTeaserHeadline}
+          </h2>
+          <div className="grid gap-6 md:grid-cols-2">
+            {page!.featuredSolutions.map((solution) => (
+              <SolutionCard
+                key={solution.nucid}
+                solution={solution}
+                ctaLabelOverride={solution.status === 'live' ? 'Learn more' : undefined}
+                ctaHrefOverride={solution.status === 'live' ? `/solutions#${solution.slug}` : undefined}
+              />
+            ))}
+          </div>
+        </Reveal>
       </Section>
 
       {/* Closing CTA band */}
       <Section tone="yellow">
-        <div className="text-center">
-          <h2 className="mb-2 text-[22px] font-semibold md:text-[26px]">{page!.finalCtaHeadline}</h2>
-          {page!.finalCtaSubtext && <p className="mb-6 text-[16px] md:text-[17px]">{page!.finalCtaSubtext}</p>}
+        <Reveal className="text-center">
+          <h2 className="mb-2 text-[length:var(--type-h2)] font-semibold tracking-[-0.01em]">{page!.finalCtaHeadline}</h2>
+          {page!.finalCtaSubtext && <p className="mb-6 text-[length:var(--type-body)]">{page!.finalCtaSubtext}</p>}
           <Button href={page!.finalCtaButtonHref} variant="secondary">
             {page!.finalCtaButtonLabel}
           </Button>
-        </div>
+        </Reveal>
       </Section>
     </>
   );

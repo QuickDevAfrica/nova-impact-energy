@@ -23,10 +23,10 @@ export function EcosystemCard({
         </IllustrationFrame>
       )}
       <div className="mb-2 flex items-center gap-2">
-        <h3 className="text-[15px] md:text-[17px] font-semibold">{platform.name}</h3>
+        <h3 className="text-[length:var(--type-h3)] font-semibold">{platform.name}</h3>
         <StatusBadge label={isLive ? 'Live' : 'Planned'} />
       </div>
-      {platform.purpose && <p className="text-[16px] leading-normal md:text-[17px]">{platform.purpose}</p>}
+      {platform.purpose && <p className="text-[length:var(--type-body)] leading-normal">{platform.purpose}</p>}
     </Card>
   );
 }

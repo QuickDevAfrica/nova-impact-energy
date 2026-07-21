@@ -37,16 +37,16 @@ export function SolutionCard({
         </IllustrationFrame>
       )}
       <div className="mb-2 flex items-center gap-2">
-        <h3 className="text-[15px] md:text-[17px] font-semibold">{solution.name}</h3>
+        <h3 className="text-[length:var(--type-h3)] font-semibold">{solution.name}</h3>
         {!isLive && <StatusBadge label="Coming soon" />}
       </div>
-      {solution.painPoint && <p className="mb-4 text-[16px] leading-normal md:text-[17px]">{solution.painPoint}</p>}
+      {solution.painPoint && <p className="mb-4 text-[length:var(--type-body)] leading-normal">{solution.painPoint}</p>}
       {isLive ? (
         <Button href={ctaHref} variant="primary">
           {ctaLabel}
         </Button>
       ) : (
-        <span className="text-[13px] font-semibold text-muted-text">Not yet available</span>
+        <span className="text-[length:var(--type-label)] font-semibold text-muted-text">Not yet available</span>
       )}
     </Card>
   );

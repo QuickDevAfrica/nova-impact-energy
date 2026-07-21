@@ -29,6 +29,32 @@
   /* Typography */
   --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 
+  /*
+    Fluid type scale -- Master Build Brief Section 1, "matched directly to
+    Apple's live marketing site CSS". Apple's own headline sizes scale
+    continuously with viewport width rather than jumping between two fixed
+    breakpoints, so these are expressed as clamp(min, preferred, max) --
+    same min/max endpoints the spec already gives (40px->80-96px hero,
+    22->26px section heading, etc), just interpolated instead of stepped.
+    Every page's H1 uses --type-hero -- Apple applies its biggest display
+    treatment to a page's own headline consistently, not only on the home
+    page's hero.
+  */
+  --type-hero: clamp(2.5rem, 1.25rem + 6vw, 6rem);       /* 40px -> 96px, weight 600, tracking -0.015em, leading 1.05 */
+  --type-h2: clamp(1.375rem, 1.1rem + 1vw, 1.625rem);     /* 22px -> 26px, weight 600, tracking -0.01em, leading 1.1 */
+  --type-h3: clamp(0.9375rem, 0.875rem + 0.3vw, 1.0625rem); /* 15px -> 17px, weight 600, leading 1.3 */
+  --type-body: clamp(1rem, 0.95rem + 0.2vw, 1.0625rem);   /* 16px -> 17px, weight 400, leading 1.5 */
+  --type-label: clamp(0.75rem, 0.72rem + 0.15vw, 0.8125rem); /* 12px -> 13px, weight 600, tracking 0.3px */
+  --type-button: clamp(0.875rem, 0.85rem + 0.15vw, 0.9375rem); /* 14px -> 15px, weight 600 */
+
+  /* Motion -- Master Build Brief 9.8: used sparingly, signals state changes,
+     never decorative. One shared easing/duration pair, reused everywhere,
+     so hover/focus/reveal transitions feel consistent site-wide instead of
+     each component picking its own timing. */
+  --ease-standard: cubic-bezier(0.22, 1, 0.36, 1);
+  --duration-fast: 150ms;
+  --duration-base: 400ms;
+
   /* Spacing scale */
   --space-xs: 0.5rem;
   --space-sm: 1rem;

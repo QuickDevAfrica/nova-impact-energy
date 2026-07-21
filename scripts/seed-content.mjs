@@ -15,9 +15,14 @@
 //   npm install
 //   SANITY_API_TOKEN=<your token> node scripts/seed-content.mjs
 //
-// It is idempotent: every document has a fixed _id, so re-running it after
-// fixing a typo in this file just updates the same records (createOrReplace),
-// it never creates duplicates.
+// It is idempotent in the sense that every document has a fixed _id, so
+// re-running it never creates duplicates -- but createOrReplace REPLACES
+// the whole document. Do not re-run this after uploading real photos or
+// any other content directly in Studio (project images, for instance) --
+// anything added in Studio that isn't a field in this file will be wiped.
+// For phase-2-style incremental CMS changes, write/use a small script that
+// .patch(id).set({...}) the specific changed fields instead -- see
+// scripts/phase2-content-depth-updates.mjs for an example of that pattern.
 
 import { createClient } from '@sanity/client';
 
@@ -251,9 +256,9 @@ const siteSettings = {
   contactPhone: '+234 816 137 6589',
   contactWebsite: 'www.novaimpactenergy.com',
   navLinks: [
-    { _key: key(), label: 'About', href: '/about' },
-    { _key: key(), label: 'Services', href: '/services' },
-    { _key: key(), label: 'Our impact', href: '/impact' },
+    { _key: key(), label: 'About us', href: '/about' },
+    { _key: key(), label: 'Solutions', href: '/solutions' },
+    { _key: key(), label: 'Proof', href: '/proof' },
     { _key: key(), label: 'Contact', href: '/contact' },
   ],
   navCtaLabel: 'Get in touch',
@@ -268,7 +273,7 @@ const homePage = {
   heroSubtext:
     'Nova Impact Energy trains certified installers and represents international manufacturers on the ground -- so solar systems in Nigeria get built right, and stay supported.',
   heroCtaPrimaryLabel: 'See our work',
-  heroCtaPrimaryHref: '/impact',
+  heroCtaPrimaryHref: '/proof',
   servicesTeaserHeadline: 'Two things, done properly.',
   featuredSolutions: [
     { _type: 'reference', _ref: 'solution-sol-001', _key: key() },

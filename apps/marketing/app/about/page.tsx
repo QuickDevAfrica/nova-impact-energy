@@ -1,5 +1,5 @@
 import { PortableText, type PortableTextBlock } from '@portabletext/react';
-import { Section, PulledQuote } from '@nova/ui';
+import { Section, PulledQuote, Reveal } from '@nova/ui';
 import { sanityClient } from '@/lib/sanity.client';
 import { aboutPageQuery } from '@/lib/sanity.queries';
 import { requireField } from '@/lib/requireField';
@@ -24,8 +24,12 @@ export default async function AboutPage() {
   return (
     <Section tone="white">
       <div className="mx-auto max-w-[640px]">
-        <h1 className="mb-6 text-[32px] font-semibold leading-[1.3] md:text-[40px]">{page!.headline}</h1>
-        <div className="prose-nova mb-10 flex flex-col gap-4 text-[16px] leading-normal md:text-[17px]">
+        <Reveal>
+          <h1 className="mb-6 text-[length:var(--type-hero)] font-semibold leading-[1.05] tracking-[-0.015em]">
+            {page!.headline}
+          </h1>
+        </Reveal>
+        <div className="prose-nova mb-10 flex flex-col gap-4 text-[length:var(--type-body)] leading-normal">
           <PortableText value={page!.bodyBlocks} />
         </div>
         <PulledQuote>{page!.whatWeBelieveQuote}</PulledQuote>

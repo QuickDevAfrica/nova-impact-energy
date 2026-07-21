@@ -6,7 +6,7 @@
  */
 export function StatusBadge({ label }: { label: string }) {
   return (
-    <span className="inline-block rounded-sm bg-muted-bg px-2.5 py-1 text-[12px] font-semibold tracking-[0.3px] text-muted-text">
+    <span className="inline-block rounded-sm bg-muted-bg px-2.5 py-1 text-[length:var(--type-label)] font-semibold tracking-[0.3px] text-muted-text">
       {label}
     </span>
   );

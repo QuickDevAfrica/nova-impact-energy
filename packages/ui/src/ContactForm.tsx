@@ -52,7 +52,7 @@ export function ContactForm({ options }: { options: string[] }) {
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-4">
       <div>
-        <label htmlFor="name" className="mb-1 block text-[12px] font-semibold tracking-[0.3px]">
+        <label htmlFor="name" className="mb-1 block text-[length:var(--type-label)] font-semibold tracking-[0.3px]">
           Name
         </label>
         <input
@@ -65,7 +65,7 @@ export function ContactForm({ options }: { options: string[] }) {
       </div>
 
       <div>
-        <label htmlFor="email" className="mb-1 block text-[12px] font-semibold tracking-[0.3px]">
+        <label htmlFor="email" className="mb-1 block text-[length:var(--type-label)] font-semibold tracking-[0.3px]">
           Email
         </label>
         <input
@@ -78,7 +78,7 @@ export function ContactForm({ options }: { options: string[] }) {
       </div>
 
       <div>
-        <label htmlFor="phone" className="mb-1 block text-[12px] font-semibold tracking-[0.3px]">
+        <label htmlFor="phone" className="mb-1 block text-[length:var(--type-label)] font-semibold tracking-[0.3px]">
           Phone
         </label>
         <input
@@ -90,7 +90,7 @@ export function ContactForm({ options }: { options: string[] }) {
       </div>
 
       <fieldset>
-        <legend className="mb-2 text-[12px] font-semibold tracking-[0.3px]">I&apos;m reaching out about</legend>
+        <legend className="mb-2 text-[length:var(--type-label)] font-semibold tracking-[0.3px]">I&apos;m reaching out about</legend>
         <div className="flex flex-wrap gap-2">
           {options.map((opt) => (
             <button
@@ -108,7 +108,7 @@ export function ContactForm({ options }: { options: string[] }) {
       </fieldset>
 
       <div>
-        <label htmlFor="message" className="mb-1 block text-[12px] font-semibold tracking-[0.3px]">
+        <label htmlFor="message" className="mb-1 block text-[length:var(--type-label)] font-semibold tracking-[0.3px]">
           Message
         </label>
         <textarea

@@ -9,6 +9,7 @@ import homePage from './singletons/homePage';
 import aboutPage from './singletons/aboutPage';
 import servicesPage from './singletons/servicesPage';
 import contactPage from './singletons/contactPage';
+import proofPage from './singletons/proofPage';
 
 /**
  * V1 schema set -- Master Build Brief Section 5 + Platform Directory:
@@ -32,6 +33,7 @@ export const schemaTypes = [
   aboutPage,
   servicesPage,
   contactPage,
+  proofPage,
 ];
 
 export const singletonTypes = new Set([
@@ -40,4 +42,5 @@ export const singletonTypes = new Set([
   'aboutPage',
   'servicesPage',
   'contactPage',
+  'proofPage',
 ]);

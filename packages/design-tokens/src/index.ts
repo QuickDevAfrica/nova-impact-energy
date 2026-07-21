@@ -46,14 +46,26 @@ export const layout = {
  * Typography scale -- Master Build Brief Section 1 (Apple-verified values).
  * Two weights only: 400 (body) and 600 (everything with visual weight).
  * Sentence case everywhere -- enforced in copy, not in CSS.
+ *
+ * `fluid` is the CSS var name to reach for in components (`text-[length:var(--type-hero)]`
+ * etc, defined in tokens.css) -- Apple's actual headline sizes scale continuously
+ * with viewport width, not in two fixed steps, so every page's H1 uses this,
+ * not just the home page hero.
  */
 export const type = {
-  hero: { desktop: '80px', mobile: '40px', weight: 600, letterSpacing: '-0.015em', lineHeight: 1.05 },
-  h2: { desktop: '26px', mobile: '22px', weight: 600, letterSpacing: '-0.01em', lineHeight: 1.1 },
-  h3: { desktop: '17px', mobile: '15px', weight: 600, lineHeight: 1.3 },
-  body: { desktop: '17px', mobile: '16px', weight: 400, lineHeight: 1.5 },
-  label: { desktop: '13px', mobile: '12px', weight: 600, letterSpacing: '0.3px', lineHeight: 1.3 },
-  button: { desktop: '15px', mobile: '14px', weight: 600 },
+  hero: { desktop: '80px', mobile: '40px', weight: 600, letterSpacing: '-0.015em', lineHeight: 1.05, fluid: 'var(--type-hero)' },
+  h2: { desktop: '26px', mobile: '22px', weight: 600, letterSpacing: '-0.01em', lineHeight: 1.1, fluid: 'var(--type-h2)' },
+  h3: { desktop: '17px', mobile: '15px', weight: 600, lineHeight: 1.3, fluid: 'var(--type-h3)' },
+  body: { desktop: '17px', mobile: '16px', weight: 400, lineHeight: 1.5, fluid: 'var(--type-body)' },
+  label: { desktop: '13px', mobile: '12px', weight: 600, letterSpacing: '0.3px', lineHeight: 1.3, fluid: 'var(--type-label)' },
+  button: { desktop: '15px', mobile: '14px', weight: 600, fluid: 'var(--type-button)' },
+} as const;
+
+/** Motion -- Master Build Brief 9.8: used sparingly, state changes only. */
+export const motion = {
+  easeStandard: 'var(--ease-standard)',
+  durationFast: 'var(--duration-fast)',
+  durationBase: 'var(--duration-base)',
 } as const;
 
 export type StatusLive = 'live' | 'planned';

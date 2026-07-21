@@ -1,4 +1,4 @@
-import { Section, ContactForm } from '@nova/ui';
+import { Section, ContactForm, Reveal } from '@nova/ui';
 import { sanityClient } from '@/lib/sanity.client';
 import { contactPageQuery, siteSettingsQuery } from '@/lib/sanity.queries';
 import { requireField } from '@/lib/requireField';
@@ -33,9 +33,11 @@ export default async function ContactPage() {
   return (
     <Section tone="white">
       <div className="grid gap-12 md:grid-cols-2">
-        <div>
-          <h1 className="mb-4 text-[32px] font-semibold md:text-[40px]">{page!.headline}</h1>
-          <p className="mb-8 text-[16px] leading-normal md:text-[17px]">{page!.bodyText}</p>
+        <Reveal>
+          <h1 className="mb-4 text-[length:var(--type-hero)] font-semibold leading-[1.05] tracking-[-0.015em]">
+            {page!.headline}
+          </h1>
+          <p className="mb-8 text-[length:var(--type-body)] leading-normal">{page!.bodyText}</p>
           <div className="flex flex-col gap-1 text-[14.5px]">
             <a href={`mailto:${settings!.contactEmail}`} className="text-teal no-underline hover:underline">
               {settings!.contactEmail}
@@ -45,7 +47,7 @@ export default async function ContactPage() {
             </a>
             <span>{settings!.contactWebsite}</span>
           </div>
-        </div>
+        </Reveal>
         <ContactForm options={page!.formOptions} />
       </div>
     </Section>
