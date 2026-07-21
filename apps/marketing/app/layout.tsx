@@ -47,6 +47,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <main>{children}</main>
         <Footer
           companyName={settings!.companyName}
+          navLinks={settings!.navLinks}
           contactEmail={settings!.contactEmail}
           contactPhone={settings!.contactPhone}
           contactWebsite={settings!.contactWebsite}

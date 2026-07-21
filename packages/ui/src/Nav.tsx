@@ -7,8 +7,12 @@ export interface NavLink {
   href: string;
 }
 
-/** UI-UX Handoff 4.1. All copy (links, CTA label) comes from siteSettings --
- * this component never hardcodes "About / Services / Our Impact / Contact". */
+/**
+ * UI-UX Handoff 4.1, restructured to Apple's actual header pattern (Phase 2
+ * visual-system rework): sticky, translucent + blurred rather than solid,
+ * compact height. All copy (links, CTA label) still comes from siteSettings
+ * -- this component never hardcodes "About / Services / Our Impact / Contact".
+ */
 export function Nav({
   logoLabel,
   links,
@@ -23,22 +27,22 @@ export function Nav({
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="bg-forest text-white">
-      <div className="mx-auto flex max-w-content items-center justify-between px-5 py-4 md:px-12">
+    <header className="sticky top-0 z-50 border-b border-white/10 bg-forest/90 text-white backdrop-blur-md">
+      <div className="mx-auto flex max-w-content items-center justify-between px-5 py-3 md:px-12">
         <a href="/" className="flex items-center gap-2 no-underline">
-          <span className="flex h-8 w-8 items-center justify-center rounded-full bg-mint text-[14px] font-semibold text-forest">
+          <span className="flex h-7 w-7 items-center justify-center rounded-full bg-mint text-[13px] font-semibold text-forest">
             N
           </span>
-          <span className="text-[14px] font-semibold text-white">{logoLabel}</span>
+          <span className="text-[13px] font-semibold text-white">{logoLabel}</span>
         </a>
 
-        <nav className="hidden items-center gap-6 md:flex">
+        <nav className="hidden items-center gap-8 md:flex">
           {links.map((link) => (
-            <a key={link.href} href={link.href} className="text-[13px] text-offwhite no-underline hover:text-mint">
+            <a key={link.href} href={link.href} className="text-[12px] text-offwhite no-underline hover:text-mint">
               {link.label}
             </a>
           ))}
-          <Button href={ctaHref} variant="primary">
+          <Button href={ctaHref} variant="primary" className="px-4 py-2">
             {ctaLabel}
           </Button>
         </nav>

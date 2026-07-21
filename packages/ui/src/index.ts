@@ -13,3 +13,5 @@ export * from './Footer';
 export * from './PulledQuote';
 export * from './ContactForm';
 export * from './Reveal';
+export * from './Tile';
+export * from './MiniTile';
