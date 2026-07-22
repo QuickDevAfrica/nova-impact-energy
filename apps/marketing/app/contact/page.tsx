@@ -34,7 +34,7 @@ export default async function ContactPage() {
     <Section tone="white">
       <div className="grid gap-12 md:grid-cols-2">
         <Reveal>
-          <h1 className="mb-4 text-[length:var(--type-hero)] font-semibold leading-[1.05] tracking-[-0.015em]">
+          <h1 className="mb-4 text-[length:var(--type-hero-long)] font-semibold leading-[1.05] tracking-[-0.015em]">
             {page!.headline}
           </h1>
           <p className="mb-8 text-[length:var(--type-body)] leading-normal">{page!.bodyText}</p>

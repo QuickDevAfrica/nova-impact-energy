@@ -54,7 +54,7 @@ export default async function SolutionsPage() {
     <>
       <Section tone="white">
         <Reveal>
-          <h1 className="text-[length:var(--type-hero)] font-semibold leading-[1.05] tracking-[-0.015em]">
+          <h1 className="text-[length:var(--type-hero-long)] font-semibold leading-[1.05] tracking-[-0.015em]">
             {page!.introText}
           </h1>
         </Reveal>
