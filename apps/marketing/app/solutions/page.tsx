@@ -1,5 +1,5 @@
 import { PortableText, type PortableTextBlock } from '@portabletext/react';
-import { Section, Button, StatusBadge, Reveal } from '@nova/ui';
+import { Section, Button, Reveal } from '@nova/ui';
 import { sanityClient } from '@/lib/sanity.client';
 import { servicesPageQuery } from '@/lib/sanity.queries';
 import { requireField } from '@/lib/requireField';
@@ -61,33 +61,24 @@ export default async function SolutionsPage() {
       </Section>
 
       {page!.featuredSolutions.map((solution, i) => {
-        const isLive = solution.status === 'live';
         const tone = i % 2 === 0 ? 'offwhite' : 'white';
         return (
           <Section tone={tone} key={solution.nucid} id={solution.slug}>
             <Reveal className={`flex flex-col gap-8 md:flex-row md:items-center ${i % 2 === 1 ? 'md:flex-row-reverse' : ''}`}>
               <div className="aspect-[4/3] w-full rounded-md bg-muted-bg md:w-1/2" aria-hidden="true" />
               <div className="md:w-1/2">
-                <div className="mb-3 flex items-center gap-2">
-                  <h2 className="text-[length:var(--type-h2)] font-semibold tracking-[-0.01em]">{solution.name}</h2>
-                  {!isLive && <StatusBadge label="Coming soon" />}
-                </div>
+                <h2 className="mb-3 text-[length:var(--type-h2)] font-semibold tracking-[-0.01em]">{solution.name}</h2>
                 <div className="mb-6 flex flex-col gap-4 text-[length:var(--type-body)] leading-normal">
                   <PortableText value={solution.summaryText} />
                 </div>
-                {isLive && (
-                  <Button href={solution.ctaLink} variant="primary">
-                    {solution.ctaLabel}
-                  </Button>
-                )}
+                <Button href={solution.ctaLink} variant="primary">
+                  {solution.ctaLabel}
+                </Button>
               </div>
             </Reveal>
 
-            {/* How it works -- step breakdown (Ecosystem Review Section 3).
-                Only shown for live solutions; a planned solution stays
-                honestly minimal rather than describing a process that
-                doesn't operate yet. */}
-            {isLive && solution.processSteps && solution.processSteps.length > 0 && (
+            {/* How it works -- step breakdown (Ecosystem Review Section 3). */}
+            {solution.processSteps && solution.processSteps.length > 0 && (
               <Reveal className="mt-12">
                 <h3 className="mb-6 text-[length:var(--type-h3)] font-semibold">How it works</h3>
                 <ol className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -106,7 +97,7 @@ export default async function SolutionsPage() {
 
             {/* FAQ -- real reusable faq documents (Content OS Core Object 14),
                 not hardcoded per page. */}
-            {isLive && solution.faqs && solution.faqs.length > 0 && (
+            {solution.faqs && solution.faqs.length > 0 && (
               <Reveal className="mt-12 max-w-[640px]">
                 <h3 className="mb-6 text-[length:var(--type-h3)] font-semibold">Frequently asked questions</h3>
                 <div className="flex flex-col divide-y divide-border">

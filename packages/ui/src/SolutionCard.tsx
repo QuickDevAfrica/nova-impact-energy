@@ -1,14 +1,14 @@
 import type { Solution } from '@nova/content-model';
 import { Card } from './Card';
-import { StatusBadge } from './StatusBadge';
 import { Button } from './Button';
 import { IllustrationFrame } from './IllustrationFrame';
 import type { ReactNode } from 'react';
 
 /**
- * Content OS-to-UI Process, Step 2 table: "Solution -> Solution card
- * (live or coming-soon variant)". `status` alone decides the treatment --
- * never a per-page decision.
+ * Phase 2 correction: no badge, no muted/grayscale treatment, no status-
+ * gated CTA -- every Solution card renders with identical visual weight
+ * regardless of `status`. The field itself is untouched in the CMS; only
+ * the rendering changed (explicit instruction, confirmed).
  */
 export function SolutionCard({
   solution,
@@ -26,28 +26,20 @@ export function SolutionCard({
   ctaLabelOverride?: string;
   ctaHrefOverride?: string;
 }) {
-  const isLive = solution.status === 'live';
   const ctaLabel = ctaLabelOverride ?? solution.ctaLabel;
   const ctaHref = ctaHrefOverride ?? solution.ctaLink;
   return (
-    <Card tone="offwhite" muted={!isLive}>
+    <Card tone="offwhite">
       {illustration && (
         <IllustrationFrame size="medium" className="mb-4">
           {illustration}
         </IllustrationFrame>
       )}
-      <div className="mb-2 flex items-center gap-2">
-        <h3 className="text-[length:var(--type-h3)] font-semibold">{solution.name}</h3>
-        {!isLive && <StatusBadge label="Coming soon" />}
-      </div>
+      <h3 className="mb-2 text-[length:var(--type-h3)] font-semibold">{solution.name}</h3>
       {solution.painPoint && <p className="mb-4 text-[length:var(--type-body)] leading-normal">{solution.painPoint}</p>}
-      {isLive ? (
-        <Button href={ctaHref} variant="primary">
-          {ctaLabel}
-        </Button>
-      ) : (
-        <span className="text-[length:var(--type-label)] font-semibold text-muted-text">Not yet available</span>
-      )}
+      <Button href={ctaHref} variant="primary">
+        {ctaLabel}
+      </Button>
     </Card>
   );
 }

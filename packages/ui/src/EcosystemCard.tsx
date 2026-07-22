@@ -1,12 +1,14 @@
 import type { Platform } from '@nova/content-model';
 import { Card } from './Card';
-import { StatusBadge } from './StatusBadge';
 import { IllustrationFrame } from './IllustrationFrame';
 import type { ReactNode } from 'react';
 
-/** Content OS-to-UI Process Step 2: "Platform -> Ecosystem card (always
- * 'planned' today)". No Platform is live yet -- this must stay accurate
- * automatically until one actually ships, never hand-maintained. */
+/**
+ * Phase 2 correction: no badge, no muted/grayscale treatment -- every
+ * Ecosystem card renders with identical visual weight regardless of
+ * `status`. The field itself is untouched in the CMS; only the rendering
+ * changed (explicit instruction, confirmed).
+ */
 export function EcosystemCard({
   platform,
   illustration,
@@ -14,18 +16,14 @@ export function EcosystemCard({
   platform: Pick<Platform, 'name' | 'purpose' | 'status'>;
   illustration?: ReactNode;
 }) {
-  const isLive = platform.status === 'live';
   return (
-    <Card tone="white" muted={!isLive}>
+    <Card tone="white">
       {illustration && (
         <IllustrationFrame size="medium" className="mb-4">
           {illustration}
         </IllustrationFrame>
       )}
-      <div className="mb-2 flex items-center gap-2">
-        <h3 className="text-[length:var(--type-h3)] font-semibold">{platform.name}</h3>
-        <StatusBadge label={isLive ? 'Live' : 'Planned'} />
-      </div>
+      <h3 className="mb-2 text-[length:var(--type-h3)] font-semibold">{platform.name}</h3>
       {platform.purpose && <p className="text-[length:var(--type-body)] leading-normal">{platform.purpose}</p>}
     </Card>
   );

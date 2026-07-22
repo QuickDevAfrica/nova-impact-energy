@@ -132,12 +132,10 @@ export default async function HomePage() {
               <Tile
                 key={solution.nucid}
                 tone={i % 2 === 0 ? 'dark' : 'light'}
-                eyebrow={solution.status === 'live' ? 'Live' : undefined}
                 headline={solution.name}
                 body={solution.painPoint}
-                ctaLabel={solution.status === 'live' ? 'Learn more' : undefined}
-                ctaHref={solution.status === 'live' ? `/solutions#${solution.slug}` : undefined}
-                muted={solution.status !== 'live'}
+                ctaLabel="Learn more"
+                ctaHref={`/solutions#${solution.slug}`}
                 className="pb-10"
               />
             ))}
@@ -147,17 +145,16 @@ export default async function HomePage() {
 
       {/* Ecosystem -- 2 featured Platform tiles + a mini-tile row for the
           rest, same weighting pattern Apple uses (2 heavy tiles, then a
-          lighter row of smaller ones). Status-driven throughout: nothing
-          here is live yet, and that stays accurate automatically. */}
+          lighter row of smaller ones). Phase 2 correction: no disclaimer
+          text, no muted treatment -- rendered with the same visual weight
+          as the Solutions tiles above (explicit instruction, confirmed).
+          The underlying Platform `status` field is untouched in the CMS. */}
       {allPlatforms.length > 0 && (
         <Section tone="white">
           <Reveal>
-            <h2 className="mb-2 text-center text-[length:var(--type-h2)] font-semibold tracking-[-0.01em]">
+            <h2 className="mb-10 text-center text-[length:var(--type-h2)] font-semibold tracking-[-0.01em]">
               What we&rsquo;re building next.
             </h2>
-            <p className={`mx-auto mb-10 ${PROSE_MAX} text-center text-[length:var(--type-body)] leading-normal text-muted-text`}>
-              None of this is live yet -- shown honestly as planned, not a claim.
-            </p>
 
             {featuredTilePlatforms.length > 0 && (
               <div className="mb-6 grid gap-6 md:grid-cols-2">
@@ -167,7 +164,6 @@ export default async function HomePage() {
                     tone={i % 2 === 0 ? 'dark' : 'light'}
                     headline={platform.name}
                     body={platform.purpose}
-                    muted
                     className="pb-10"
                   />
                 ))}
