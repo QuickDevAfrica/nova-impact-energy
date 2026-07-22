@@ -18,7 +18,7 @@ export function ProjectCard({
     >
       {imageSlot && <div className="aspect-[16/9] w-full bg-offwhite">{imageSlot}</div>}
       <div className="p-7">
-        <h3 className="mb-1 text-[15px] font-semibold md:text-[17px]">{project.title}</h3>
+        <h3 className="mb-1 text-[length:var(--type-h3)] font-semibold">{project.title}</h3>
         <p className="mb-2 text-[length:var(--type-label)] font-semibold tracking-[0.3px] text-teal">{project.location}</p>
         <p className="text-[length:var(--type-body)] leading-normal">{project.scope}</p>
       </div>

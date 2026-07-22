@@ -38,7 +38,7 @@ export default async function ContactPage() {
             {page!.headline}
           </h1>
           <p className="mb-8 text-[length:var(--type-body)] leading-normal">{page!.bodyText}</p>
-          <div className="flex flex-col gap-1 text-[14.5px]">
+          <div className="flex flex-col gap-1 text-[length:var(--type-button)]">
             <a href={`mailto:${settings!.contactEmail}`} className="text-teal no-underline hover:underline">
               {settings!.contactEmail}
             </a>

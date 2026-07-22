@@ -28,24 +28,32 @@ export function Footer({
       <div className="mx-auto max-w-content px-5 py-12 md:px-12">
         <div className="grid gap-10 border-b border-white/10 pb-10 md:grid-cols-3">
           <div>
-            <p className="mb-3 text-[15px] font-semibold text-white">{companyName}</p>
-            <p className="text-[13px] leading-relaxed text-sage">
+            <p className="mb-3 text-[length:var(--type-h3)] font-semibold text-white">{companyName}</p>
+            <p className="text-[length:var(--type-label)] leading-relaxed text-sage">
               Technical credibility for Nigeria&rsquo;s clean energy transition.
             </p>
           </div>
           <div>
-            <p className="mb-3 text-[12px] font-semibold uppercase tracking-[0.5px] text-sage">Explore</p>
+            <p className="mb-3 text-[length:var(--type-label)] font-semibold uppercase tracking-[0.5px] text-sage">
+              Explore
+            </p>
             <div className="flex flex-col gap-2">
               {navLinks.map((link) => (
-                <a key={link.href} href={link.href} className="text-[13px] text-offwhite no-underline hover:text-mint">
+                <a
+                  key={link.href}
+                  href={link.href}
+                  className="text-[length:var(--type-label)] text-offwhite no-underline hover:text-mint"
+                >
                   {link.label}
                 </a>
               ))}
             </div>
           </div>
           <div>
-            <p className="mb-3 text-[12px] font-semibold uppercase tracking-[0.5px] text-sage">Contact</p>
-            <div className="flex flex-col gap-2 text-[13px]">
+            <p className="mb-3 text-[length:var(--type-label)] font-semibold uppercase tracking-[0.5px] text-sage">
+              Contact
+            </p>
+            <div className="flex flex-col gap-2 text-[length:var(--type-label)]">
               <a href={`mailto:${contactEmail}`} className="text-offwhite no-underline hover:text-mint">
                 {contactEmail}
               </a>
@@ -56,7 +64,7 @@ export function Footer({
             </div>
           </div>
         </div>
-        <p className="pt-6 text-[12px] text-sage">{copyrightLine}</p>
+        <p className="pt-6 text-[length:var(--type-label)] text-sage">{copyrightLine}</p>
       </div>
     </footer>
   );

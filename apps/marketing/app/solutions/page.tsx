@@ -107,7 +107,7 @@ export default async function SolutionsPage() {
             {/* FAQ -- real reusable faq documents (Content OS Core Object 14),
                 not hardcoded per page. */}
             {isLive && solution.faqs && solution.faqs.length > 0 && (
-              <Reveal className="mt-12 max-w-[720px]">
+              <Reveal className="mt-12 max-w-[640px]">
                 <h3 className="mb-6 text-[length:var(--type-h3)] font-semibold">Frequently asked questions</h3>
                 <div className="flex flex-col divide-y divide-border">
                   {solution.faqs.map((faq) => (

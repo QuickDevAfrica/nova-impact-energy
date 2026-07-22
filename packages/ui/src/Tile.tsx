@@ -55,7 +55,10 @@ export function Tile({
           </p>
         )}
         {ctaLabel && ctaHref && !muted && (
-          <Button href={ctaHref} variant={tone === 'dark' ? 'primary' : 'secondary'} className="mt-2">
+          // Always primary/yellow, regardless of tile tone -- matches the
+          // Solutions page's own CTA treatment and keeps yellow consistently
+          // meaning "the action to take" everywhere, not just on dark tiles.
+          <Button href={ctaHref} variant="primary" className="mt-2">
             {ctaLabel}
           </Button>
         )}

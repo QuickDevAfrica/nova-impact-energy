@@ -20,3 +20,12 @@ button,
 a {
   text-transform: none;
 }
+
+/* Portable Text rich-text blocks (Why now, Founder story, How we work) --
+   the wrapping flex container already sets paragraph spacing via gap-4;
+   without this, each <p>'s own default browser margin stacks on top of
+   that gap, doubling up the space between paragraphs. This class was
+   referenced on those blocks from the start but never actually defined. */
+.prose-nova p {
+  margin: 0;
+}

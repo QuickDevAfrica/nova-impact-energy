@@ -1,5 +1,5 @@
 import { PortableText, type PortableTextBlock } from '@portabletext/react';
-import { Section, Tile, MiniTile, IllustrationFrame, StatStrip, Button, Reveal } from '@nova/ui';
+import { Section, Tile, MiniTile, StatStrip, Button, Reveal } from '@nova/ui';
 import { sanityClient } from '@/lib/sanity.client';
 import { homePageQuery, siteSettingsQuery } from '@/lib/sanity.queries';
 import { getDerivedStats, formatStatStrip } from '@/lib/getStats';
@@ -16,6 +16,16 @@ export const dynamic = 'force-dynamic'; // CMS-driven pages -- not statically pr
  * Nova content object -- Apple's grid works because they have 10+ real
  * products; Nova has 2 live Solutions and a handful of planned Platforms,
  * so the grid is sized to that rather than padded out with invented tiles.
+ *
+ * Phase 2 bug-fix pass:
+ * - Illustration placeholders removed entirely (empty gray boxes looked
+ *   worse than no box) until real assets exist -- Tile/MiniTile still
+ *   accept an `illustration` prop, just not passed one here yet.
+ * - Every centered text block now shares one prose max-width (640px,
+ *   matching the About page) instead of ad hoc per-section values.
+ * - Closing CTA moved off a yellow section background -- yellow is button-
+ *   fill only now (see Section.tsx) -- onto offwhite, with the CTA button
+ *   itself carrying the yellow "primary" treatment instead.
  */
 interface HomePageDoc {
   heroHeadline: string;
@@ -40,6 +50,8 @@ interface HomePageDoc {
 interface SiteSettingsDoc {
   statesLabel: string;
 }
+
+const PROSE_MAX = 'max-w-[640px]';
 
 export default async function HomePage() {
   const [page, settings] = await Promise.all([
@@ -77,29 +89,20 @@ export default async function HomePage() {
     <>
       {/* Hero -- centered, Apple pattern */}
       <Section tone="forest">
-        <div className="mx-auto flex max-w-[720px] flex-col items-center text-center">
+        <div className={`mx-auto flex ${PROSE_MAX} flex-col items-center text-center`}>
           <h1 className="mb-5 text-[length:var(--type-hero)] font-semibold leading-[1.05] tracking-[-0.015em]">
             {page!.heroHeadline}
           </h1>
-          <p className="mb-8 max-w-[560px] text-[length:var(--type-body)] leading-normal text-text-on-dark">
-            {page!.heroSubtext}
-          </p>
+          <p className="mb-8 text-[length:var(--type-body)] leading-normal text-text-on-dark">{page!.heroSubtext}</p>
           <Button href={page!.heroCtaPrimaryHref} variant="primary">
             {page!.heroCtaPrimaryLabel}
           </Button>
-        </div>
-        {/* Hero illustration -- placeholder until real photography/illustration
-            exists (see asset list). Large size per Master Build Brief 9.3. */}
-        <div className="mx-auto mt-12 max-w-[900px]">
-          <IllustrationFrame size="large" className="!max-w-none">
-            <div className="aspect-[16/7] w-full rounded-md border border-white/10 bg-white/5" aria-hidden="true" />
-          </IllustrationFrame>
         </div>
       </Section>
 
       {/* Why now -- centered promo band, Apple pattern (e.g. "College, sorted") */}
       <Section tone="white">
-        <Reveal className="mx-auto max-w-[640px] text-center">
+        <Reveal className={`mx-auto ${PROSE_MAX} text-center`}>
           <h2 className="mb-4 text-[length:var(--type-h2)] font-semibold tracking-[-0.01em]">{page!.whyNowHeadline}</h2>
           <div className="prose-nova mx-auto flex flex-col gap-4 text-left text-[length:var(--type-body)] leading-normal">
             <PortableText value={page!.whyNowBody} />
@@ -107,8 +110,17 @@ export default async function HomePage() {
         </Reveal>
       </Section>
 
-      {/* Solutions -- Apple-pattern 2-up tile grid, alternating dark/light */}
-      <Section tone="offwhite">
+      {/* Solutions -- Apple-pattern 2-up tile grid, alternating dark/light.
+          No illustration yet -- see project asset list -- so the tile is
+          just headline/body/CTA on a solid tone until real ones exist.
+          Section itself is forest (dark), not offwhite: Proof preview
+          below needs to stay light (StatStrip's colors are spec-locked to
+          light backgrounds), which forces Closing CTA dark to follow it --
+          given those two fixed points, this is the arrangement that keeps
+          the fewest same-tone sections adjacent (UI-UX Handoff Section 3's
+          alternation rule can't be satisfied with zero repeats across all
+          6 sections here, so this minimizes it to one unavoidable pair). */}
+      <Section tone="forest">
         <Reveal>
           <h2 className="mb-8 text-center text-[length:var(--type-h2)] font-semibold tracking-[-0.01em]">
             {page!.servicesTeaserHeadline}
@@ -124,14 +136,7 @@ export default async function HomePage() {
                 ctaLabel={solution.status === 'live' ? 'Learn more' : undefined}
                 ctaHref={solution.status === 'live' ? `/solutions#${solution.slug}` : undefined}
                 muted={solution.status !== 'live'}
-                illustration={
-                  <IllustrationFrame size="large" className="!max-w-none px-8 pb-8 md:px-10 md:pb-10">
-                    <div
-                      className={`aspect-[4/3] w-full rounded-md ${i % 2 === 0 ? 'bg-white/5' : 'bg-muted-bg'}`}
-                      aria-hidden="true"
-                    />
-                  </IllustrationFrame>
-                }
+                className="pb-10"
               />
             ))}
           </div>
@@ -148,7 +153,7 @@ export default async function HomePage() {
             <h2 className="mb-2 text-center text-[length:var(--type-h2)] font-semibold tracking-[-0.01em]">
               What we&rsquo;re building next.
             </h2>
-            <p className="mx-auto mb-10 max-w-[520px] text-center text-[length:var(--type-body)] leading-normal text-muted-text">
+            <p className={`mx-auto mb-10 ${PROSE_MAX} text-center text-[length:var(--type-body)] leading-normal text-muted-text`}>
               None of this is live yet -- shown honestly as planned, not a claim.
             </p>
 
@@ -161,14 +166,7 @@ export default async function HomePage() {
                     headline={platform.name}
                     body={platform.purpose}
                     muted
-                    illustration={
-                      <IllustrationFrame size="large" className="!max-w-none px-8 pb-8 md:px-10 md:pb-10">
-                        <div
-                          className={`aspect-[4/3] w-full rounded-md ${i % 2 === 0 ? 'bg-white/5' : 'bg-muted-bg'}`}
-                          aria-hidden="true"
-                        />
-                      </IllustrationFrame>
-                    }
+                    className="pb-10"
                   />
                 ))}
               </div>
@@ -177,11 +175,7 @@ export default async function HomePage() {
             {miniPlatforms.length > 0 && (
               <div className="grid grid-cols-3 gap-3 sm:grid-cols-5">
                 {miniPlatforms.map((platform) => (
-                  <MiniTile
-                    key={platform.nucid}
-                    label={platform.name}
-                    illustration={<div className="h-full w-full rounded bg-muted-bg" aria-hidden="true" />}
-                  />
+                  <MiniTile key={platform.nucid} label={platform.name} />
                 ))}
               </div>
             )}
@@ -196,10 +190,10 @@ export default async function HomePage() {
           <h2 className="mb-2 text-[length:var(--type-h2)] font-semibold tracking-[-0.01em]">
             {page!.proofPreviewHeadline}
           </h2>
-          <p className="mx-auto mb-6 max-w-[560px] text-[length:var(--type-body)] leading-normal">
+          <p className={`mx-auto mb-6 ${PROSE_MAX} text-[length:var(--type-body)] leading-normal`}>
             {page!.proofPreviewBody}
           </p>
-          <div className="mb-8">
+          <div className={`mx-auto mb-8 ${PROSE_MAX}`}>
             <StatStrip stats={formatStatStrip(stats)} />
           </div>
           <Button href={page!.proofPreviewButtonHref} variant="primary">
@@ -208,12 +202,15 @@ export default async function HomePage() {
         </Reveal>
       </Section>
 
-      {/* Closing CTA band */}
-      <Section tone="yellow">
+      {/* Closing CTA -- forest (dark), not yellow (yellow is button-fill
+          only, never a section background -- see Section.tsx). Also keeps
+          the required dark/light alternation: Proof preview above is
+          offwhite, so this needs to be dark, not another light section. */}
+      <Section tone="forest">
         <Reveal className="text-center">
           <h2 className="mb-2 text-[length:var(--type-h2)] font-semibold tracking-[-0.01em]">{page!.finalCtaHeadline}</h2>
-          {page!.finalCtaSubtext && <p className="mb-6 text-[length:var(--type-body)]">{page!.finalCtaSubtext}</p>}
-          <Button href={page!.finalCtaButtonHref} variant="secondary">
+          {page!.finalCtaSubtext && <p className="mb-6 text-[length:var(--type-body)] text-text-on-dark">{page!.finalCtaSubtext}</p>}
+          <Button href={page!.finalCtaButtonHref} variant="primary">
             {page!.finalCtaButtonLabel}
           </Button>
         </Reveal>

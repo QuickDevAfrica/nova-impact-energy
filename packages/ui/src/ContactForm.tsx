@@ -43,7 +43,7 @@ export function ContactForm({ options }: { options: string[] }) {
 
   if (status === 'success') {
     return (
-      <p className="rounded-md bg-offwhite p-6 text-[16px] text-nova-text md:text-[17px]">
+      <p className="rounded-md bg-offwhite p-6 text-[length:var(--type-body)] text-nova-text">
         Thanks -- your message is in. We&apos;ll be in touch shortly.
       </p>
     );
@@ -97,7 +97,7 @@ export function ContactForm({ options }: { options: string[] }) {
               type="button"
               key={opt}
               onClick={() => setReason(opt)}
-              className={`rounded-sm border px-4 py-2 text-[13px] ${
+              className={`rounded-sm border px-4 py-2 text-[length:var(--type-label)] ${
                 reason === opt ? 'border-teal bg-teal text-white' : 'border-border bg-white text-nova-text'
               }`}
             >
@@ -120,7 +120,7 @@ export function ContactForm({ options }: { options: string[] }) {
         />
       </div>
 
-      {status === 'error' && <p className="text-[13px] font-semibold text-error">{errorMsg}</p>}
+      {status === 'error' && <p className="text-[length:var(--type-label)] font-semibold text-error">{errorMsg}</p>}
 
       <Button type="submit" variant="primary" className="w-full md:w-auto" disabled={status === 'submitting'}>
         {status === 'submitting' ? 'Sending...' : 'Submit'}

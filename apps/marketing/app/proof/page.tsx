@@ -78,7 +78,14 @@ export default async function ProofPage() {
         </Reveal>
       </Section>
 
-      <Section tone="offwhite">
+      {/* Forest (dark), not offwhite: ProjectCaseStudy cards are fully
+          self-contained (own bg-white + explicit text colors), so they
+          render fine on a dark section -- and this keeps the required
+          dark/light alternation, since the headline/stats section above
+          and the closing CTA below both need to stay light (StatStrip's
+          colors are spec-locked to light backgrounds; yellow is button-
+          fill only, never a section background -- see Section.tsx). */}
+      <Section tone="forest">
         <div className="grid gap-6 md:grid-cols-2">
           {projects.map((project) => {
             const images = project.images ?? [];
@@ -108,12 +115,12 @@ export default async function ProofPage() {
         </div>
       </Section>
 
-      <Section tone="yellow">
+      <Section tone="offwhite">
         <Reveal className="text-center">
           <h2 className="mb-6 text-[length:var(--type-h2)] font-semibold tracking-[-0.01em]">
             {page!.closingCtaHeadline}
           </h2>
-          <Button href={page!.closingCtaButtonHref} variant="secondary">
+          <Button href={page!.closingCtaButtonHref} variant="primary">
             {page!.closingCtaButtonLabel}
           </Button>
         </Reveal>

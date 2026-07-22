@@ -30,15 +30,19 @@ export function Nav({
     <header className="sticky top-0 z-50 border-b border-white/10 bg-forest/90 text-white backdrop-blur-md">
       <div className="mx-auto flex max-w-content items-center justify-between px-5 py-3 md:px-12">
         <a href="/" className="flex items-center gap-2 no-underline">
-          <span className="flex h-7 w-7 items-center justify-center rounded-full bg-mint text-[13px] font-semibold text-forest">
+          <span className="flex h-8 w-8 items-center justify-center rounded-full bg-mint text-[length:var(--type-label)] font-semibold text-forest">
             N
           </span>
-          <span className="text-[13px] font-semibold text-white">{logoLabel}</span>
+          <span className="text-[length:var(--type-label)] font-semibold text-white">{logoLabel}</span>
         </a>
 
         <nav className="hidden items-center gap-8 md:flex">
           {links.map((link) => (
-            <a key={link.href} href={link.href} className="text-[12px] text-offwhite no-underline hover:text-mint">
+            <a
+              key={link.href}
+              href={link.href}
+              className="text-[length:var(--type-label)] text-offwhite no-underline hover:text-mint"
+            >
               {link.label}
             </a>
           ))}
@@ -63,7 +67,7 @@ export function Nav({
       {open && (
         <div className="flex flex-col gap-4 bg-forest px-5 pb-6 md:hidden">
           {links.map((link) => (
-            <a key={link.href} href={link.href} className="text-[14px] text-offwhite no-underline">
+            <a key={link.href} href={link.href} className="text-[length:var(--type-label)] text-offwhite no-underline">
               {link.label}
             </a>
           ))}
