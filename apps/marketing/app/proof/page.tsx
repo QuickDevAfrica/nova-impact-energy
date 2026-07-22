@@ -71,7 +71,9 @@ export default async function ProofPage() {
     <>
       <Section tone="white">
         <Reveal>
-          <h1 className="mb-8 text-[length:var(--type-hero)] font-semibold leading-[1.05] tracking-[-0.015em]">
+          {/* Sentence-length copy -- --type-hero-long, same reasoning as
+              the Home hero. */}
+          <h1 className="mb-8 text-[length:var(--type-hero-long)] font-semibold leading-[1.05] tracking-[-0.015em]">
             {page!.headline}
           </h1>
           <StatStrip stats={formatStatStrip(stats)} />

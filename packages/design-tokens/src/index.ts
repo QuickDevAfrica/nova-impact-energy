@@ -54,6 +54,9 @@ export const layout = {
  */
 export const type = {
   hero: { desktop: '80px', mobile: '40px', weight: 600, letterSpacing: '-0.015em', lineHeight: 1.05, fluid: 'var(--type-hero)' },
+  /** Phase 2 addition: same treatment as `hero`, capped smaller (32-56px)
+   * for sentence-length H1 copy -- see tokens.css for the full rationale. */
+  heroLong: { desktop: '56px', mobile: '32px', weight: 600, letterSpacing: '-0.015em', lineHeight: 1.05, fluid: 'var(--type-hero-long)' },
   h2: { desktop: '26px', mobile: '22px', weight: 600, letterSpacing: '-0.01em', lineHeight: 1.1, fluid: 'var(--type-h2)' },
   h3: { desktop: '17px', mobile: '15px', weight: 600, lineHeight: 1.3, fluid: 'var(--type-h3)' },
   body: { desktop: '17px', mobile: '16px', weight: 400, lineHeight: 1.5, fluid: 'var(--type-body)' },

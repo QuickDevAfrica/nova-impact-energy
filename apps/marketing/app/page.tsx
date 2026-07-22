@@ -90,7 +90,9 @@ export default async function HomePage() {
       {/* Hero -- centered, Apple pattern */}
       <Section tone="forest">
         <div className={`mx-auto flex ${PROSE_MAX} flex-col items-center text-center`}>
-          <h1 className="mb-5 text-[length:var(--type-hero)] font-semibold leading-[1.05] tracking-[-0.015em]">
+          {/* Sentence-length copy -- --type-hero-long (32-56px), not the
+              full 40-96px --type-hero scale reserved for 2-4 word headlines. */}
+          <h1 className="mb-5 text-[length:var(--type-hero-long)] font-semibold leading-[1.05] tracking-[-0.015em]">
             {page!.heroHeadline}
           </h1>
           <p className="mb-8 text-[length:var(--type-body)] leading-normal text-text-on-dark">{page!.heroSubtext}</p>
