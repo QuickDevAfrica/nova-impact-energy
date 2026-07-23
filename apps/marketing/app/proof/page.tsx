@@ -15,29 +15,19 @@ export const dynamic = 'force-dynamic'; // CMS-driven pages -- not statically pr
  * hardcoded directly in this component rather than coming from Sanity --
  * they now come from the new `proofPage` singleton instead.
  *
- * Phase 2 task 6 (Ecosystem Review Section 3): each project now renders as
- * a full case study (problem, technical approach, results, testimonial
- * where available) via ProjectCaseStudy instead of the compact ProjectCard.
- *
- * Phase 2 redesign: the tile itself is now Apple's overlay-card pattern --
+ * Phase 2 redesign: each project renders as Apple's overlay-card pattern --
  * the first image is the tile's full background with title/location
- * overlaid on a gradient. Case-study depth moves into an expandable
- * <details> below. Any additional images beyond the first (still "multiple
- * images, not one" -- Ecosystem Review Section 3) render inside that
- * expanded section as a small gallery row, rather than stacked above the
- * fold with the primary tile.
+ * overlaid on a gradient, rounded corners on the whole tile. The
+ * problem/technicalApproach/results/testimonial case-study depth added in
+ * task 6 (Ecosystem Review Section 3) and the "View case study" expandable
+ * disclosure that held it were removed by explicit instruction -- the tile
+ * itself is the only thing rendered now, just the photo and the overlaid
+ * title/location text.
  */
 interface ProjectDoc {
   nucid: string;
   title: string;
   location: string;
-  scope: string;
-  problem?: string;
-  technicalApproach?: string;
-  results?: string;
-  testimonial?: string;
-  capacityKw?: number;
-  storageKwh?: number;
   featured: boolean;
   order: number;
   images?: { url: string; alt: string; isPlaceholder: boolean }[];
@@ -84,18 +74,16 @@ export default async function ProofPage() {
         </Reveal>
       </Section>
 
-      {/* Forest (dark), not offwhite: ProjectCaseStudy cards are fully
-          self-contained (own bg-white + explicit text colors), so they
-          render fine on a dark section -- and this keeps the required
-          dark/light alternation, since the headline/stats section above
-          and the closing CTA below both need to stay light (StatStrip's
-          colors are spec-locked to light backgrounds; yellow is button-
-          fill only, never a section background -- see Section.tsx). */}
-      <Section tone="forest">
+      {/* White, not forest -- explicit instruction. This does mean the
+          hero section above and this one are both light/white back to
+          back, which departs from the strict dark/light alternation rule
+          (UI-UX Handoff Section 3); noted here since it's a deliberate,
+          explicit override rather than an oversight. */}
+      <Section tone="white">
         <div className="grid gap-6 md:grid-cols-2">
           {projects.map((project) => {
             const images = project.images ?? [];
-            const [heroImage, ...restImages] = images;
+            const heroImage = images[0];
             // Build Charter rule 6: NUCIDs never reach user-facing copy.
             // Strip one here in case it was typed into a CMS text field
             // (alt text, title) -- don't just rely on editors remembering.
@@ -107,22 +95,6 @@ export default async function ProofPage() {
                   heroImageSlot={
                     heroImage ? (
                       <Image src={heroImage.url} alt={stripLeakedNucid(heroImage.alt)} fill className="object-cover" priority />
-                    ) : undefined
-                  }
-                  galleryImagesSlot={
-                    restImages.length > 0 ? (
-                      <div className="mb-6">
-                        <h4 className="mb-2 text-[length:var(--type-label)] font-semibold uppercase tracking-[0.3px] text-muted-text">
-                          More photos
-                        </h4>
-                        <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
-                          {restImages.map((image) => (
-                            <div key={image.url} className="relative aspect-[4/3] w-full overflow-hidden rounded-sm bg-offwhite">
-                              <Image src={image.url} alt={stripLeakedNucid(image.alt)} fill className="object-cover" />
-                            </div>
-                          ))}
-                        </div>
-                      </div>
                     ) : undefined
                   }
                 />
