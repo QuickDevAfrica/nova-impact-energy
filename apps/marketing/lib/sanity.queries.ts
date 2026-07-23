@@ -41,7 +41,8 @@ export const contactPageQuery = groq`*[_type == "contactPage"][0]{
 }`;
 
 export const proofPageQuery = groq`*[_type == "proofPage"][0]{
-  headline, closingCtaHeadline, closingCtaButtonLabel, closingCtaButtonHref
+  headline, bodyText, growingLine,
+  closingCtaHeadline, closingCtaSubtext, closingCtaButtonLabel, closingCtaButtonHref
 }`;
 
 /**

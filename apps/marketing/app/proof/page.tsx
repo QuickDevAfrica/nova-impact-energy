@@ -1,8 +1,7 @@
 import Image from 'next/image';
-import { Section, ProjectCaseStudy, StatStrip, Button, Reveal } from '@nova/ui';
+import { Section, ProjectCaseStudy, Button, Reveal } from '@nova/ui';
 import { sanityClient } from '@/lib/sanity.client';
-import { projectsQuery, siteSettingsQuery, proofPageQuery } from '@/lib/sanity.queries';
-import { getDerivedStats, formatStatStrip } from '@/lib/getStats';
+import { projectsQuery, proofPageQuery } from '@/lib/sanity.queries';
 import { requireField } from '@/lib/requireField';
 import { stripLeakedNucid } from '@nova/content-model';
 
@@ -23,6 +22,15 @@ export const dynamic = 'force-dynamic'; // CMS-driven pages -- not statically pr
  * disclosure that held it were removed by explicit instruction -- the tile
  * itself is the only thing rendered now, just the photo and the overlaid
  * title/location text.
+ *
+ * Phase 2 hero rework (explicit instruction): the numeric StatStrip (4
+ * projects / 163kW+ / 260kWh / Lagos & Ogun States) is removed from this
+ * page's hero -- replaced with qualitative headline/body copy instead. The
+ * derived-stats infrastructure (getStats.ts) is untouched and still powers
+ * the Home page's own Proof-preview StatStrip; only this page's copy
+ * dropped it. Closing CTA also replaced: a headline + subtext + a link
+ * back to /solutions instead of the previous "Get in touch" button to
+ * /contact.
  */
 interface ProjectDoc {
   nucid: string;
@@ -33,44 +41,43 @@ interface ProjectDoc {
   images?: { url: string; alt: string; isPlaceholder: boolean }[];
 }
 
-interface SiteSettingsDoc {
-  statesLabel: string;
-}
-
 interface ProofPageDoc {
   headline: string;
+  bodyText?: string;
+  growingLine?: string;
   closingCtaHeadline: string;
+  closingCtaSubtext?: string;
   closingCtaButtonLabel: string;
   closingCtaButtonHref: string;
 }
 
 export default async function ProofPage() {
-  const [projects, settings, page] = await Promise.all([
+  const [projects, page] = await Promise.all([
     sanityClient.fetch<ProjectDoc[]>(projectsQuery),
-    sanityClient.fetch<SiteSettingsDoc | null>(siteSettingsQuery),
     sanityClient.fetch<ProofPageDoc | null>(proofPageQuery),
   ]);
 
   requireField(projects, 'project (none found)');
-  requireField(settings?.statesLabel, 'siteSettings.statesLabel');
   requireField(page, 'proofPage');
   requireField(page?.headline, 'proofPage.headline');
+  requireField(page?.bodyText, 'proofPage.bodyText');
+  requireField(page?.growingLine, 'proofPage.growingLine');
   requireField(page?.closingCtaHeadline, 'proofPage.closingCtaHeadline');
   requireField(page?.closingCtaButtonLabel, 'proofPage.closingCtaButtonLabel');
   requireField(page?.closingCtaButtonHref, 'proofPage.closingCtaButtonHref');
 
-  const stats = await getDerivedStats(settings!.statesLabel);
-
   return (
     <>
       <Section tone="white">
-        <Reveal>
+        <Reveal className="mx-auto max-w-[640px] text-center">
           {/* Sentence-length copy -- --type-hero-long, same reasoning as
-              the Home hero. */}
-          <h1 className="mb-8 text-[length:var(--type-hero-long)] font-semibold leading-[1.05] tracking-[-0.015em]">
+              the Home hero. Font tokens unchanged throughout this rework --
+              only the copy (and the removed StatStrip) changed. */}
+          <h1 className="mb-6 text-[length:var(--type-hero-long)] font-semibold leading-[1.05] tracking-[-0.015em]">
             {page!.headline}
           </h1>
-          <StatStrip stats={formatStatStrip(stats)} />
+          <p className="mb-4 text-[length:var(--type-body)] leading-normal">{page!.bodyText}</p>
+          <p className="text-[length:var(--type-body)] font-semibold leading-normal">{page!.growingLine}</p>
         </Reveal>
       </Section>
 
@@ -106,9 +113,10 @@ export default async function ProofPage() {
 
       <Section tone="offwhite">
         <Reveal className="text-center">
-          <h2 className="mb-6 text-[length:var(--type-h2)] font-semibold tracking-[-0.01em]">
+          <h2 className="mb-2 text-[length:var(--type-h2)] font-semibold tracking-[-0.01em]">
             {page!.closingCtaHeadline}
           </h2>
+          {page!.closingCtaSubtext && <p className="mb-6 text-[length:var(--type-body)] leading-normal">{page!.closingCtaSubtext}</p>}
           <Button href={page!.closingCtaButtonHref} variant="primary">
             {page!.closingCtaButtonLabel}
           </Button>

@@ -14,7 +14,10 @@ export default defineType({
   type: 'document',
   fields: [
     defineField({ name: 'headline', title: 'Headline', type: 'string', validation: (Rule) => Rule.required() }),
+    defineField({ name: 'bodyText', title: 'Body paragraph (below the headline)', type: 'text' }),
+    defineField({ name: 'growingLine', title: 'Short standalone line (e.g. "Our portfolio is growing...")', type: 'string' }),
     defineField({ name: 'closingCtaHeadline', title: 'Closing CTA headline', type: 'string', validation: (Rule) => Rule.required() }),
+    defineField({ name: 'closingCtaSubtext', title: 'Closing CTA subtext (optional line below the headline)', type: 'string' }),
     defineField({ name: 'closingCtaButtonLabel', title: 'Closing CTA button label', type: 'string', validation: (Rule) => Rule.required() }),
     defineField({ name: 'closingCtaButtonHref', title: 'Closing CTA button href', type: 'string', validation: (Rule) => Rule.required() }),
   ],
