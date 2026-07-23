@@ -137,7 +137,7 @@ export default async function SolutionsPage() {
                 and rendering. */}
             {solution.processSteps && solution.processSteps.length > 0 && (
               <Reveal className="mt-12">
-                <h3 className="mb-6 text-[length:var(--type-h3)] font-semibold">What you&rsquo;ll gain</h3>
+                <h3 className="mb-6 text-[length:var(--type-h2)] font-semibold tracking-[-0.01em]">What you&rsquo;ll gain</h3>
                 <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
                   {solution.processSteps.map((step) => (
                     <FeatureCard key={step.title} title={step.title} body={step.description} />
