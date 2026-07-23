@@ -150,7 +150,7 @@ export default async function HomePage() {
           as the Solutions tiles above (explicit instruction, confirmed).
           The underlying Platform `status` field is untouched in the CMS. */}
       {allPlatforms.length > 0 && (
-        <Section tone="white">
+        <Section tone="white" id="ecosystem">
           <Reveal>
             <h2 className="mb-10 text-center text-[length:var(--type-h2)] font-semibold tracking-[-0.01em]">
               What we&rsquo;re building next.

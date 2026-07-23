@@ -18,10 +18,14 @@ export const dynamic = 'force-dynamic'; // CMS-driven pages -- not statically pr
  * Phase 2 task 6 (Ecosystem Review Section 3): each project now renders as
  * a full case study (problem, technical approach, results, testimonial
  * where available) via ProjectCaseStudy instead of the compact ProjectCard.
- * The image gallery renders every image on the project, not just the
- * first -- "multiple images (not one)" -- but still honestly shows
- * whatever number of real images actually exist rather than padding with
- * placeholders.
+ *
+ * Phase 2 redesign: the tile itself is now Apple's overlay-card pattern --
+ * the first image is the tile's full background with title/location
+ * overlaid on a gradient. Case-study depth moves into an expandable
+ * <details> below. Any additional images beyond the first (still "multiple
+ * images, not one" -- Ecosystem Review Section 3) render inside that
+ * expanded section as a small gallery row, rather than stacked above the
+ * fold with the primary tile.
  */
 interface ProjectDoc {
   nucid: string;
@@ -91,6 +95,7 @@ export default async function ProofPage() {
         <div className="grid gap-6 md:grid-cols-2">
           {projects.map((project) => {
             const images = project.images ?? [];
+            const [heroImage, ...restImages] = images;
             // Build Charter rule 6: NUCIDs never reach user-facing copy.
             // Strip one here in case it was typed into a CMS text field
             // (alt text, title) -- don't just rely on editors remembering.
@@ -99,14 +104,24 @@ export default async function ProofPage() {
               <Reveal key={project.nucid} className={project.featured ? 'md:col-span-2' : ''}>
                 <ProjectCaseStudy
                   project={safeProject}
-                  imagesSlot={
-                    images.length > 0 ? (
-                      <div className={`grid gap-1 ${images.length > 1 ? 'grid-cols-2' : 'grid-cols-1'}`}>
-                        {images.map((image, i) => (
-                          <div key={image.url} className="relative aspect-[16/9] w-full bg-offwhite">
-                            <Image src={image.url} alt={stripLeakedNucid(image.alt)} fill className="object-cover" priority={i === 0} />
-                          </div>
-                        ))}
+                  heroImageSlot={
+                    heroImage ? (
+                      <Image src={heroImage.url} alt={stripLeakedNucid(heroImage.alt)} fill className="object-cover" priority />
+                    ) : undefined
+                  }
+                  galleryImagesSlot={
+                    restImages.length > 0 ? (
+                      <div className="mb-6">
+                        <h4 className="mb-2 text-[length:var(--type-label)] font-semibold uppercase tracking-[0.3px] text-muted-text">
+                          More photos
+                        </h4>
+                        <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
+                          {restImages.map((image) => (
+                            <div key={image.url} className="relative aspect-[4/3] w-full overflow-hidden rounded-sm bg-offwhite">
+                              <Image src={image.url} alt={stripLeakedNucid(image.alt)} fill className="object-cover" />
+                            </div>
+                          ))}
+                        </div>
                       </div>
                     ) : undefined
                   }

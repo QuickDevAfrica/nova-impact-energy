@@ -28,6 +28,7 @@ export const aboutPageQuery = groq`*[_type == "aboutPage"][0]{
 
 export const servicesPageQuery = groq`*[_type == "servicesPage"][0]{
   introText,
+  valuesEyebrow, valuesHeadline, valuesBody, valuesColumns,
   "featuredSolutions": featuredSolutions[]->{
     nucid, name, slug, summaryText, ctaLabel, ctaLink, status,
     processSteps,

@@ -1,5 +1,5 @@
 import { PortableText, type PortableTextBlock } from '@portabletext/react';
-import { Section, Button, Reveal } from '@nova/ui';
+import { Section, Button, Reveal, ValuesSection } from '@nova/ui';
 import { sanityClient } from '@/lib/sanity.client';
 import { servicesPageQuery } from '@/lib/sanity.queries';
 import { requireField } from '@/lib/requireField';
@@ -38,8 +38,19 @@ interface ServiceSolution {
   faqs?: SolutionFaq[];
 }
 
+interface ValueColumn {
+  leadIn: string;
+  bodyText: string;
+  linkLabel: string;
+  linkHref: string;
+}
+
 interface ServicesPageDoc {
   introText: string;
+  valuesEyebrow?: string;
+  valuesHeadline: string;
+  valuesBody: string;
+  valuesColumns: ValueColumn[];
   featuredSolutions: ServiceSolution[];
 }
 
@@ -48,6 +59,9 @@ export default async function SolutionsPage() {
 
   requireField(page, 'servicesPage');
   requireField(page?.introText, 'servicesPage.introText');
+  requireField(page?.valuesHeadline, 'servicesPage.valuesHeadline');
+  requireField(page?.valuesBody, 'servicesPage.valuesBody');
+  requireField(page?.valuesColumns, 'servicesPage.valuesColumns');
   requireField(page?.featuredSolutions, 'servicesPage.featuredSolutions');
 
   return (
@@ -60,8 +74,24 @@ export default async function SolutionsPage() {
         </Reveal>
       </Section>
 
+      {/* Apple "Designed to make a difference" pattern -- Solutions page
+          only, per explicit instruction (not reused on Home). offwhite,
+          not white, so it alternates properly against the white hero
+          above and the first featured Solution below (which now starts
+          on white instead of offwhite to keep that alternation intact). */}
+      <Section tone="offwhite">
+        <Reveal>
+          <ValuesSection
+            eyebrow={page!.valuesEyebrow}
+            headline={page!.valuesHeadline}
+            body={page!.valuesBody}
+            columns={page!.valuesColumns}
+          />
+        </Reveal>
+      </Section>
+
       {page!.featuredSolutions.map((solution, i) => {
-        const tone = i % 2 === 0 ? 'offwhite' : 'white';
+        const tone = i % 2 === 0 ? 'white' : 'offwhite';
         return (
           <Section tone={tone} key={solution.nucid} id={solution.slug}>
             <Reveal className={`flex flex-col gap-8 md:flex-row md:items-center ${i % 2 === 1 ? 'md:flex-row-reverse' : ''}`}>
