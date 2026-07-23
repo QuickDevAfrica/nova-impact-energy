@@ -27,12 +27,14 @@ export const aboutPageQuery = groq`*[_type == "aboutPage"][0]{
 }`;
 
 export const servicesPageQuery = groq`*[_type == "servicesPage"][0]{
-  introText,
-  valuesEyebrow, valuesHeadline, valuesBody, valuesColumns,
+  introText, introBody,
+  valuesColumns,
+  platformsHeadline, platformsBody,
+  "featuredPlatforms": featuredPlatforms[]->{ nucid, name, purpose },
+  closingCtaHeadline, closingCtaBody, closingCtaButtonLabel, closingCtaButtonHref,
   "featuredSolutions": featuredSolutions[]->{
-    nucid, name, slug, summaryText, ctaLabel, ctaLink, status,
-    processSteps,
-    "faqs": faqs[]->{ nucid, question, answer }
+    nucid, name, tagline, slug, summaryText, ctaLabel, ctaLink, status,
+    processSteps
   }
 }`;
 

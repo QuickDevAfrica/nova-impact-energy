@@ -19,6 +19,11 @@ export default defineType({
     }),
     defineField({ name: 'name', title: 'Name', type: 'string', validation: (Rule) => Rule.required() }),
     defineField({
+      name: 'tagline',
+      title: 'Tagline (short bold subheadline shown under the name on the Services page, e.g. "Building confident renewable energy professionals.")',
+      type: 'string',
+    }),
+    defineField({
       name: 'slug',
       title: 'Slug (anchor id used by the Home page teaser card, e.g. "training", "oem")',
       type: 'string',

@@ -1,9 +1,14 @@
 /**
- * Apple "Designed to make a difference" pattern: eyebrow -> large headline
- * -> one body paragraph -> a row of exactly 3 columns, each an icon, a bold
- * lead-in phrase followed by regular body text, and a "->" link underneath.
- * Solutions page only (Phase 2 explicit instruction) -- not a general-
- * purpose component reused on Home.
+ * Apple "Designed to make a difference" pattern: a row of exactly 3
+ * columns, each an icon, a bold column title, short body text, and a
+ * "->" link underneath. Solutions page only -- not a general-purpose
+ * component reused on Home.
+ *
+ * The eyebrow/headline/body intro block is optional and, as of the
+ * content-standard redesign, no longer used on the Solutions page (that
+ * headline moved up to become the page's own hero) -- kept optional
+ * rather than removed so the component still works standalone if reused
+ * with its own heading elsewhere later.
  *
  * No real icon assets exist yet (per the asset pipeline's honest-placeholder
  * rule), so the 3 icons are simple inline SVGs assigned by column position
@@ -51,29 +56,30 @@ export function ValuesSection({
   columns,
 }: {
   eyebrow?: string;
-  headline: string;
-  body: string;
+  headline?: string;
+  body?: string;
   columns: ValueColumn[];
 }) {
   return (
     <div className="mx-auto max-w-[960px]">
-      <div className="mx-auto mb-12 max-w-[640px] text-center">
-        {eyebrow && (
-          <span className="mb-3 block text-[length:var(--type-label)] font-semibold uppercase tracking-[0.5px] text-teal">
-            {eyebrow}
-          </span>
-        )}
-        <h2 className="mb-4 text-[length:var(--type-h2)] font-semibold tracking-[-0.01em]">{headline}</h2>
-        <p className="text-[length:var(--type-body)] leading-normal">{body}</p>
-      </div>
+      {headline && (
+        <div className="mx-auto mb-12 max-w-[640px] text-center">
+          {eyebrow && (
+            <span className="mb-3 block text-[length:var(--type-label)] font-semibold uppercase tracking-[0.5px] text-teal">
+              {eyebrow}
+            </span>
+          )}
+          <h2 className="mb-4 text-[length:var(--type-h2)] font-semibold tracking-[-0.01em]">{headline}</h2>
+          {body && <p className="text-[length:var(--type-body)] leading-normal">{body}</p>}
+        </div>
+      )}
 
       <div className="grid gap-10 md:grid-cols-3">
         {columns.map((column, i) => (
           <div key={column.leadIn} className="flex flex-col items-center text-center">
             <div className="mb-4 h-8 w-8 text-teal">{ICONS[i % ICONS.length]}</div>
-            <p className="mb-3 text-[length:var(--type-body)] leading-normal">
-              <span className="font-semibold">{column.leadIn}</span> {column.bodyText}
-            </p>
+            <h3 className="mb-2 text-[length:var(--type-h3)] font-semibold">{column.leadIn}</h3>
+            <p className="mb-3 text-[length:var(--type-body)] leading-normal">{column.bodyText}</p>
             <a href={column.linkHref} className="text-[length:var(--type-button)] font-semibold text-teal no-underline hover:underline">
               {column.linkLabel}
             </a>

@@ -30,6 +30,9 @@ export type SolutionStatus = 'live' | 'planned';
 
 export interface Solution extends ContentMeta {
   name: string;
+  /** Short bold subheadline shown under the name on the Services page
+   * (content-standard redesign). */
+  tagline?: string;
   /** Anchor id for the Home page teaser card (e.g. "training", "oem") --
    * links to /services#{slug}. Kept separate from ctaLabel/ctaLink, which
    * are the Services page block's own CTA (usually -> /contact). Same
