@@ -104,17 +104,18 @@ export default async function SolutionsPage() {
       </Section>
 
       {/* Section 2 -- 3-column values row, no separate headline (moved to hero) */}
-      <Section tone="offwhite">
+      <Section tone="white">
         <Reveal>
           <ValuesSection columns={page!.valuesColumns} />
         </Reveal>
       </Section>
 
-      {/* Sections 3/4 -- each Solution */}
+      {/* Sections 3/4 -- each Solution. All white, per explicit instruction
+          (was alternating white/offwhite for dark/light rhythm -- this
+          page now stays white end to end instead). */}
       {page!.featuredSolutions.map((solution, i) => {
-        const tone = i % 2 === 0 ? 'white' : 'offwhite';
         return (
-          <Section tone={tone} key={solution.nucid} id={solution.slug}>
+          <Section tone="white" key={solution.nucid} id={solution.slug}>
             <Reveal className={`flex flex-col gap-8 md:flex-row md:items-center ${i % 2 === 1 ? 'md:flex-row-reverse' : ''}`}>
               <div className="aspect-[4/3] w-full rounded-md bg-muted-bg md:w-1/2" aria-hidden="true" />
               <div className="md:w-1/2">
@@ -165,12 +166,16 @@ export default async function SolutionsPage() {
         </Section>
       )}
 
-      {/* Section 6 -- closing CTA, new */}
+      {/* Section 6 -- closing CTA, new. White, per explicit instruction
+          (was dark forest, matching Home/Proof/About's closing-CTA
+          treatment -- this page stays white end to end instead, so text
+          colors here are the normal dark-on-light pair, not white/
+          text-on-dark). */}
       {page!.closingCtaHeadline && (
-        <Section tone="forest">
+        <Section tone="white">
           <Reveal className="text-center">
-            <h2 className="mb-2 text-[length:var(--type-h2)] font-semibold tracking-[-0.01em] text-white">{page!.closingCtaHeadline}</h2>
-            {page!.closingCtaBody && <p className="mb-6 text-[length:var(--type-body)] leading-normal text-text-on-dark">{page!.closingCtaBody}</p>}
+            <h2 className="mb-2 text-[length:var(--type-h2)] font-semibold tracking-[-0.01em]">{page!.closingCtaHeadline}</h2>
+            {page!.closingCtaBody && <p className="mb-6 text-[length:var(--type-body)] leading-normal">{page!.closingCtaBody}</p>}
             {page!.closingCtaButtonLabel && page!.closingCtaButtonHref && (
               <Button href={page!.closingCtaButtonHref} variant="primary">
                 {page!.closingCtaButtonLabel}
