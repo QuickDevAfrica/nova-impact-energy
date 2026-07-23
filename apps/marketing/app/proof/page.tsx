@@ -77,7 +77,9 @@ export default async function ProofPage() {
             {page!.headline}
           </h1>
           <p className="mb-4 text-[length:var(--type-body)] leading-normal">{page!.bodyText}</p>
-          <p className="text-[length:var(--type-body)] font-semibold leading-normal">{page!.growingLine}</p>
+          {/* Matches the closing CTA headline's size (--type-h2), per
+              explicit instruction -- same token, not a new one-off size. */}
+          <p className="text-[length:var(--type-h2)] font-semibold tracking-[-0.01em]">{page!.growingLine}</p>
         </Reveal>
       </Section>
 
