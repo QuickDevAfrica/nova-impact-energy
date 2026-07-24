@@ -13,6 +13,21 @@ export interface NavLink {
  * visual-system rework): sticky, translucent + blurred rather than solid,
  * compact height. All copy (links, CTA label) still comes from siteSettings
  * -- this component never hardcodes "About / Services / Our Impact / Contact".
+ *
+ * Second pass, matched directly against apple.com's own header (client
+ * screenshot reference): apple.com's bar is a *light* frosted-glass blur
+ * (translucent white/gray, dark text) -- not a dark, colored one. Changed
+ * from bg-forest/90 + white text to bg-white/70 + backdrop-blur + dark
+ * text. The brand mark itself is untouched (still its own fixed #2C6E49,
+ * never recolored) -- it now simply reads correctly against a light bar
+ * instead of fighting the previous dark-green one for contrast.
+ *
+ * The mobile menu is rebuilt to match apple.com's own mobile nav exactly
+ * (client screenshot reference): a full-screen white overlay, a single
+ * close (X) in the same top-right spot the hamburger occupied, and a
+ * left-aligned, large-type list of links -- no dark background, no CTA
+ * button crammed into the list (kept below the links, since this site
+ * has one real CTA apple.com's own nav doesn't need).
  */
 export function Nav({
   logoLabel,
@@ -28,17 +43,13 @@ export function Nav({
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-white/10 bg-forest/90 text-white backdrop-blur-md">
+    <header className="sticky top-0 z-50 border-b border-black/5 bg-white/70 text-nova-text backdrop-blur-xl">
       <div className="mx-auto flex max-w-content items-center justify-between px-5 py-3 md:px-12">
         <a href="/" className="flex items-center gap-2 no-underline">
           {/* Official brand mark -- 30px on mobile, 36px on desktop, per
-              brand guide. Kept at its own #2C6E49 color (never recolored),
-              which is a lighter/brighter green than this bar's bg-forest
-              (#0B3B37) -- worth checking in person for contrast, since the
-              brand guide's own "dark background" reference is a different,
-              lighter shade (#1F4D3A) than what this Nav actually uses. */}
+              brand guide. Fixed at its own #2C6E49 (never recolored). */}
           <Logo heightPx={30} className="h-[30px] md:h-9" />
-          <span className="text-[length:var(--type-label)] font-semibold text-white">{logoLabel}</span>
+          <span className="text-[length:var(--type-label)] font-semibold text-nova-text">{logoLabel}</span>
         </a>
 
         <nav className="hidden items-center gap-8 md:flex">
@@ -46,7 +57,7 @@ export function Nav({
             <a
               key={link.href}
               href={link.href}
-              className="text-[length:var(--type-label)] text-offwhite no-underline hover:text-mint"
+              className="text-[length:var(--type-label)] text-nova-text no-underline hover:text-teal"
             >
               {link.label}
             </a>
@@ -58,25 +69,40 @@ export function Nav({
 
         <button
           type="button"
-          aria-label="Toggle menu"
+          aria-label={open ? 'Close menu' : 'Open menu'}
           aria-expanded={open}
-          className="text-white md:hidden"
+          className="text-nova-text md:hidden"
           onClick={() => setOpen((o) => !o)}
         >
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-          </svg>
+          {open ? (
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+            </svg>
+          ) : (
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+            </svg>
+          )}
         </button>
       </div>
 
+      {/* Full-screen white overlay, apple.com's own mobile-menu pattern --
+          left-aligned, large type, generous vertical rhythm, no dividers. */}
       {open && (
-        <div className="flex flex-col gap-4 bg-forest px-5 pb-6 md:hidden">
-          {links.map((link) => (
-            <a key={link.href} href={link.href} className="text-[length:var(--type-label)] text-offwhite no-underline">
-              {link.label}
-            </a>
-          ))}
-          <Button href={ctaHref} variant="primary" className="w-full">
+        <div className="fixed inset-x-0 top-[57px] bottom-0 z-50 flex flex-col overflow-y-auto bg-white px-6 pb-10 pt-8 md:hidden">
+          <nav className="flex flex-col gap-7">
+            {links.map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
+                className="text-[28px] font-normal leading-none text-nova-text no-underline"
+                onClick={() => setOpen(false)}
+              >
+                {link.label}
+              </a>
+            ))}
+          </nav>
+          <Button href={ctaHref} variant="primary" className="mt-10 w-fit" onClick={() => setOpen(false)}>
             {ctaLabel}
           </Button>
         </div>
