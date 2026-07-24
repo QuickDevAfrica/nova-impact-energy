@@ -20,10 +20,14 @@ export const homePageQuery = groq`*[_type == "homePage"][0]{
 }`;
 
 export const aboutPageQuery = groq`*[_type == "aboutPage"][0]{
-  headline, bodyBlocks,
+  heroLabel, headline, bodyBlocks,
+  pillarsHeadline, pillarsBody, pillars,
   founderStoryHeadline, founderStoryBody,
-  howWeWorkHeadline, howWeWorkBody,
-  whatWeBelieveQuote
+  valueHeadline, valueCards,
+  howWeWorkHeadline, howWeWorkBody, processCards,
+  visionHeadline, visionBody,
+  guidesHeadline, coreValues,
+  closingCtaHeadline, closingCtaBody, closingCtaButtonLabel, closingCtaButtonHref
 }`;
 
 export const servicesPageQuery = groq`*[_type == "servicesPage"][0]{

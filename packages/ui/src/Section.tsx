@@ -9,13 +9,19 @@ import type { ReactNode } from 'react';
  * correction): yellow is reserved for the primary Button fill only, never
  * a section/page background -- keeping that rule enforced at the type
  * level means a future page can't accidentally reintroduce it.
+ *
+ * 'soft' added for the About page content-standard redesign: a second
+ * light section background (#F7FCF9), alternated with white instead of
+ * `offwhite` -- explicit hex given for that page, distinct from the
+ * warmer `offwhite` (#F4F1E9) used elsewhere.
  */
-export type SectionTone = 'forest' | 'white' | 'offwhite';
+export type SectionTone = 'forest' | 'white' | 'offwhite' | 'soft';
 
 const toneClasses: Record<SectionTone, string> = {
   forest: 'bg-forest text-white',
   white: 'bg-white text-nova-text',
   offwhite: 'bg-offwhite text-nova-text',
+  soft: 'bg-soft text-nova-text',
 };
 
 export function Section({

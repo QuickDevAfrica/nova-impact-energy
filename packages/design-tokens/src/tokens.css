@@ -16,10 +16,12 @@
   --nova-offwhite: #F4F1E9;    /* alternate light section background */
   --nova-sage: #5FA98A;        /* dividers, secondary icons, muted labels */
   --nova-teal: #2C6B5F;        /* hover/active states, eyebrow labels */
+  --nova-soft: #F7FCF9;        /* About page: second light section bg, alternated with white */
 
   /* Derived, for consistency */
   --nova-border: #E4E0D3;      /* hairline borders on light backgrounds */
   --nova-text-on-dark: #F4F1E9; /* body text on --nova-forest backgrounds */
+  --nova-card-border: #DCEFE7; /* About page: pillar/value/process/values card border */
 
   /* Status (not brand colors -- reserved strictly for the muted "planned/latent" treatment) */
   --nova-muted-bg: #EDEAE0;

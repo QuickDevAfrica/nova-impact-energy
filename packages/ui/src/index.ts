@@ -17,3 +17,4 @@ export * from './Tile';
 export * from './MiniTile';
 export * from './ValuesSection';
 export * from './FeatureCard';
+export * from './AboutCard';

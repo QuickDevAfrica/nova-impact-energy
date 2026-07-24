@@ -17,6 +17,14 @@ export const colors = {
   mutedBg: '#EDEAE0',
   mutedText: '#7A8C86',
   error: '#B5533C',
+  /** About page content-standard redesign: a second, cooler-tinted light
+   * section background, alternated with white for readability -- distinct
+   * from `offwhite` (#F4F1E9, warm), given as an explicit hex. */
+  soft: '#F7FCF9',
+  /** Card border for the About page's pillar/value/process/values cards --
+   * distinct from the general `border` token (#E4E0D3), given as an
+   * explicit hex. */
+  cardBorder: '#DCEFE7',
 } as const;
 
 export const fontSans =
