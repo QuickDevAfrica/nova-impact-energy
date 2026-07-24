@@ -43,7 +43,7 @@ export const servicesPageQuery = groq`*[_type == "servicesPage"][0]{
 }`;
 
 export const contactPageQuery = groq`*[_type == "contactPage"][0]{
-  headline, bodyText, formOptions
+  label, headline, bodyText, formOptions
 }`;
 
 export const proofPageQuery = groq`*[_type == "proofPage"][0]{

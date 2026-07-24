@@ -5,8 +5,16 @@ import { requireField } from '@/lib/requireField';
 
 export const dynamic = 'force-dynamic'; // CMS-driven pages -- not statically prerendered
 
-
+/**
+ * Content-standard redesign (explicit instruction): eyebrow label added
+ * for consistency with About/Solutions, body copy tightened to 2-3 short
+ * lines. Layout, ContactForm, and font tokens are unchanged -- this page
+ * was already close to the target (one message, generous whitespace,
+ * ends with its CTA being the form itself), so it stayed a single
+ * section rather than being split into more of them.
+ */
 interface ContactPageDoc {
+  label?: string;
   headline: string;
   bodyText: string;
   formOptions: string[];
@@ -34,6 +42,11 @@ export default async function ContactPage() {
     <Section tone="white">
       <div className="grid gap-12 md:grid-cols-2">
         <Reveal>
+          {page!.label && (
+            <span className="mb-4 block text-[length:var(--type-label)] font-semibold uppercase tracking-[0.5px] text-teal">
+              {page!.label}
+            </span>
+          )}
           <h1 className="mb-4 text-[length:var(--type-hero-long)] font-semibold leading-[1.05] tracking-[-0.015em]">
             {page!.headline}
           </h1>
