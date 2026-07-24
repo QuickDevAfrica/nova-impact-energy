@@ -1,4 +1,5 @@
 import type { NavLink } from './Nav';
+import { Logo } from './Logo';
 
 /**
  * UI-UX Handoff 4.6, restructured to Apple's multi-column footer pattern
@@ -28,6 +29,7 @@ export function Footer({
       <div className="mx-auto max-w-content px-5 py-12 md:px-12">
         <div className="grid gap-10 border-b border-white/10 pb-10 md:grid-cols-3">
           <div>
+            <Logo heightPx={28} className="mb-3 h-7" />
             <p className="mb-3 text-[length:var(--type-h3)] font-semibold text-white">{companyName}</p>
             <p className="text-[length:var(--type-label)] leading-relaxed text-sage">
               Technical credibility for Nigeria&rsquo;s clean energy transition.

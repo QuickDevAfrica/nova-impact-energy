@@ -1,6 +1,7 @@
 'use client';
 import { useState } from 'react';
 import { Button } from './Button';
+import { Logo } from './Logo';
 
 export interface NavLink {
   label: string;
@@ -30,9 +31,13 @@ export function Nav({
     <header className="sticky top-0 z-50 border-b border-white/10 bg-forest/90 text-white backdrop-blur-md">
       <div className="mx-auto flex max-w-content items-center justify-between px-5 py-3 md:px-12">
         <a href="/" className="flex items-center gap-2 no-underline">
-          <span className="flex h-8 w-8 items-center justify-center rounded-full bg-mint text-[length:var(--type-label)] font-semibold text-forest">
-            N
-          </span>
+          {/* Official brand mark -- 30px on mobile, 36px on desktop, per
+              brand guide. Kept at its own #2C6E49 color (never recolored),
+              which is a lighter/brighter green than this bar's bg-forest
+              (#0B3B37) -- worth checking in person for contrast, since the
+              brand guide's own "dark background" reference is a different,
+              lighter shade (#1F4D3A) than what this Nav actually uses. */}
+          <Logo heightPx={30} className="h-[30px] md:h-9" />
           <span className="text-[length:var(--type-label)] font-semibold text-white">{logoLabel}</span>
         </a>
 

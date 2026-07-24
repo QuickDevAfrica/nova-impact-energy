@@ -12,6 +12,19 @@ export const metadata: Metadata = {
   title: 'Nova Impact Energy',
   description:
     'Technical credibility for Nigeria’s clean energy transition -- installer training, certification, and OEM technical partnerships.',
+  // Official brand mark (nova_logo_primary.svg), generated at the sizes
+  // the brand guide specifies. favicon.svg is the source file itself,
+  // unmodified; the PNGs are rasterized from it (color-verified against
+  // #2C6E49) since browsers/OS chrome that can't use an SVG favicon need
+  // a raster fallback.
+  icons: {
+    icon: [
+      { url: '/favicon.svg', type: 'image/svg+xml' },
+      { url: '/favicon-32.png', sizes: '32x32', type: 'image/png' },
+      { url: '/favicon-16.png', sizes: '16x16', type: 'image/png' },
+    ],
+    apple: [{ url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' }],
+  },
 };
 
 interface SiteSettings {

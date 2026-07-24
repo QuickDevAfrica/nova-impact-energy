@@ -29,3 +29,24 @@ a {
 .prose-nova p {
   margin: 0;
 }
+
+/* Loading screen (app/loading.tsx) -- brand mark fades in smoothly rather
+   than popping in. Fading back out isn't controllable from CSS alone --
+   Next.js unmounts loading.tsx the instant the real page is ready, it
+   doesn't animate that swap -- so this only covers the entrance. */
+@keyframes nova-logo-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.nova-loading-logo {
+  animation: nova-logo-fade var(--duration-base) var(--ease-standard) both;
+}
+@media (prefers-reduced-motion: reduce) {
+  .nova-loading-logo {
+    animation: none;
+  }
+}
