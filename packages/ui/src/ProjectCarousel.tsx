@@ -27,15 +27,18 @@ export function ProjectCarousel({ items, heightPx = 520 }: { items: CarouselCard
         {loop.map((card, i) => (
           <div
             key={i}
-            className="relative flex h-full w-[340px] shrink-0 flex-col justify-end overflow-hidden rounded-[24px] bg-white/[0.06] md:w-[420px]"
+            className="relative flex h-full w-[340px] shrink-0 flex-col justify-end overflow-hidden rounded-[24px] bg-white/10 md:w-[420px]"
           >
             {/* cinematic project photography placeholder -- see
                 /images/home/endless/{slug}.webp, reserves this card's
-                exact aspect ratio for the final photography library */}
+                exact aspect ratio for the final photography library.
+                Neutral black gradient, not brand green (client feedback:
+                too much dark green across the page) -- these will
+                eventually hold real project photography. */}
             <div
               className="absolute inset-0"
               aria-hidden="true"
-              style={{ background: 'linear-gradient(180deg, rgba(18,61,54,0) 45%, rgba(18,61,54,0.92) 100%)' }}
+              style={{ background: 'linear-gradient(180deg, rgba(10,10,10,0) 45%, rgba(10,10,10,0.85) 100%)' }}
             />
             <div className="relative z-10 flex flex-col gap-1 p-7">
               <p className="text-[length:var(--type-h3)] font-semibold text-white">{card.title}</p>

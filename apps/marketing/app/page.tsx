@@ -122,16 +122,17 @@ export default async function HomePage() {
 
   return (
     <>
-      {/* SECTION 1 -- Hero. Full viewport, Dark Forest background, large
+      {/* SECTION 1 -- Hero. Full viewport, white background (changed from
+          Dark Forest per client feedback after seeing the preview -- too
+          much dark green across the page; white carries the same bold
+          confident feel with this much whitespace and type size), large
           centered headline, illustration reserved below it. */}
-      <Section tone="forest" maxWidthClassName={HOME_MAX} paddingClassName="px-5 pb-20 pt-24 md:px-12 md:pb-28 md:pt-16">
+      <Section tone="white" maxWidthClassName={HOME_MAX} paddingClassName="px-5 pb-20 pt-24 md:px-12 md:pb-28 md:pt-16">
         <div className="flex min-h-[80vh] flex-col items-center justify-center text-center">
           <h1 className="mb-6 max-w-[880px] text-[length:var(--type-hero)] font-semibold leading-[1.05] tracking-[-0.015em]">
             {page!.heroHeadline}
           </h1>
-          <p className="mb-9 max-w-[600px] text-[length:var(--type-body)] leading-normal text-text-on-dark">
-            {page!.heroSubtext}
-          </p>
+          <p className="mb-9 max-w-[600px] text-[length:var(--type-body)] leading-normal">{page!.heroSubtext}</p>
           <div className="flex flex-wrap items-center justify-center gap-4">
             <Button href={page!.heroCtaPrimaryHref} variant="primary">
               {page!.heroCtaPrimaryLabel}
@@ -139,7 +140,7 @@ export default async function HomePage() {
             {page!.heroCtaSecondaryLabel && page!.heroCtaSecondaryHref && (
               <a
                 href={page!.heroCtaSecondaryHref}
-                className="inline-flex items-center justify-center rounded-sm border border-white/40 px-5 py-3 text-[length:var(--type-button)] font-semibold text-white no-underline transition-colors duration-150 hover:bg-white/10"
+                className="inline-flex items-center justify-center rounded-sm border border-teal px-5 py-3 text-[length:var(--type-button)] font-semibold text-teal no-underline transition-colors duration-150 hover:bg-teal hover:text-white"
               >
                 {page!.heroCtaSecondaryLabel}
               </a>
@@ -148,7 +149,7 @@ export default async function HomePage() {
         </div>
         {/* hero illustration placeholder -- reserves the layout/aspect
             ratio for /images/home/hero-energy.webp */}
-        <div className="aspect-[16/9] w-full rounded-[32px] bg-white/[0.06]" aria-hidden="true" />
+        <div className="aspect-[16/9] w-full rounded-[32px] bg-muted-bg" aria-hidden="true" />
       </Section>
 
       {/* SECTION 2 -- "The energy transition needs more than hardware." */}
@@ -163,8 +164,11 @@ export default async function HomePage() {
         </Reveal>
       </Section>
 
-      {/* SECTION 3 -- "What we do today." Three premium equal-height cards. */}
-      <Section tone="forest" maxWidthClassName={HOME_MAX} paddingClassName={HOME_PADDING}>
+      {/* SECTION 3 -- "What we do today." Three premium equal-height cards.
+          White (changed from Dark Forest per client feedback -- too much
+          dark green across the page); cards use the same light treatment
+          as Section 4's mini cards. */}
+      <Section tone="white" maxWidthClassName={HOME_MAX} paddingClassName={HOME_PADDING}>
         <Reveal>
           <h2 className="mb-14 text-center text-[length:var(--type-hero-long)] font-semibold leading-[1.05] tracking-[-0.015em]">
             {page!.whatWeDoHeadline}
@@ -173,7 +177,7 @@ export default async function HomePage() {
             {page!.whatWeDoCards.map((card) => (
               <HomeCard
                 key={card.headline}
-                tone="dark"
+                tone="light"
                 size="large"
                 headline={card.headline}
                 body={card.body}
@@ -213,20 +217,22 @@ export default async function HomePage() {
         </Reveal>
       </Section>
 
-      {/* SECTION 5 -- "Built for long-term impact." Three columns. */}
-      <Section tone="forest" maxWidthClassName={HOME_MAX} paddingClassName={HOME_PADDING}>
+      {/* SECTION 5 -- "Built for long-term impact." Three columns. White
+          (changed from Dark Forest per client feedback -- too much dark
+          green across the page). */}
+      <Section tone="offwhite" maxWidthClassName={HOME_MAX} paddingClassName={HOME_PADDING}>
         <Reveal>
           <div className="mx-auto mb-14 max-w-[640px] text-center">
             <h2 className="mb-4 text-[length:var(--type-hero-long)] font-semibold leading-[1.05] tracking-[-0.015em]">
               {page!.impactHeadline}
             </h2>
-            <p className="text-[length:var(--type-body)] leading-normal text-text-on-dark">{page!.impactBody}</p>
+            <p className="text-[length:var(--type-body)] leading-normal">{page!.impactBody}</p>
           </div>
           <div className="grid gap-10 md:grid-cols-3">
             {page!.impactColumns.map((column) => (
               <div key={column.headline} className="text-center">
                 <h3 className="mb-2 text-[length:var(--type-h3)] font-semibold">{column.headline}</h3>
-                <p className="text-[length:var(--type-body)] leading-normal text-text-on-dark">{column.body}</p>
+                <p className="text-[length:var(--type-body)] leading-normal">{column.body}</p>
               </div>
             ))}
           </div>

@@ -10,7 +10,11 @@ import { Button } from './Button';
  * No illustration exists yet -- rather than wait, this reserves the exact
  * layout/aspect ratio with a placeholder fill plus a bottom gradient
  * (so the eventual photo/illustration only needs to drop in behind the
- * existing text, never the other way around).
+ * existing text, never the other way around). Placeholder fill/gradient
+ * are neutral gray/black, not brand green -- these cards will eventually
+ * hold real photography, and a green-tinted placeholder reads as "another
+ * dark green block" rather than "a photo is coming" (client feedback
+ * after the first preview: too much dark green across the page).
  */
 export function FullBleedFeature({
   eyebrow,
@@ -31,14 +35,14 @@ export function FullBleedFeature({
 }) {
   return (
     <div
-      className={`relative overflow-hidden bg-white/[0.06] ${rounded ? 'rounded-[32px]' : ''} ${heightClass}`}
+      className={`relative overflow-hidden bg-muted-bg ${rounded ? 'rounded-[32px]' : ''} ${heightClass}`}
     >
       {/* full-bleed image placeholder -- see comment at call site for the
           reserved filename; fills the entire card, no inset padding */}
       <div
         className="absolute inset-0"
         aria-hidden="true"
-        style={{ background: 'linear-gradient(180deg, rgba(18,61,54,0) 35%, rgba(18,61,54,0.9) 100%)' }}
+        style={{ background: 'linear-gradient(180deg, rgba(10,10,10,0) 35%, rgba(10,10,10,0.78) 100%)' }}
       />
       <div className="relative z-10 flex h-full flex-col items-start justify-end gap-3 p-8 md:p-14">
         {eyebrow && (

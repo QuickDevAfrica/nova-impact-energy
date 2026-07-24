@@ -4,7 +4,10 @@ import { Button } from './Button';
  * Homepage Section 8 -- Apple's split full-bleed product pair: two equal
  * cards, each a full-bleed background image with text overlaid directly
  * on it (no padding gutter around the image). Fixed at exactly two cards
- * -- this is a layout pattern, not a generic grid.
+ * -- this is a layout pattern, not a generic grid. Placeholder fill/
+ * gradient are neutral gray/black, not brand green (client feedback: too
+ * much dark green across the page) -- these will eventually hold real
+ * training/warehouse photography.
  */
 export interface SplitCardContent {
   headline: string;
@@ -28,14 +31,14 @@ export function SplitCards({
       {cards.slice(0, 2).map((card) => (
         <div
           key={card.headline}
-          className={`relative overflow-hidden rounded-[32px] bg-white/[0.06] ${heightClass}`}
+          className={`relative overflow-hidden rounded-[32px] bg-muted-bg ${heightClass}`}
         >
           {/* full-bleed image placeholder -- see comment at call site for
               the reserved filename */}
           <div
             className="absolute inset-0"
             aria-hidden="true"
-            style={{ background: 'linear-gradient(180deg, rgba(18,61,54,0) 40%, rgba(18,61,54,0.9) 100%)' }}
+            style={{ background: 'linear-gradient(180deg, rgba(10,10,10,0) 40%, rgba(10,10,10,0.8) 100%)' }}
           />
           <div className="relative z-10 flex h-full flex-col justify-end gap-2 p-8">
             <h3 className="text-[length:var(--type-h2)] font-semibold tracking-[-0.01em] text-white">{card.headline}</h3>
