@@ -29,15 +29,31 @@ export function Section({
   children,
   className = '',
   id,
+  maxWidthClassName = 'max-w-content',
+  paddingClassName = 'px-5 py-16 md:px-12 md:py-24',
+  noInnerPadding = false,
 }: {
   tone: SectionTone;
   children: ReactNode;
   className?: string;
   id?: string;
+  /** Homepage content-standard redesign only: the shared 1120px content
+   * width stays the default for every other page; the homepage opts into
+   * a wider 1280-1440px container instead of changing the sitewide token
+   * (explicit instruction: layout width changes are homepage-only). */
+  maxWidthClassName?: string;
+  /** Homepage content-standard redesign only: the shared 64-96px section
+   * padding stays the default elsewhere; the homepage opts into the
+   * larger 120-180px vertical rhythm its spec calls for. */
+  paddingClassName?: string;
+  /** Section 6 ("Endless Possibilities") is one continuous, edge-to-edge
+   * component (ticker + carousel, no gap) -- it manages its own inner
+   * width/padding per row, so the wrapper must not add any. */
+  noInnerPadding?: boolean;
 }) {
   return (
     <section id={id} className={`${toneClasses[tone]} ${className}`}>
-      <div className="mx-auto max-w-content px-5 py-16 md:px-12 md:py-24">{children}</div>
+      {noInnerPadding ? children : <div className={`mx-auto ${maxWidthClassName} ${paddingClassName}`}>{children}</div>}
     </section>
   );
 }

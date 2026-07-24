@@ -1,63 +1,103 @@
 import { PortableText, type PortableTextBlock } from '@portabletext/react';
-import { Section, Tile, MiniTile, StatStrip, Button, Reveal } from '@nova/ui';
+import {
+  Section,
+  Button,
+  Reveal,
+  HomeCard,
+  FullBleedFeature,
+  SplitCards,
+  Ticker,
+  ProjectCarousel,
+  type TickerItem,
+  type CarouselCard,
+  type SplitCardContent,
+} from '@nova/ui';
 import { sanityClient } from '@/lib/sanity.client';
-import { homePageQuery, siteSettingsQuery } from '@/lib/sanity.queries';
-import { getDerivedStats, formatStatStrip } from '@/lib/getStats';
+import { homePageQuery } from '@/lib/sanity.queries';
 import { requireField } from '@/lib/requireField';
-import type { Solution, Platform } from '@nova/content-model';
 
 export const dynamic = 'force-dynamic'; // CMS-driven pages -- not statically prerendered
 
 /**
- * Phase 2 visual-system rework: restructured to Apple's actual homepage
- * pattern (hero -> centered promo band -> alternating tile grid -> promo
- * band -> closing CTA) per the explicit instruction to match apple.com's
- * structure, not just its typography. Every tile still maps to a real
- * Nova content object -- Apple's grid works because they have 10+ real
- * products; Nova has 2 live Solutions and a handful of planned Platforms,
- * so the grid is sized to that rather than padded out with invented tiles.
+ * Homepage content-standard redesign -- Apple.com's design philosophy
+ * (not its content): premium, minimal, spacious, image-driven. Full
+ * 9-section rebuild per explicit instruction, replacing the previous
+ * tile-grid layout entirely. Two decisions made explicit with the user
+ * before writing this:
  *
- * Phase 2 bug-fix pass:
- * - Illustration placeholders removed entirely (empty gray boxes looked
- *   worse than no box) until real assets exist -- Tile/MiniTile still
- *   accept an `illustration` prop, just not passed one here yet.
- * - Every centered text block now shares one prose max-width (640px,
- *   matching the About page) instead of ad hoc per-section values.
- * - Closing CTA moved off a yellow section background -- yellow is button-
- *   fill only now (see Section.tsx) -- onto offwhite, with the CTA button
- *   itself carrying the yellow "primary" treatment instead.
+ * 1. Color palette -- the brief's colors (#2C6E49 etc, matching the real
+ *    logo mark) replaced the sitewide design tokens (Nav, Footer, every
+ *    page), not just this page -- see packages/design-tokens.
+ * 2. Layout width/radius -- the brief's 1280-1440px max-width and 32px
+ *    corner radius are homepage-only (`HOME_MAX` / `HOME_PADDING` below,
+ *    and each new component's own rounded-[32px]) -- every other page
+ *    keeps the shared 1120px / 8-12px system.
+ *
+ * Two more decisions, also explicit: the Section 6 price ticker is a
+ * static/illustrative display, not a live market-data feed (none exists
+ * yet); the Section 6 cinematic carousel uses anonymized project types
+ * instead of the brief's named real companies (Tesla, Apple, Google...),
+ * since publishing unverified capacity claims about unaffiliated
+ * companies isn't something to put on a live production site.
  */
+
+const HOME_MAX = 'max-w-[1400px]';
+const HOME_PADDING = 'px-5 py-24 md:px-12 md:py-32 lg:py-40';
+
+interface WhatWeDoCard {
+  headline: string;
+  body: string;
+  ctaLabel: string;
+  ctaHref: string;
+}
+
+interface EcosystemCard {
+  headline: string;
+  body: string;
+}
+
+interface ImpactColumn {
+  headline: string;
+  body: string;
+}
+
 interface HomePageDoc {
   heroHeadline: string;
   heroSubtext: string;
   heroCtaPrimaryLabel: string;
   heroCtaPrimaryHref: string;
+  heroCtaSecondaryLabel?: string;
+  heroCtaSecondaryHref?: string;
   whyNowHeadline: string;
   whyNowBody: PortableTextBlock[];
-  servicesTeaserHeadline: string;
-  proofPreviewHeadline: string;
-  proofPreviewBody: string;
-  proofPreviewButtonLabel: string;
-  proofPreviewButtonHref: string;
+  whatWeDoHeadline: string;
+  whatWeDoCards: WhatWeDoCard[];
+  ecosystemHeadline: string;
+  ecosystemIntro: string;
+  enovaHeadline: string;
+  enovaBody: string;
+  enovaCtaLabel: string;
+  enovaCtaHref: string;
+  ecosystemCards: EcosystemCard[];
+  impactHeadline: string;
+  impactBody: string;
+  impactColumns: ImpactColumn[];
+  endlessHeadline: string;
+  tickerItems: TickerItem[];
+  carouselItems: CarouselCard[];
+  engineeringHeadline: string;
+  engineeringBody: string;
+  engineeringCtaLabel: string;
+  engineeringCtaHref: string;
+  splitCards: SplitCardContent[];
   finalCtaHeadline: string;
   finalCtaSubtext?: string;
   finalCtaButtonLabel: string;
   finalCtaButtonHref: string;
-  featuredSolutions: Pick<Solution, 'nucid' | 'name' | 'slug' | 'painPoint' | 'ctaLabel' | 'ctaLink' | 'status'>[];
-  featuredPlatforms?: Pick<Platform, 'nucid' | 'name' | 'purpose' | 'status'>[];
 }
-
-interface SiteSettingsDoc {
-  statesLabel: string;
-}
-
-const PROSE_MAX = 'max-w-[640px]';
 
 export default async function HomePage() {
-  const [page, settings] = await Promise.all([
-    sanityClient.fetch<HomePageDoc | null>(homePageQuery),
-    sanityClient.fetch<SiteSettingsDoc | null>(siteSettingsQuery),
-  ]);
+  const page = await sanityClient.fetch<HomePageDoc | null>(homePageQuery);
 
   requireField(page, 'homePage');
   requireField(page?.heroHeadline, 'homePage.heroHeadline');
@@ -65,149 +105,182 @@ export default async function HomePage() {
   requireField(page?.heroCtaPrimaryLabel, 'homePage.heroCtaPrimaryLabel');
   requireField(page?.whyNowHeadline, 'homePage.whyNowHeadline');
   requireField(page?.whyNowBody, 'homePage.whyNowBody');
-  requireField(page?.servicesTeaserHeadline, 'homePage.servicesTeaserHeadline');
-  requireField(page?.featuredSolutions, 'homePage.featuredSolutions');
-  requireField(page?.proofPreviewHeadline, 'homePage.proofPreviewHeadline');
-  requireField(page?.proofPreviewBody, 'homePage.proofPreviewBody');
-  requireField(page?.proofPreviewButtonLabel, 'homePage.proofPreviewButtonLabel');
-  requireField(page?.proofPreviewButtonHref, 'homePage.proofPreviewButtonHref');
+  requireField(page?.whatWeDoHeadline, 'homePage.whatWeDoHeadline');
+  requireField(page?.whatWeDoCards, 'homePage.whatWeDoCards');
+  requireField(page?.ecosystemHeadline, 'homePage.ecosystemHeadline');
+  requireField(page?.enovaHeadline, 'homePage.enovaHeadline');
+  requireField(page?.ecosystemCards, 'homePage.ecosystemCards');
+  requireField(page?.impactHeadline, 'homePage.impactHeadline');
+  requireField(page?.impactColumns, 'homePage.impactColumns');
+  requireField(page?.endlessHeadline, 'homePage.endlessHeadline');
+  requireField(page?.tickerItems, 'homePage.tickerItems');
+  requireField(page?.carouselItems, 'homePage.carouselItems');
+  requireField(page?.engineeringHeadline, 'homePage.engineeringHeadline');
+  requireField(page?.splitCards, 'homePage.splitCards');
   requireField(page?.finalCtaHeadline, 'homePage.finalCtaHeadline');
   requireField(page?.finalCtaButtonLabel, 'homePage.finalCtaButtonLabel');
-  requireField(settings?.statesLabel, 'siteSettings.statesLabel');
-
-  const stats = await getDerivedStats(settings!.statesLabel);
-
-  // The 2 most narratively-load-bearing Platforms (ENOVA, the umbrella; and
-  // Monitoring, the first piece of it expected to ship) get the full Tile
-  // treatment. The rest render as the smaller icon-row, same pattern Apple
-  // uses for Arcade/Fitness+/Music/TV+/Podcasts under a heavier feature.
-  const allPlatforms = page!.featuredPlatforms ?? [];
-  const featuredTilePlatforms = allPlatforms.filter((p) => p.nucid === 'PLT-007' || p.nucid === 'PLT-002');
-  const miniPlatforms = allPlatforms.filter((p) => p.nucid !== 'PLT-007' && p.nucid !== 'PLT-002');
 
   return (
     <>
-      {/* Hero -- centered, Apple pattern */}
-      <Section tone="forest">
-        <div className={`mx-auto flex ${PROSE_MAX} flex-col items-center text-center`}>
-          {/* Sentence-length copy -- --type-hero-long (32-56px), not the
-              full 40-96px --type-hero scale reserved for 2-4 word headlines. */}
-          <h1 className="mb-5 text-[length:var(--type-hero-long)] font-semibold leading-[1.05] tracking-[-0.015em]">
+      {/* SECTION 1 -- Hero. Full viewport, Dark Forest background, large
+          centered headline, illustration reserved below it. */}
+      <Section tone="forest" maxWidthClassName={HOME_MAX} paddingClassName="px-5 pb-20 pt-24 md:px-12 md:pb-28 md:pt-16">
+        <div className="flex min-h-[80vh] flex-col items-center justify-center text-center">
+          <h1 className="mb-6 max-w-[880px] text-[length:var(--type-hero)] font-semibold leading-[1.05] tracking-[-0.015em]">
             {page!.heroHeadline}
           </h1>
-          <p className="mb-8 text-[length:var(--type-body)] leading-normal text-text-on-dark">{page!.heroSubtext}</p>
-          <Button href={page!.heroCtaPrimaryHref} variant="primary">
-            {page!.heroCtaPrimaryLabel}
-          </Button>
+          <p className="mb-9 max-w-[600px] text-[length:var(--type-body)] leading-normal text-text-on-dark">
+            {page!.heroSubtext}
+          </p>
+          <div className="flex flex-wrap items-center justify-center gap-4">
+            <Button href={page!.heroCtaPrimaryHref} variant="primary">
+              {page!.heroCtaPrimaryLabel}
+            </Button>
+            {page!.heroCtaSecondaryLabel && page!.heroCtaSecondaryHref && (
+              <a
+                href={page!.heroCtaSecondaryHref}
+                className="inline-flex items-center justify-center rounded-sm border border-white/40 px-5 py-3 text-[length:var(--type-button)] font-semibold text-white no-underline transition-colors duration-150 hover:bg-white/10"
+              >
+                {page!.heroCtaSecondaryLabel}
+              </a>
+            )}
+          </div>
         </div>
+        {/* hero illustration placeholder -- reserves the layout/aspect
+            ratio for /images/home/hero-energy.webp */}
+        <div className="aspect-[16/9] w-full rounded-[32px] bg-white/[0.06]" aria-hidden="true" />
       </Section>
 
-      {/* Why now -- centered promo band, Apple pattern (e.g. "College, sorted") */}
-      <Section tone="white">
-        <Reveal className={`mx-auto ${PROSE_MAX} text-center`}>
-          <h2 className="mb-4 text-[length:var(--type-h2)] font-semibold tracking-[-0.01em]">{page!.whyNowHeadline}</h2>
-          <div className="prose-nova mx-auto flex flex-col gap-4 text-left text-[length:var(--type-body)] leading-normal">
+      {/* SECTION 2 -- "The energy transition needs more than hardware." */}
+      <Section tone="white" maxWidthClassName={HOME_MAX} paddingClassName={HOME_PADDING}>
+        <Reveal className="mx-auto max-w-[720px] text-center">
+          <h2 className="mb-6 text-[length:var(--type-hero-long)] font-semibold leading-[1.05] tracking-[-0.015em]">
+            {page!.whyNowHeadline}
+          </h2>
+          <div className="prose-nova mx-auto flex flex-col gap-4 text-[length:var(--type-body)] leading-normal">
             <PortableText value={page!.whyNowBody} />
           </div>
         </Reveal>
       </Section>
 
-      {/* Solutions -- Apple-pattern 2-up tile grid, alternating dark/light.
-          No illustration yet -- see project asset list -- so the tile is
-          just headline/body/CTA on a solid tone until real ones exist.
-          Section itself is forest (dark), not offwhite: Proof preview
-          below needs to stay light (StatStrip's colors are spec-locked to
-          light backgrounds), which forces Closing CTA dark to follow it --
-          given those two fixed points, this is the arrangement that keeps
-          the fewest same-tone sections adjacent (UI-UX Handoff Section 3's
-          alternation rule can't be satisfied with zero repeats across all
-          6 sections here, so this minimizes it to one unavoidable pair). */}
-      <Section tone="forest">
+      {/* SECTION 3 -- "What we do today." Three premium equal-height cards. */}
+      <Section tone="forest" maxWidthClassName={HOME_MAX} paddingClassName={HOME_PADDING}>
         <Reveal>
-          <h2 className="mb-8 text-center text-[length:var(--type-h2)] font-semibold tracking-[-0.01em]">
-            {page!.servicesTeaserHeadline}
+          <h2 className="mb-14 text-center text-[length:var(--type-hero-long)] font-semibold leading-[1.05] tracking-[-0.015em]">
+            {page!.whatWeDoHeadline}
           </h2>
-          <div className="grid gap-6 md:grid-cols-2">
-            {page!.featuredSolutions.map((solution, i) => (
-              <Tile
-                key={solution.nucid}
-                tone={i % 2 === 0 ? 'dark' : 'light'}
-                headline={solution.name}
-                body={solution.painPoint}
-                ctaLabel="Learn more"
-                ctaHref={`/solutions#${solution.slug}`}
-                className="pb-10"
+          <div className="grid gap-6 md:grid-cols-3">
+            {page!.whatWeDoCards.map((card) => (
+              <HomeCard
+                key={card.headline}
+                tone="dark"
+                size="large"
+                headline={card.headline}
+                body={card.body}
+                ctaLabel={card.ctaLabel}
+                ctaHref={card.ctaHref}
               />
             ))}
           </div>
         </Reveal>
       </Section>
 
-      {/* Ecosystem -- 2 featured Platform tiles + a mini-tile row for the
-          rest, same weighting pattern Apple uses (2 heavy tiles, then a
-          lighter row of smaller ones). Phase 2 correction: no disclaimer
-          text, no muted treatment -- rendered with the same visual weight
-          as the Solutions tiles above (explicit instruction, confirmed).
-          The underlying Platform `status` field is untouched in the CMS. */}
-      {allPlatforms.length > 0 && (
-        <Section tone="white" id="ecosystem">
-          <Reveal>
-            <h2 className="mb-10 text-center text-[length:var(--type-h2)] font-semibold tracking-[-0.01em]">
-              What we&rsquo;re building next.
+      {/* SECTION 4 -- "What we're building next." ENOVA feature + 4 mini cards. */}
+      <Section tone="white" maxWidthClassName={HOME_MAX} paddingClassName={HOME_PADDING} id="ecosystem">
+        <Reveal>
+          <div className="mx-auto mb-12 max-w-[640px] text-center">
+            <h2 className="mb-3 text-[length:var(--type-hero-long)] font-semibold leading-[1.05] tracking-[-0.015em]">
+              {page!.ecosystemHeadline}
             </h2>
-
-            {featuredTilePlatforms.length > 0 && (
-              <div className="mb-6 grid gap-6 md:grid-cols-2">
-                {featuredTilePlatforms.map((platform, i) => (
-                  <Tile
-                    key={platform.nucid}
-                    tone={i % 2 === 0 ? 'dark' : 'light'}
-                    headline={platform.name}
-                    body={platform.purpose}
-                    className="pb-10"
-                  />
-                ))}
-              </div>
-            )}
-
-            {miniPlatforms.length > 0 && (
-              <div className="grid grid-cols-3 gap-3 sm:grid-cols-5">
-                {miniPlatforms.map((platform) => (
-                  <MiniTile key={platform.nucid} label={platform.name} />
-                ))}
-              </div>
-            )}
-          </Reveal>
-        </Section>
-      )}
-
-      {/* Proof preview -- centered promo band with a real derived stat,
-          rather than just linking to it (Ecosystem Review Section 3). */}
-      <Section tone="offwhite">
-        <Reveal className="text-center">
-          <h2 className="mb-2 text-[length:var(--type-h2)] font-semibold tracking-[-0.01em]">
-            {page!.proofPreviewHeadline}
-          </h2>
-          <p className={`mx-auto mb-6 ${PROSE_MAX} text-[length:var(--type-body)] leading-normal`}>
-            {page!.proofPreviewBody}
-          </p>
-          <div className={`mx-auto mb-8 ${PROSE_MAX}`}>
-            <StatStrip stats={formatStatStrip(stats)} />
+            <p className="text-[length:var(--type-body)] leading-normal">{page!.ecosystemIntro}</p>
           </div>
-          <Button href={page!.proofPreviewButtonHref} variant="primary">
-            {page!.proofPreviewButtonLabel}
-          </Button>
+          <div className="mb-6">
+            {/* ENOVA full-bleed feature card -- reserves the layout for
+                /images/home/enova-platform.webp */}
+            <FullBleedFeature
+              eyebrow="Platform"
+              headline={page!.enovaHeadline}
+              body={page!.enovaBody}
+              ctaLabel={page!.enovaCtaLabel}
+              ctaHref={page!.enovaCtaHref}
+            />
+          </div>
+          <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
+            {page!.ecosystemCards.map((card) => (
+              <HomeCard key={card.headline} tone="light" size="small" headline={card.headline} body={card.body} />
+            ))}
+          </div>
         </Reveal>
       </Section>
 
-      {/* Closing CTA -- forest (dark), not yellow (yellow is button-fill
-          only, never a section background -- see Section.tsx). Also keeps
-          the required dark/light alternation: Proof preview above is
-          offwhite, so this needs to be dark, not another light section. */}
-      <Section tone="forest">
-        <Reveal className="text-center">
-          <h2 className="mb-2 text-[length:var(--type-h2)] font-semibold tracking-[-0.01em]">{page!.finalCtaHeadline}</h2>
-          {page!.finalCtaSubtext && <p className="mb-6 text-[length:var(--type-body)] text-text-on-dark">{page!.finalCtaSubtext}</p>}
+      {/* SECTION 5 -- "Built for long-term impact." Three columns. */}
+      <Section tone="forest" maxWidthClassName={HOME_MAX} paddingClassName={HOME_PADDING}>
+        <Reveal>
+          <div className="mx-auto mb-14 max-w-[640px] text-center">
+            <h2 className="mb-4 text-[length:var(--type-hero-long)] font-semibold leading-[1.05] tracking-[-0.015em]">
+              {page!.impactHeadline}
+            </h2>
+            <p className="text-[length:var(--type-body)] leading-normal text-text-on-dark">{page!.impactBody}</p>
+          </div>
+          <div className="grid gap-10 md:grid-cols-3">
+            {page!.impactColumns.map((column) => (
+              <div key={column.headline} className="text-center">
+                <h3 className="mb-2 text-[length:var(--type-h3)] font-semibold">{column.headline}</h3>
+                <p className="text-[length:var(--type-body)] leading-normal text-text-on-dark">{column.body}</p>
+              </div>
+            ))}
+          </div>
+        </Reveal>
+      </Section>
+
+      {/* SECTION 6 -- "Endless Possibilities." One continuous block: a
+          70px price ticker (Row One) immediately followed by the large
+          cinematic project carousel (Row Two), no gap between them. */}
+      <Section tone="forest" noInnerPadding>
+        <div className={`mx-auto ${HOME_MAX} px-5 pb-10 pt-24 md:px-12 md:pt-32`}>
+          <h2 className="text-center text-[length:var(--type-hero-long)] font-semibold leading-[1.05] tracking-[-0.015em]">
+            {page!.endlessHeadline}
+          </h2>
+        </div>
+        <Ticker items={page!.tickerItems} />
+        <ProjectCarousel items={page!.carouselItems} />
+      </Section>
+
+      {/* SECTION 7 -- "Engineering that lasts." Full-width, no margins,
+          text over image -- truly edge-to-edge, not the rounded contained
+          card treatment used elsewhere on this page. */}
+      <Section tone="white" noInnerPadding>
+        {/* full-bleed feature -- reserves the layout for
+            /images/home/service-engineering.webp */}
+        <FullBleedFeature
+          headline={page!.engineeringHeadline}
+          body={page!.engineeringBody}
+          ctaLabel={page!.engineeringCtaLabel}
+          ctaHref={page!.engineeringCtaHref}
+          heightClass="h-[480px] md:h-[640px]"
+          rounded={false}
+        />
+      </Section>
+
+      {/* SECTION 8 -- Split layout: two equal cards, full-bleed images,
+          text overlaid directly on them. */}
+      <Section tone="white" maxWidthClassName={HOME_MAX} paddingClassName={HOME_PADDING}>
+        <Reveal>
+          {/* left card -- /images/home/service-training.webp,
+              right card -- /images/home/service-oem.webp */}
+          <SplitCards cards={page!.splitCards} />
+        </Reveal>
+      </Section>
+
+      {/* SECTION 9 -- Final CTA. Dark Forest background, centered. */}
+      <Section tone="forest" maxWidthClassName={HOME_MAX} paddingClassName={HOME_PADDING}>
+        <Reveal className="mx-auto max-w-[640px] text-center">
+          <h2 className="mb-4 text-[length:var(--type-hero-long)] font-semibold leading-[1.05] tracking-[-0.015em]">
+            {page!.finalCtaHeadline}
+          </h2>
+          {page!.finalCtaSubtext && (
+            <p className="mb-9 text-[length:var(--type-body)] leading-normal text-text-on-dark">{page!.finalCtaSubtext}</p>
+          )}
           <Button href={page!.finalCtaButtonHref} variant="primary">
             {page!.finalCtaButtonLabel}
           </Button>

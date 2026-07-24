@@ -5,18 +5,24 @@
   per the Build Charter constitution, brand tokens are never approximated.
 */
 :root {
-  /* Primary palette */
-  --nova-forest: #0B3B37;      /* dominant bg -- header, footer, hero, dark sections */
-  --nova-mint: #7FE3A8;        /* accent -- logo mark, links, highlights, icons */
-  --nova-yellow: #F7E6A0;      /* CTA only -- buttons, signup prompts, never decorative */
+  /* Primary palette -- Homepage content-standard redesign: true brand
+     colors matched to the official logo mark (#2C6E49), rolled out
+     sitewide per explicit instruction rather than left homepage-only.
+     `--nova-forest` is the former "Dark Forest" (header/footer/dark
+     section bg); `--nova-teal` is repointed to the new "Primary Forest
+     Green" (#2C6E49) since it already carried that hover/active/link role. */
+  --nova-forest: #123D36;      /* dominant bg -- header, footer, hero, dark sections */
+  --nova-mint: #6ED3B5;        /* accent -- logo mark, links, highlights, icons */
+  --nova-yellow: #F4D97B;      /* CTA only -- buttons, signup prompts, never decorative */
   --nova-white: #FFFFFF;       /* cards, light sections */
 
   /* Supporting neutrals */
   --nova-text: #0A2422;        /* ALL body text and headings on light backgrounds -- never pure black */
   --nova-offwhite: #F4F1E9;    /* alternate light section background */
   --nova-sage: #5FA98A;        /* dividers, secondary icons, muted labels */
-  --nova-teal: #2C6B5F;        /* hover/active states, eyebrow labels */
-  --nova-soft: #F7FCF9;        /* About page: second light section bg, alternated with white */
+  --nova-teal: #2C6E49;        /* Primary Forest Green -- hover/active states, eyebrow labels, links */
+  --nova-light-mint: #BFEFDE;  /* homepage palette: subtle accents/badges on dark sections */
+  --nova-soft: #F7FCF9;        /* About page: second light section bg, alternated with white -- matches homepage "Background" */
 
   /* Derived, for consistency */
   --nova-border: #E4E0D3;      /* hairline borders on light backgrounds */

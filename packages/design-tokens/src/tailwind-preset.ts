@@ -16,6 +16,7 @@ const preset: Partial<Config> = {
         sage: colors.sage,
         teal: colors.teal,
         soft: colors.soft,
+        'light-mint': colors.lightMint,
         border: colors.border,
         'card-border': colors.cardBorder,
         'nova-text': colors.text,

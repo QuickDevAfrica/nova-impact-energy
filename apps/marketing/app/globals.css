@@ -50,3 +50,37 @@ a {
     animation: none;
   }
 }
+
+/* Homepage Section 6 ("Endless Possibilities") -- the price ticker and
+   cinematic project carousel are pure CSS: each track renders its item
+   list twice back-to-back and animates by exactly -50%, so the loop point
+   is invisible (the second copy is already in the exact position the
+   first copy started in). No JS/state needed for this, so both stay
+   server components. Direction is per the brief: the ticker (Row One)
+   reads left-to-right, the carousel (Row Two) reads right-to-left. */
+@keyframes nova-scroll-rtl {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+@keyframes nova-scroll-ltr {
+  from { transform: translateX(-50%); }
+  to { transform: translateX(0); }
+}
+.nova-ticker-track {
+  width: max-content;
+  animation: nova-scroll-ltr 45s linear infinite;
+}
+.nova-carousel-track {
+  width: max-content;
+  animation: nova-scroll-rtl 70s linear infinite;
+}
+.nova-ticker-track:hover,
+.nova-carousel-track:hover {
+  animation-play-state: paused;
+}
+@media (prefers-reduced-motion: reduce) {
+  .nova-ticker-track,
+  .nova-carousel-track {
+    animation: none;
+  }
+}

@@ -4,22 +4,37 @@
  * Every app in the ecosystem imports from here. Never redefine a token locally.
  */
 export const colors = {
-  forest: '#0B3B37',
-  mint: '#7FE3A8',
-  yellow: '#F7E6A0',
+  /**
+   * Homepage content-standard redesign (Apple/Linear/Stripe-inspired):
+   * the true brand palette, matched to the official logo mark's fill
+   * (#2C6E49) rather than the earlier placeholder greens used before the
+   * logo existed. Rolled out sitewide (Nav, Footer, every page) per
+   * explicit instruction rather than left homepage-only, so the whole
+   * site stays one consistent system. `forest` here is the former
+   * "Dark Forest" -- section/Nav/Footer background -- and `teal` is
+   * repointed to the new "Primary Forest Green" (#2C6E49), since it
+   * already carried that exact semantic role (hover/active/eyebrow/link).
+   */
+  forest: '#123D36',
+  mint: '#6ED3B5',
+  yellow: '#F4D97B',
   white: '#FFFFFF',
   text: '#0A2422',
   offwhite: '#F4F1E9',
   sage: '#5FA98A',
-  teal: '#2C6B5F',
+  teal: '#2C6E49',
   border: '#E4E0D3',
   textOnDark: '#F4F1E9',
   mutedBg: '#EDEAE0',
   mutedText: '#7A8C86',
   error: '#B5533C',
+  /** Light mint -- new homepage palette, used for subtle accents/badges
+   * on dark sections and light-tinted card fills. */
+  lightMint: '#BFEFDE',
   /** About page content-standard redesign: a second, cooler-tinted light
    * section background, alternated with white for readability -- distinct
-   * from `offwhite` (#F4F1E9, warm), given as an explicit hex. */
+   * from `offwhite` (#F4F1E9, warm), given as an explicit hex. Also
+   * exactly matches the homepage spec's "Background" color (#F7FCF9). */
   soft: '#F7FCF9',
   /** Card border for the About page's pillar/value/process/values cards --
    * distinct from the general `border` token (#E4E0D3), given as an

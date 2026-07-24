@@ -19,3 +19,8 @@ export * from './ValuesSection';
 export * from './FeatureCard';
 export * from './AboutCard';
 export * from './Logo';
+export * from './Ticker';
+export * from './ProjectCarousel';
+export * from './FullBleedFeature';
+export * from './SplitCards';
+export * from './HomeCard';
