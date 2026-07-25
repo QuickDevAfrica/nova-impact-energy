@@ -53,7 +53,7 @@ export default async function ContactPage() {
           </h1>
           <p className="mb-8 text-[length:var(--type-body)] leading-normal">{page!.bodyText}</p>
           <div className="flex flex-col gap-1 text-[length:var(--type-button)]">
-            {settings!.officeAddress && <p className="mb-2 text-[length:var(--type-body)] leading-normal">{settings!.officeAddress}</p>}
+            {settings!.officeAddress && <p className="mb-2 leading-normal">{settings!.officeAddress}</p>}
             <a href={`mailto:${settings!.contactEmail}`} className="text-teal no-underline hover:underline">
               {settings!.contactEmail}
             </a>
