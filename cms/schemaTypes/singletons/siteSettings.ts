@@ -19,6 +19,7 @@ export default defineType({
     defineField({ name: 'contactEmail', title: 'Contact email', type: 'string', validation: (Rule) => Rule.required() }),
     defineField({ name: 'contactPhone', title: 'Contact phone', type: 'string', validation: (Rule) => Rule.required() }),
     defineField({ name: 'contactWebsite', title: 'Website', type: 'string', validation: (Rule) => Rule.required() }),
+    defineField({ name: 'officeAddress', title: 'Office address (shown in Footer and on the Contact page)', type: 'text' }),
     defineField({
       name: 'navLinks',
       title: 'Nav links',

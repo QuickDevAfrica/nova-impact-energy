@@ -15,6 +15,7 @@ export function Footer({
   contactEmail,
   contactPhone,
   contactWebsite,
+  officeAddress,
   copyrightLine,
 }: {
   companyName: string;
@@ -22,6 +23,7 @@ export function Footer({
   contactEmail: string;
   contactPhone: string;
   contactWebsite: string;
+  officeAddress?: string;
   copyrightLine: string;
 }) {
   return (
@@ -56,6 +58,7 @@ export function Footer({
               Contact
             </p>
             <div className="flex flex-col gap-2 text-[length:var(--type-label)]">
+              {officeAddress && <span className="text-offwhite">{officeAddress}</span>}
               <a href={`mailto:${contactEmail}`} className="text-offwhite no-underline hover:text-mint">
                 {contactEmail}
               </a>

@@ -33,6 +33,7 @@ interface SiteSettings {
   contactEmail: string;
   contactPhone: string;
   contactWebsite: string;
+  officeAddress?: string;
   navLinks: { label: string; href: string }[];
   navCtaLabel: string;
   navCtaHref: string;
@@ -64,6 +65,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           contactEmail={settings!.contactEmail}
           contactPhone={settings!.contactPhone}
           contactWebsite={settings!.contactWebsite}
+          officeAddress={settings!.officeAddress}
           copyrightLine={settings!.footerCopyright}
         />
       </body>

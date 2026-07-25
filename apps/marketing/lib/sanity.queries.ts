@@ -1,7 +1,7 @@
 import { groq } from 'next-sanity';
 
 export const siteSettingsQuery = groq`*[_type == "siteSettings"][0]{
-  companyName, statesLabel, contactEmail, contactPhone, contactWebsite,
+  companyName, statesLabel, contactEmail, contactPhone, contactWebsite, officeAddress,
   navLinks, navCtaLabel, navCtaHref, footerCopyright
 }`;
 
