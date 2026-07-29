@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { PortableText, type PortableTextBlock } from '@portabletext/react';
 import { Section, Reveal, AboutCard, Button } from '@nova/ui';
 import { sanityClient } from '@/lib/sanity.client';
@@ -90,9 +91,11 @@ export default async function AboutPage() {
               <PortableText value={page!.bodyBlocks} />
             </div>
           </div>
-          {/* Reserved: hero-about.avif (packages/assets/images/hero naming
-              convention) -- optional hero illustration, right column */}
-          <div className="aspect-square w-full max-w-[420px] shrink-0 rounded-[20px] bg-muted-bg md:w-1/2" aria-hidden="true" />
+          {/* PLACEHOLDER -- Unsplash stock, tagged isPlaceholder in
+              apps/marketing/public/images/about/CREDITS.json. */}
+          <div className="relative aspect-square w-full max-w-[420px] shrink-0 overflow-hidden rounded-[20px] bg-muted-bg md:w-1/2">
+            <Image src="/images/about/hero-about.webp" alt="Engineers reviewing project plans" fill className="object-cover" />
+          </div>
         </Reveal>
       </Section>
 
@@ -118,9 +121,16 @@ export default async function AboutPage() {
       {/* Section 3 -- Why we exist */}
       <Section tone="white">
         <Reveal className="flex flex-col-reverse items-center gap-10 md:flex-row md:items-center">
-          {/* Reserved: about-engineers-collaborating.avif -- engineers
-              collaborating around a renewable energy project */}
-          <div className="aspect-[4/3] w-full shrink-0 rounded-[20px] bg-muted-bg md:w-1/2" aria-hidden="true" />
+          {/* PLACEHOLDER -- Unsplash stock, tagged isPlaceholder in
+              apps/marketing/public/images/about/CREDITS.json. */}
+          <div className="relative aspect-[4/3] w-full shrink-0 overflow-hidden rounded-[20px] bg-muted-bg md:w-1/2">
+            <Image
+              src="/images/about/about-engineers-collaborating.webp"
+              alt="Engineers collaborating on a renewable energy project"
+              fill
+              className="object-cover"
+            />
+          </div>
           <div className="md:w-1/2">
             <h2 className="mb-4 text-[length:var(--type-h2)] font-semibold tracking-[-0.01em]">{page!.founderStoryHeadline}</h2>
             <div className="prose-nova flex flex-col gap-4 text-[length:var(--type-body)] leading-normal">
@@ -178,10 +188,16 @@ export default async function AboutPage() {
               </div>
             )}
           </div>
-          {/* Reserved: about-connected-ecosystem.avif -- connected
-              ecosystem showing engineering, training, OEMs, monitoring,
-              EV, battery swap and carbon platforms */}
-          <div className="aspect-[4/3] w-full shrink-0 rounded-[20px] bg-muted-bg md:w-1/2" aria-hidden="true" />
+          {/* PLACEHOLDER -- Unsplash stock, tagged isPlaceholder in
+              apps/marketing/public/images/about/CREDITS.json. */}
+          <div className="relative aspect-[4/3] w-full shrink-0 overflow-hidden rounded-[20px] bg-muted-bg md:w-1/2">
+            <Image
+              src="/images/about/about-connected-ecosystem.webp"
+              alt="Power transmission infrastructure at dusk"
+              fill
+              className="object-cover"
+            />
+          </div>
         </Reveal>
       </Section>
 

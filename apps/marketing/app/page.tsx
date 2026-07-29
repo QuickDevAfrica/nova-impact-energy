@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { PortableText, type PortableTextBlock } from '@portabletext/react';
 import {
   Section,
@@ -43,6 +44,36 @@ export const dynamic = 'force-dynamic'; // CMS-driven pages -- not statically pr
 
 const HOME_MAX = 'max-w-[1400px]';
 const HOME_PADDING = 'px-5 py-24 md:px-12 md:py-32 lg:py-40';
+
+// PLACEHOLDER -- Unsplash stock, tagged isPlaceholder in
+// apps/marketing/public/images/home/CREDITS.json. Order matches
+// page!.splitCards (left card, right card).
+const HOME_SPLIT_IMAGES = [
+  { src: '/images/home/service-training.webp', alt: 'Installers training on a solar panel roof install' },
+  { src: '/images/home/service-oem.webp', alt: 'Technician inspecting manufacturing equipment' },
+];
+
+// PLACEHOLDER -- Unsplash stock, tagged isPlaceholder in
+// apps/marketing/public/images/home/CREDITS.json. Order matches
+// page!.carouselItems.
+const HOME_CAROUSEL_SLUGS = [
+  'gigafactory-campus',
+  'corporate-headquarters',
+  'sustainable-city-district',
+  'waterfront-business-district',
+  'university-research-campus',
+  'airport-terminal-complex',
+  'floating-solar-farm',
+  'commercial-rooftop-portfolio',
+  'battery-storage-plant',
+  'rural-mini-grid-network',
+  'solar-irrigation-scheme',
+  'industrial-manufacturing-plant',
+  'utility-scale-solar-farm',
+  'solar-powered-hospital',
+  'solar-powered-university',
+  'ev-charging-hub',
+];
 
 interface WhatWeDoCard {
   headline: string;
@@ -147,9 +178,18 @@ export default async function HomePage() {
             )}
           </div>
         </div>
-        {/* hero illustration placeholder -- reserves the layout/aspect
-            ratio for /images/home/hero-energy.webp */}
-        <div className="aspect-[16/9] w-full rounded-[32px] bg-muted-bg" aria-hidden="true" />
+        {/* PLACEHOLDER -- replace with real project/team photo. Unsplash
+            stock (Markus Spiske), tagged isPlaceholder in
+            apps/marketing/public/images/home/CREDITS.json. */}
+        <div className="relative aspect-[16/9] w-full overflow-hidden rounded-[32px] bg-muted-bg">
+          <Image
+            src="/images/home/hero-energy.webp"
+            alt="Technician installing a solar panel"
+            fill
+            className="object-cover"
+            priority
+          />
+        </div>
       </Section>
 
       {/* SECTION 2 -- "The energy transition needs more than hardware." */}
@@ -199,14 +239,16 @@ export default async function HomePage() {
             <p className="text-[length:var(--type-body)] leading-normal">{page!.ecosystemIntro}</p>
           </div>
           <div className="mb-6">
-            {/* ENOVA full-bleed feature card -- reserves the layout for
-                /images/home/enova-platform.webp */}
+            {/* PLACEHOLDER -- Unsplash stock (Ofspace LLC), tagged
+                isPlaceholder in apps/marketing/public/images/home/CREDITS.json. */}
             <FullBleedFeature
               eyebrow="Platform"
               headline={page!.enovaHeadline}
               body={page!.enovaBody}
               ctaLabel={page!.enovaCtaLabel}
               ctaHref={page!.enovaCtaHref}
+              imageSrc="/images/home/enova-platform.webp"
+              imageAlt="Engineer working on the ENOVA monitoring platform"
             />
           </div>
           <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
@@ -249,15 +291,20 @@ export default async function HomePage() {
           </h2>
         </div>
         <Ticker items={page!.tickerItems} />
-        <ProjectCarousel items={page!.carouselItems} />
+        <ProjectCarousel
+          items={page!.carouselItems.map((item, i) => ({
+            ...item,
+            imageSrc: HOME_CAROUSEL_SLUGS[i] ? `/images/home/endless/${HOME_CAROUSEL_SLUGS[i]}.webp` : undefined,
+          }))}
+        />
       </Section>
 
       {/* SECTION 7 -- "Engineering that lasts." Full-width, no margins,
           text over image -- truly edge-to-edge, not the rounded contained
           card treatment used elsewhere on this page. */}
       <Section tone="white" noInnerPadding>
-        {/* full-bleed feature -- reserves the layout for
-            /images/home/service-engineering.webp */}
+        {/* PLACEHOLDER -- Unsplash stock (Sikwe Scarter), tagged
+            isPlaceholder in apps/marketing/public/images/home/CREDITS.json. */}
         <FullBleedFeature
           headline={page!.engineeringHeadline}
           body={page!.engineeringBody}
@@ -265,6 +312,8 @@ export default async function HomePage() {
           ctaHref={page!.engineeringCtaHref}
           heightClass="h-[480px] md:h-[640px]"
           rounded={false}
+          imageSrc="/images/home/service-engineering.webp"
+          imageAlt="Engineer inspecting a solar installation"
         />
       </Section>
 
@@ -272,9 +321,15 @@ export default async function HomePage() {
           text overlaid directly on them. */}
       <Section tone="white" maxWidthClassName={HOME_MAX} paddingClassName={HOME_PADDING}>
         <Reveal>
-          {/* left card -- /images/home/service-training.webp,
-              right card -- /images/home/service-oem.webp */}
-          <SplitCards cards={page!.splitCards} />
+          {/* PLACEHOLDER -- Unsplash stock (Raze Solar / TECNIC Bioprocess
+              Solutions), tagged isPlaceholder in
+              apps/marketing/public/images/home/CREDITS.json. */}
+          <SplitCards
+            cards={page!.splitCards.map((card, i) => ({
+              ...card,
+              image: HOME_SPLIT_IMAGES[i],
+            }))}
+          />
         </Reveal>
       </Section>
 

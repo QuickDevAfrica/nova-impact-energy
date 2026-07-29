@@ -1,3 +1,5 @@
+import Image from 'next/image';
+
 /**
  * Homepage Section 6, Row Two -- large cinematic Apple TV+-style carousel
  * of real-world renewable energy projects. Sits immediately under the
@@ -16,6 +18,7 @@ export interface CarouselCard {
   title: string;
   location: string;
   stat: string;
+  imageSrc?: string;
 }
 
 export function ProjectCarousel({ items, heightPx = 520 }: { items: CarouselCard[]; heightPx?: number }) {
@@ -29,12 +32,11 @@ export function ProjectCarousel({ items, heightPx = 520 }: { items: CarouselCard
             key={i}
             className="relative flex h-full w-[340px] shrink-0 flex-col justify-end overflow-hidden rounded-[24px] bg-white/10 md:w-[420px]"
           >
-            {/* cinematic project photography placeholder -- see
-                /images/home/endless/{slug}.webp, reserves this card's
-                exact aspect ratio for the final photography library.
-                Neutral black gradient, not brand green (client feedback:
-                too much dark green across the page) -- these will
-                eventually hold real project photography. */}
+            {/* PLACEHOLDER -- Unsplash stock, tagged isPlaceholder in
+                apps/marketing/public/images/home/CREDITS.json. */}
+            {card.imageSrc && (
+              <Image src={card.imageSrc} alt={card.title} fill className="object-cover" />
+            )}
             <div
               className="absolute inset-0"
               aria-hidden="true"

@@ -1,0 +1,20 @@
+[
+  {
+    "slug": "solution-training",
+    "unsplashId": "MxHjumNWlkI",
+    "photographer": "Ufoma Ojo",
+    "photographerUrl": "https://unsplash.com/@ladyufoma001",
+    "photoUrl": "https://unsplash.com/photos/audience-seated-in-a-conference-hall-during-a-presentation-MxHjumNWlkI",
+    "isPlaceholder": true,
+    "addedAt": "2026-07-29T09:50:00.000Z"
+  },
+  {
+    "slug": "solution-oem",
+    "unsplashId": "zWOgsj3j0wA",
+    "photographer": "Emmanuel Ikwuegbu",
+    "photographerUrl": "https://unsplash.com/@emmages",
+    "photoUrl": "https://unsplash.com/photos/man-in-blue-white-and-red-plaid-button-up-shirt-wearing-yellow-hard-hat-holding-black-zWOgsj3j0wA",
+    "isPlaceholder": true,
+    "addedAt": "2026-07-29T09:50:00.000Z"
+  }
+]

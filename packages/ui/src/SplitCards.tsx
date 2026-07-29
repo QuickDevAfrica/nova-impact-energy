@@ -1,19 +1,20 @@
+import Image from 'next/image';
 import { Button } from './Button';
 
 /**
  * Homepage Section 8 -- Apple's split full-bleed product pair: two equal
  * cards, each a full-bleed background image with text overlaid directly
  * on it (no padding gutter around the image). Fixed at exactly two cards
- * -- this is a layout pattern, not a generic grid. Placeholder fill/
- * gradient are neutral gray/black, not brand green (client feedback: too
- * much dark green across the page) -- these will eventually hold real
- * training/warehouse photography.
+ * -- this is a layout pattern, not a generic grid. Falls back to a
+ * neutral gray/black placeholder fill when a card has no `image` (client
+ * feedback: too much dark green across the page).
  */
 export interface SplitCardContent {
   headline: string;
   body: string;
   ctaLabel: string;
   ctaHref: string;
+  image?: { src: string; alt: string };
 }
 
 export function SplitCards({
@@ -33,8 +34,9 @@ export function SplitCards({
           key={card.headline}
           className={`relative overflow-hidden rounded-[32px] bg-muted-bg ${heightClass}`}
         >
-          {/* full-bleed image placeholder -- see comment at call site for
-              the reserved filename */}
+          {card.image && (
+            <Image src={card.image.src} alt={card.image.alt} fill className="object-cover" />
+          )}
           <div
             className="absolute inset-0"
             aria-hidden="true"

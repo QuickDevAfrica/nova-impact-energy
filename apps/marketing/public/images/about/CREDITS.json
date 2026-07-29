@@ -1,0 +1,29 @@
+[
+  {
+    "slug": "hero-about",
+    "unsplashId": "IH_9wWlo3UA",
+    "photographer": "Sikwe Scarter",
+    "photographerUrl": "https://unsplash.com/@sikwe",
+    "photoUrl": "https://unsplash.com/photos/two-women-in-hard-hats-and-workwear-smiling-IH_9wWlo3UA",
+    "isPlaceholder": true,
+    "addedAt": "2026-07-29T09:50:00.000Z"
+  },
+  {
+    "slug": "about-engineers-collaborating",
+    "unsplashId": "69I10EF57UY",
+    "photographer": "Ali Mkumbwa",
+    "photographerUrl": "https://unsplash.com/@mkumbwajr",
+    "photoUrl": "https://unsplash.com/photos/a-couple-of-men-standing-next-to-a-wooden-table-69I10EF57UY",
+    "isPlaceholder": true,
+    "addedAt": "2026-07-29T09:50:00.000Z"
+  },
+  {
+    "slug": "about-connected-ecosystem",
+    "unsplashId": "AA5v6sMcalY",
+    "photographer": "American Public Power Association",
+    "photographerUrl": "https://unsplash.com/@publicpowerorg",
+    "photoUrl": "https://unsplash.com/photos/green-and-grey-transmission-tower-during-nighttime-AA5v6sMcalY",
+    "isPlaceholder": true,
+    "addedAt": "2026-07-29T06:50:00.000Z"
+  }
+]

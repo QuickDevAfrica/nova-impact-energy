@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { Button } from './Button';
 
 /**
@@ -7,14 +8,9 @@ import { Button } from './Button';
  * line of body copy, a single CTA. Used for the ENOVA feature (Section 4)
  * and the "Engineering that lasts" full-bleed section (Section 7).
  *
- * No illustration exists yet -- rather than wait, this reserves the exact
- * layout/aspect ratio with a placeholder fill plus a bottom gradient
- * (so the eventual photo/illustration only needs to drop in behind the
- * existing text, never the other way around). Placeholder fill/gradient
- * are neutral gray/black, not brand green -- these cards will eventually
- * hold real photography, and a green-tinted placeholder reads as "another
- * dark green block" rather than "a photo is coming" (client feedback
- * after the first preview: too much dark green across the page).
+ * Falls back to a neutral gray/black placeholder fill when `imageSrc` is
+ * omitted (not brand green -- client feedback after the first preview:
+ * too much dark green across the page).
  */
 export function FullBleedFeature({
   eyebrow,
@@ -24,6 +20,8 @@ export function FullBleedFeature({
   ctaHref,
   heightClass = 'h-[440px] md:h-[560px]',
   rounded = true,
+  imageSrc,
+  imageAlt,
 }: {
   eyebrow?: string;
   headline: string;
@@ -32,13 +30,16 @@ export function FullBleedFeature({
   ctaHref?: string;
   heightClass?: string;
   rounded?: boolean;
+  imageSrc?: string;
+  imageAlt?: string;
 }) {
   return (
     <div
       className={`relative overflow-hidden bg-muted-bg ${rounded ? 'rounded-[32px]' : ''} ${heightClass}`}
     >
-      {/* full-bleed image placeholder -- see comment at call site for the
-          reserved filename; fills the entire card, no inset padding */}
+      {imageSrc && (
+        <Image src={imageSrc} alt={imageAlt ?? ''} fill className="object-cover" />
+      )}
       <div
         className="absolute inset-0"
         aria-hidden="true"

@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "dependencies": {
-    "@sanity/client": "^6.24.1"
+    "@sanity/client": "^6.24.1",
+    "sharp": "^0.33.5"
   }
 }
