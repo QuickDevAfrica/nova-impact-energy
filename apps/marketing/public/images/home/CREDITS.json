@@ -1,39 +1,39 @@
 [
   {
     "slug": "hero-energy",
-    "unsplashId": "rNn_TU8dvoY",
-    "photographer": "Markus Spiske",
-    "photographerUrl": "https://unsplash.com/@markusspiske",
-    "photoUrl": "https://unsplash.com/photos/a-person-working-on-a-solar-panel-rNn_TU8dvoY",
+    "unsplashId": "_2AlIm-F6pw",
+    "photographer": "Emmanuel Ikwuegbu",
+    "photographerUrl": "https://unsplash.com/@emmages",
+    "photoUrl": "https://unsplash.com/photos/electrician-installing-wiring-with-yellow-hardhat-_2AlIm-F6pw",
     "isPlaceholder": true,
-    "addedAt": "2026-07-29T02:13:03.477Z"
+    "addedAt": "2026-07-29T09:50:00.000Z"
   },
   {
     "slug": "enova-platform",
-    "unsplashId": "ZTLUNxoRaPY",
-    "photographer": "Ofspace LLC",
-    "photographerUrl": "https://unsplash.com/@ofspace",
-    "photoUrl": "https://unsplash.com/photos/a-man-sitting-in-front-of-two-computer-monitors-ZTLUNxoRaPY",
+    "unsplashId": "e8etaVo85AY",
+    "photographer": "Oluwatobi Fasipe",
+    "photographerUrl": "https://unsplash.com/@fasipe_tobi",
+    "photoUrl": "https://unsplash.com/photos/man-in-white-and-red-crew-neck-t-shirt-using-laptop-computer-e8etaVo85AY",
     "isPlaceholder": true,
-    "addedAt": "2026-07-29T04:33:00.000Z"
+    "addedAt": "2026-07-29T09:50:00.000Z"
   },
   {
     "slug": "service-engineering",
-    "unsplashId": "hBE96YanOlM",
-    "photographer": "Sikwe Scarter",
-    "photographerUrl": "https://unsplash.com/@sikwe",
-    "photoUrl": "https://unsplash.com/photos/a-man-wearing-a-safety-vest-and-hard-hat-hBE96YanOlM",
+    "unsplashId": "-0-kl1BjvFc",
+    "photographer": "Emmanuel Ikwuegbu",
+    "photographerUrl": "https://unsplash.com/@emmages",
+    "photoUrl": "https://unsplash.com/photos/man-in-brown-and-white-plaid-dress-shirt-and-yellow-hard-hat-holding-black-and-orange--0-kl1BjvFc",
     "isPlaceholder": true,
-    "addedAt": "2026-07-29T04:33:00.000Z"
+    "addedAt": "2026-07-29T09:52:00.000Z"
   },
   {
     "slug": "service-training",
-    "unsplashId": "pIcseKMisrs",
-    "photographer": "Raze Solar",
-    "photographerUrl": "https://unsplash.com/@razesolar",
-    "photoUrl": "https://unsplash.com/photos/men-on-top-of-a-roof-pIcseKMisrs",
+    "unsplashId": "d4j5hns6sj8",
+    "photographer": "David Geneugelijk",
+    "photographerUrl": "https://unsplash.com/@davidgeneugelijk",
+    "photoUrl": "https://unsplash.com/photos/two-construction-workers-are-taking-a-break-d4j5hns6sj8",
     "isPlaceholder": true,
-    "addedAt": "2026-07-29T04:33:00.000Z"
+    "addedAt": "2026-07-29T09:50:00.000Z"
   },
   {
     "slug": "service-oem",
