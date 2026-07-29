@@ -43,5 +43,149 @@
     "photoUrl": "https://unsplash.com/photos/a-man-inspects-equipment-in-a-modern-factory--Wt8AyCr9i4",
     "isPlaceholder": true,
     "addedAt": "2026-07-29T04:33:00.000Z"
+  },
+  {
+    "slug": "endless/gigafactory-campus",
+    "unsplashId": "Ilpf2eUPpUE",
+    "photographer": "Andreas Gücklhorn",
+    "photographerUrl": "https://unsplash.com/@draufsicht",
+    "photoUrl": "https://unsplash.com/photos/aerial-photography-of-grass-field-with-blue-solar-panels-Ilpf2eUPpUE",
+    "isPlaceholder": true,
+    "addedAt": "2026-07-29T05:10:00.000Z"
+  },
+  {
+    "slug": "endless/corporate-headquarters",
+    "unsplashId": "OtTN9eUbUQo",
+    "photographer": "Tícia Vesztergombi",
+    "photographerUrl": "https://unsplash.com/@vticia",
+    "photoUrl": "https://unsplash.com/photos/modern-glass-building-with-solar-panels-on-roof-OtTN9eUbUQo",
+    "isPlaceholder": true,
+    "addedAt": "2026-07-29T05:10:00.000Z"
+  },
+  {
+    "slug": "endless/sustainable-city-district",
+    "unsplashId": "J1dkREbfefU",
+    "photographer": "Karthik B K",
+    "photographerUrl": "https://unsplash.com/@thatbangaloreanguy",
+    "photoUrl": "https://unsplash.com/photos/a-city-skyline-with-a-body-of-water-in-the-foreground-J1dkREbfefU",
+    "isPlaceholder": true,
+    "addedAt": "2026-07-29T05:10:00.000Z"
+  },
+  {
+    "slug": "endless/waterfront-business-district",
+    "unsplashId": "zRBcuutejUU",
+    "photographer": "tian dayong",
+    "photographerUrl": "https://unsplash.com/@tonnnyj",
+    "photoUrl": "https://unsplash.com/photos/a-row-of-solar-panels-sitting-on-top-of-a-body-of-water-zRBcuutejUU",
+    "isPlaceholder": true,
+    "addedAt": "2026-07-29T05:10:00.000Z"
+  },
+  {
+    "slug": "endless/university-research-campus",
+    "unsplashId": "y8diuDh3M0s",
+    "photographer": "Zetong Li",
+    "photographerUrl": "https://unsplash.com/@zetong",
+    "photoUrl": "https://unsplash.com/photos/a-building-that-has-a-lot-of-windows-on-it-y8diuDh3M0s",
+    "isPlaceholder": true,
+    "addedAt": "2026-07-29T05:10:00.000Z"
+  },
+  {
+    "slug": "endless/airport-terminal-complex",
+    "unsplashId": "PRUoak89kCQ",
+    "photographer": "Jonathan Phillips",
+    "photographerUrl": "https://unsplash.com/@johnnyalohaphotography",
+    "photoUrl": "https://unsplash.com/photos/empty-airport-terminal-with-rows-of-check-in-counters-PRUoak89kCQ",
+    "isPlaceholder": true,
+    "addedAt": "2026-07-29T05:10:00.000Z"
+  },
+  {
+    "slug": "endless/floating-solar-farm",
+    "unsplashId": "ZVQkJiMBI5Q",
+    "photographer": "Quang Nguyen Vinh",
+    "photographerUrl": "https://unsplash.com/@quangpraha",
+    "photoUrl": "https://unsplash.com/photos/a-field-of-solar-panels-with-mountains-in-the-background-ZVQkJiMBI5Q",
+    "isPlaceholder": true,
+    "addedAt": "2026-07-29T05:10:00.000Z"
+  },
+  {
+    "slug": "endless/commercial-rooftop-portfolio",
+    "unsplashId": "vigtAEXRJD0",
+    "photographer": "Nathan Wong",
+    "photographerUrl": "https://unsplash.com/@nathan_wong",
+    "photoUrl": "https://unsplash.com/photos/solar-panels-over-a-building-in-a-rural-landscape-vigtAEXRJD0",
+    "isPlaceholder": true,
+    "addedAt": "2026-07-29T05:10:00.000Z"
+  },
+  {
+    "slug": "endless/battery-storage-plant",
+    "unsplashId": "VuR4oHZ3ucc",
+    "photographer": "American Public Power Association",
+    "photographerUrl": "https://unsplash.com/@publicpowerorg",
+    "photoUrl": "https://unsplash.com/photos/white-electric-power-generator-VuR4oHZ3ucc",
+    "isPlaceholder": true,
+    "addedAt": "2026-07-29T05:10:00.000Z"
+  },
+  {
+    "slug": "endless/rural-mini-grid-network",
+    "unsplashId": "8nb36vQrjTc",
+    "photographer": "E. Diop",
+    "photographerUrl": "https://unsplash.com/@ediop",
+    "photoUrl": "https://unsplash.com/photos/brown-wooden-houses-near-green-trees-under-white-clouds-during-daytime-8nb36vQrjTc",
+    "isPlaceholder": true,
+    "addedAt": "2026-07-29T05:10:00.000Z"
+  },
+  {
+    "slug": "endless/solar-irrigation-scheme",
+    "unsplashId": "CgDZmgOBBu8",
+    "photographer": "Wynand Uys",
+    "photographerUrl": "https://unsplash.com/@wynand_uys",
+    "photoUrl": "https://unsplash.com/photos/aerial-view-of-green-and-brown-landscape-during-daytime-CgDZmgOBBu8",
+    "isPlaceholder": true,
+    "addedAt": "2026-07-29T05:10:00.000Z"
+  },
+  {
+    "slug": "endless/industrial-manufacturing-plant",
+    "unsplashId": "t-rzp15L7qg",
+    "photographer": "Michael Pointner",
+    "photographerUrl": "https://unsplash.com/@pino_rumbero",
+    "photoUrl": "https://unsplash.com/photos/several-rows-of-solar-panels-on-a-roof-t-rzp15L7qg",
+    "isPlaceholder": true,
+    "addedAt": "2026-07-29T05:10:00.000Z"
+  },
+  {
+    "slug": "endless/utility-scale-solar-farm",
+    "unsplashId": "Vrlc2_im1co",
+    "photographer": "Wanghao SANG",
+    "photographerUrl": "https://unsplash.com/@starsang",
+    "photoUrl": "https://unsplash.com/photos/a-large-solar-array-in-the-middle-of-a-desert-Vrlc2_im1co",
+    "isPlaceholder": true,
+    "addedAt": "2026-07-29T05:10:00.000Z"
+  },
+  {
+    "slug": "endless/solar-powered-hospital",
+    "unsplashId": "Ytcp0r7SIE4",
+    "photographer": "LEDC",
+    "photographerUrl": "https://unsplash.com/@ledc",
+    "photoUrl": "https://unsplash.com/photos/modern-medical-centre-building-with-glass-facade-Ytcp0r7SIE4",
+    "isPlaceholder": true,
+    "addedAt": "2026-07-29T05:10:00.000Z"
+  },
+  {
+    "slug": "endless/solar-powered-university",
+    "unsplashId": "-swDR70y2M8",
+    "photographer": "Andreas Haslinger",
+    "photographerUrl": "https://unsplash.com/@andreas_haslinger",
+    "photoUrl": "https://unsplash.com/photos/a-large-building-sitting-on-top-of-a-lush-green-field--swDR70y2M8",
+    "isPlaceholder": true,
+    "addedAt": "2026-07-29T05:10:00.000Z"
+  },
+  {
+    "slug": "endless/ev-charging-hub",
+    "unsplashId": "Ul1tSmfdW0c",
+    "photographer": "Bernd Dittrich",
+    "photographerUrl": "https://unsplash.com/@hdbernd",
+    "photoUrl": "https://unsplash.com/photos/electric-vehicle-charging-stations-along-a-city-street-Ul1tSmfdW0c",
+    "isPlaceholder": true,
+    "addedAt": "2026-07-29T05:10:00.000Z"
   }
 ]

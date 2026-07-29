@@ -53,6 +53,28 @@ const HOME_SPLIT_IMAGES = [
   { src: '/images/home/service-oem.webp', alt: 'Technician inspecting manufacturing equipment' },
 ];
 
+// PLACEHOLDER -- Unsplash stock, tagged isPlaceholder in
+// apps/marketing/public/images/home/CREDITS.json. Order matches
+// page!.carouselItems.
+const HOME_CAROUSEL_SLUGS = [
+  'gigafactory-campus',
+  'corporate-headquarters',
+  'sustainable-city-district',
+  'waterfront-business-district',
+  'university-research-campus',
+  'airport-terminal-complex',
+  'floating-solar-farm',
+  'commercial-rooftop-portfolio',
+  'battery-storage-plant',
+  'rural-mini-grid-network',
+  'solar-irrigation-scheme',
+  'industrial-manufacturing-plant',
+  'utility-scale-solar-farm',
+  'solar-powered-hospital',
+  'solar-powered-university',
+  'ev-charging-hub',
+];
+
 interface WhatWeDoCard {
   headline: string;
   body: string;
@@ -269,7 +291,12 @@ export default async function HomePage() {
           </h2>
         </div>
         <Ticker items={page!.tickerItems} />
-        <ProjectCarousel items={page!.carouselItems} />
+        <ProjectCarousel
+          items={page!.carouselItems.map((item, i) => ({
+            ...item,
+            imageSrc: HOME_CAROUSEL_SLUGS[i] ? `/images/home/endless/${HOME_CAROUSEL_SLUGS[i]}.webp` : undefined,
+          }))}
+        />
       </Section>
 
       {/* SECTION 7 -- "Engineering that lasts." Full-width, no margins,
