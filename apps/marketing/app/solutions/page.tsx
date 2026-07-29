@@ -1,5 +1,22 @@
 import Image from 'next/image';
 import { PortableText, type PortableTextBlock } from '@portabletext/react';
+import {
+  IconTools,
+  IconCertificate,
+  IconSettings,
+  IconBriefcase,
+  IconChartLine,
+  IconHeadset,
+  IconAffiliate,
+  IconClipboardCheck,
+  IconBuildingBank,
+  IconLayoutDashboard,
+  IconChartDots,
+  IconLeaf,
+  IconBatteryCharging,
+  IconChargingPile,
+  type Icon as TablerIconType,
+} from '@tabler/icons-react';
 import { Section, Button, Reveal, ValuesSection, FeatureCard } from '@nova/ui';
 import { sanityClient } from '@/lib/sanity.client';
 import { servicesPageQuery } from '@/lib/sanity.queries';
@@ -31,9 +48,8 @@ export const dynamic = 'force-dynamic'; // CMS-driven pages -- not statically pr
  *   5. New: a Platforms section (5 featured Platform documents as equal
  *      cards), introducing the ecosystem beyond the two live Solutions.
  *   6. New: a closing CTA -- this page didn't have one before.
- * FeatureCard's icon placeholder reserves the correct aspect ratio for a
- * real icon later rather than waiting on final illustrations (explicit
- * instruction).
+ * FeatureCard icons are Tabler (@tabler/icons-react), picked per card by
+ * SOLUTIONS_ICONS below.
  */
 interface ProcessStep {
   title: string;
@@ -84,6 +100,29 @@ interface ServicesPageDoc {
 const SOLUTION_IMAGES: Record<string, { src: string; alt: string }> = {
   'SOL-001': { src: '/images/solutions/solution-training.webp', alt: 'Trainees attending a certification session' },
   'SOL-002': { src: '/images/solutions/solution-oem.webp', alt: 'Technician installing manufacturer equipment' },
+};
+
+// Icon per card, keyed by its exact CMS title -- picked by content, not
+// position, so a reordered/renamed field in Sanity falls back to
+// FeatureCard's neutral placeholder instead of showing the wrong icon.
+const SOLUTIONS_ICONS: Record<string, TablerIconType> = {
+  // "What you'll gain" -- Certified Training
+  'Practical Experience': IconTools,
+  'Industry Standards': IconCertificate,
+  'Technical Confidence': IconSettings,
+  'Career Readiness': IconBriefcase,
+  // "What you'll gain" -- OEM Partnerships
+  'Market Development': IconChartLine,
+  'Technical Representation': IconHeadset,
+  'Installer Network': IconAffiliate,
+  'After-sales Support': IconClipboardCheck,
+  'Government & Development': IconBuildingBank,
+  // Platforms
+  ENOVA: IconLayoutDashboard,
+  'Monitoring Platform': IconChartDots,
+  'Carbon Platform': IconLeaf,
+  'Battery Swap Software': IconBatteryCharging,
+  'EV Charging Software': IconChargingPile,
 };
 
 export default async function SolutionsPage() {
@@ -151,7 +190,12 @@ export default async function SolutionsPage() {
                 <h3 className="mb-6 text-[length:var(--type-h2)] font-semibold tracking-[-0.01em]">What you&rsquo;ll gain</h3>
                 <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
                   {solution.processSteps.map((step) => (
-                    <FeatureCard key={step.title} title={step.title} body={step.description} />
+                    <FeatureCard
+                      key={step.title}
+                      title={step.title}
+                      body={step.description}
+                      icon={SOLUTIONS_ICONS[step.title]}
+                    />
                   ))}
                 </div>
               </Reveal>
@@ -170,7 +214,12 @@ export default async function SolutionsPage() {
             </div>
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {page!.featuredPlatforms.map((platform) => (
-                <FeatureCard key={platform.nucid} title={platform.name} body={platform.purpose ?? ''} />
+                <FeatureCard
+                  key={platform.nucid}
+                  title={platform.name}
+                  body={platform.purpose ?? ''}
+                  icon={SOLUTIONS_ICONS[platform.name]}
+                />
               ))}
             </div>
           </Reveal>

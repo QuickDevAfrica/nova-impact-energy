@@ -13,6 +13,7 @@
     "@nova/design-tokens": "*",
     "@nova/ui": "*",
     "@portabletext/react": "^3.2.1",
+    "@tabler/icons-react": "^3.46.0",
     "next": "^14.2.15",
     "next-sanity": "^9.8.15",
     "react": "^18.3.1",

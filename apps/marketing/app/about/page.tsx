@@ -1,5 +1,24 @@
 import Image from 'next/image';
 import { PortableText, type PortableTextBlock } from '@portabletext/react';
+import {
+  IconTools,
+  IconAffiliate,
+  IconDeviceDesktopAnalytics,
+  IconWorld,
+  IconBuildingSkyscraper,
+  IconBuildingFactory2,
+  IconUsers,
+  IconSearch,
+  IconRulerMeasure,
+  IconUsersGroup,
+  IconCircleCheck,
+  IconTrendingUp,
+  IconAward,
+  IconShieldCheck,
+  IconBulb,
+  IconBolt,
+  type Icon as TablerIconType,
+} from '@tabler/icons-react';
 import { Section, Reveal, AboutCard, Button } from '@nova/ui';
 import { sanityClient } from '@/lib/sanity.client';
 import { aboutPageQuery } from '@/lib/sanity.queries';
@@ -56,6 +75,32 @@ interface AboutPageDoc {
 
 const PROSE_MAX = 'max-w-[640px]';
 
+// Icon per card, keyed by its exact CMS title -- picked by content, not
+// position, so a reordered/renamed field in Sanity falls back to
+// AboutCard's neutral placeholder instead of showing the wrong icon.
+const ABOUT_ICONS: Record<string, TablerIconType> = {
+  // Section 2 -- Four pillars
+  'Engineering Excellence': IconTools,
+  'Strategic Partnerships': IconAffiliate,
+  'Digital Innovation': IconDeviceDesktopAnalytics,
+  'Inclusive Impact': IconWorld,
+  // Section 4 -- How we create value
+  'For Businesses': IconBuildingSkyscraper,
+  'For Industry Partners': IconBuildingFactory2,
+  'For Communities': IconUsers,
+  // Section 5 -- How we work
+  Understand: IconSearch,
+  Design: IconRulerMeasure,
+  Collaborate: IconUsersGroup,
+  Deliver: IconCircleCheck,
+  Improve: IconTrendingUp,
+  // Section 7 -- What guides us
+  Excellence: IconAward,
+  Integrity: IconShieldCheck,
+  Innovation: IconBulb,
+  Impact: IconBolt,
+};
+
 export default async function AboutPage() {
   const page = await sanityClient.fetch<AboutPageDoc | null>(aboutPageQuery);
 
@@ -111,7 +156,7 @@ export default async function AboutPage() {
             </div>
             <div className="grid gap-6 grid-cols-2 lg:grid-cols-4">
               {page!.pillars.map((pillar) => (
-                <AboutCard key={pillar.title} title={pillar.title} body={pillar.body} />
+                <AboutCard key={pillar.title} title={pillar.title} body={pillar.body} icon={ABOUT_ICONS[pillar.title]} />
               ))}
             </div>
           </Reveal>
@@ -149,7 +194,7 @@ export default async function AboutPage() {
             )}
             <div className="grid gap-6 grid-cols-1 sm:grid-cols-3">
               {page!.valueCards.map((card) => (
-                <AboutCard key={card.title} title={card.title} body={card.body} />
+                <AboutCard key={card.title} title={card.title} body={card.body} icon={ABOUT_ICONS[card.title]} />
               ))}
             </div>
           </Reveal>
@@ -168,7 +213,7 @@ export default async function AboutPage() {
           {page!.processCards && page!.processCards.length > 0 && (
             <div className="grid gap-6 grid-cols-2 sm:grid-cols-3 lg:grid-cols-5">
               {page!.processCards.map((step) => (
-                <AboutCard key={step.title} title={step.title} body={step.body} />
+                <AboutCard key={step.title} title={step.title} body={step.body} icon={ABOUT_ICONS[step.title]} />
               ))}
             </div>
           )}
@@ -210,7 +255,7 @@ export default async function AboutPage() {
             )}
             <div className="grid gap-6 grid-cols-2 lg:grid-cols-4">
               {page!.coreValues.map((value) => (
-                <AboutCard key={value.title} title={value.title} body={value.body} />
+                <AboutCard key={value.title} title={value.title} body={value.body} icon={ABOUT_ICONS[value.title]} />
               ))}
             </div>
           </Reveal>
