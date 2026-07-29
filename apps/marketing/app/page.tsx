@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { PortableText, type PortableTextBlock } from '@portabletext/react';
 import {
   Section,
@@ -147,9 +148,18 @@ export default async function HomePage() {
             )}
           </div>
         </div>
-        {/* hero illustration placeholder -- reserves the layout/aspect
-            ratio for /images/home/hero-energy.webp */}
-        <div className="aspect-[16/9] w-full rounded-[32px] bg-muted-bg" aria-hidden="true" />
+        {/* PLACEHOLDER -- replace with real project/team photo. Unsplash
+            stock (Markus Spiske), tagged isPlaceholder in
+            apps/marketing/public/images/home/CREDITS.json. */}
+        <div className="relative aspect-[16/9] w-full overflow-hidden rounded-[32px] bg-muted-bg">
+          <Image
+            src="/images/home/hero-energy.webp"
+            alt="Technician installing a solar panel"
+            fill
+            className="object-cover"
+            priority
+          />
+        </div>
       </Section>
 
       {/* SECTION 2 -- "The energy transition needs more than hardware." */}
