@@ -45,6 +45,14 @@ export const dynamic = 'force-dynamic'; // CMS-driven pages -- not statically pr
 const HOME_MAX = 'max-w-[1400px]';
 const HOME_PADDING = 'px-5 py-24 md:px-12 md:py-32 lg:py-40';
 
+// PLACEHOLDER -- Unsplash stock, tagged isPlaceholder in
+// apps/marketing/public/images/home/CREDITS.json. Order matches
+// page!.splitCards (left card, right card).
+const HOME_SPLIT_IMAGES = [
+  { src: '/images/home/service-training.webp', alt: 'Installers training on a solar panel roof install' },
+  { src: '/images/home/service-oem.webp', alt: 'Technician inspecting manufacturing equipment' },
+];
+
 interface WhatWeDoCard {
   headline: string;
   body: string;
@@ -209,14 +217,16 @@ export default async function HomePage() {
             <p className="text-[length:var(--type-body)] leading-normal">{page!.ecosystemIntro}</p>
           </div>
           <div className="mb-6">
-            {/* ENOVA full-bleed feature card -- reserves the layout for
-                /images/home/enova-platform.webp */}
+            {/* PLACEHOLDER -- Unsplash stock (Ofspace LLC), tagged
+                isPlaceholder in apps/marketing/public/images/home/CREDITS.json. */}
             <FullBleedFeature
               eyebrow="Platform"
               headline={page!.enovaHeadline}
               body={page!.enovaBody}
               ctaLabel={page!.enovaCtaLabel}
               ctaHref={page!.enovaCtaHref}
+              imageSrc="/images/home/enova-platform.webp"
+              imageAlt="Engineer working on the ENOVA monitoring platform"
             />
           </div>
           <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
@@ -266,8 +276,8 @@ export default async function HomePage() {
           text over image -- truly edge-to-edge, not the rounded contained
           card treatment used elsewhere on this page. */}
       <Section tone="white" noInnerPadding>
-        {/* full-bleed feature -- reserves the layout for
-            /images/home/service-engineering.webp */}
+        {/* PLACEHOLDER -- Unsplash stock (Sikwe Scarter), tagged
+            isPlaceholder in apps/marketing/public/images/home/CREDITS.json. */}
         <FullBleedFeature
           headline={page!.engineeringHeadline}
           body={page!.engineeringBody}
@@ -275,6 +285,8 @@ export default async function HomePage() {
           ctaHref={page!.engineeringCtaHref}
           heightClass="h-[480px] md:h-[640px]"
           rounded={false}
+          imageSrc="/images/home/service-engineering.webp"
+          imageAlt="Engineer inspecting a solar installation"
         />
       </Section>
 
@@ -282,9 +294,15 @@ export default async function HomePage() {
           text overlaid directly on them. */}
       <Section tone="white" maxWidthClassName={HOME_MAX} paddingClassName={HOME_PADDING}>
         <Reveal>
-          {/* left card -- /images/home/service-training.webp,
-              right card -- /images/home/service-oem.webp */}
-          <SplitCards cards={page!.splitCards} />
+          {/* PLACEHOLDER -- Unsplash stock (Raze Solar / TECNIC Bioprocess
+              Solutions), tagged isPlaceholder in
+              apps/marketing/public/images/home/CREDITS.json. */}
+          <SplitCards
+            cards={page!.splitCards.map((card, i) => ({
+              ...card,
+              image: HOME_SPLIT_IMAGES[i],
+            }))}
+          />
         </Reveal>
       </Section>
 

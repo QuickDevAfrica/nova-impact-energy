@@ -7,5 +7,41 @@
     "photoUrl": "https://unsplash.com/photos/a-person-working-on-a-solar-panel-rNn_TU8dvoY",
     "isPlaceholder": true,
     "addedAt": "2026-07-29T02:13:03.477Z"
+  },
+  {
+    "slug": "enova-platform",
+    "unsplashId": "ZTLUNxoRaPY",
+    "photographer": "Ofspace LLC",
+    "photographerUrl": "https://unsplash.com/@ofspace",
+    "photoUrl": "https://unsplash.com/photos/a-man-sitting-in-front-of-two-computer-monitors-ZTLUNxoRaPY",
+    "isPlaceholder": true,
+    "addedAt": "2026-07-29T04:33:00.000Z"
+  },
+  {
+    "slug": "service-engineering",
+    "unsplashId": "hBE96YanOlM",
+    "photographer": "Sikwe Scarter",
+    "photographerUrl": "https://unsplash.com/@sikwe",
+    "photoUrl": "https://unsplash.com/photos/a-man-wearing-a-safety-vest-and-hard-hat-hBE96YanOlM",
+    "isPlaceholder": true,
+    "addedAt": "2026-07-29T04:33:00.000Z"
+  },
+  {
+    "slug": "service-training",
+    "unsplashId": "pIcseKMisrs",
+    "photographer": "Raze Solar",
+    "photographerUrl": "https://unsplash.com/@razesolar",
+    "photoUrl": "https://unsplash.com/photos/men-on-top-of-a-roof-pIcseKMisrs",
+    "isPlaceholder": true,
+    "addedAt": "2026-07-29T04:33:00.000Z"
+  },
+  {
+    "slug": "service-oem",
+    "unsplashId": "-Wt8AyCr9i4",
+    "photographer": "TECNIC Bioprocess Solutions",
+    "photographerUrl": "https://unsplash.com/@tecnic",
+    "photoUrl": "https://unsplash.com/photos/a-man-inspects-equipment-in-a-modern-factory--Wt8AyCr9i4",
+    "isPlaceholder": true,
+    "addedAt": "2026-07-29T04:33:00.000Z"
   }
 ]
