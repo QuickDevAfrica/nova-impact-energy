@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { PortableText, type PortableTextBlock } from '@portabletext/react';
 import { Section, Button, Reveal, ValuesSection, FeatureCard } from '@nova/ui';
 import { sanityClient } from '@/lib/sanity.client';
@@ -78,6 +79,13 @@ interface ServicesPageDoc {
   featuredSolutions: ServiceSolution[];
 }
 
+// PLACEHOLDER -- Unsplash stock, tagged isPlaceholder in
+// apps/marketing/public/images/solutions/CREDITS.json, keyed by nucid.
+const SOLUTION_IMAGES: Record<string, { src: string; alt: string }> = {
+  'SOL-001': { src: '/images/solutions/solution-training.webp', alt: 'Trainees attending a certification session' },
+  'SOL-002': { src: '/images/solutions/solution-oem.webp', alt: 'Technician installing manufacturer equipment' },
+};
+
 export default async function SolutionsPage() {
   const page = await sanityClient.fetch<ServicesPageDoc | null>(servicesPageQuery);
 
@@ -114,10 +122,13 @@ export default async function SolutionsPage() {
           (was alternating white/offwhite for dark/light rhythm -- this
           page now stays white end to end instead). */}
       {page!.featuredSolutions.map((solution, i) => {
+        const solutionImage = SOLUTION_IMAGES[solution.nucid];
         return (
           <Section tone="white" key={solution.nucid} id={solution.slug}>
             <Reveal className={`flex flex-col gap-8 md:flex-row md:items-center ${i % 2 === 1 ? 'md:flex-row-reverse' : ''}`}>
-              <div className="aspect-[4/3] w-full rounded-md bg-muted-bg md:w-1/2" aria-hidden="true" />
+              <div className="relative aspect-[4/3] w-full overflow-hidden rounded-md bg-muted-bg md:w-1/2">
+                {solutionImage && <Image src={solutionImage.src} alt={solutionImage.alt} fill className="object-cover" />}
+              </div>
               <div className="md:w-1/2">
                 <h2 className="mb-2 text-[length:var(--type-h2)] font-semibold tracking-[-0.01em]">{solution.name}</h2>
                 {solution.tagline && (

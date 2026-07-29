@@ -1,0 +1,20 @@
+[
+  {
+    "slug": "solution-training",
+    "unsplashId": "HETN8rHahA8",
+    "photographer": "Dwayne joe",
+    "photographerUrl": "https://unsplash.com/@spliff_dj_joe",
+    "photoUrl": "https://unsplash.com/photos/diverse-group-of-people-attending-a-presentation-in-person-conference-HETN8rHahA8",
+    "isPlaceholder": true,
+    "addedAt": "2026-07-29T06:50:00.000Z"
+  },
+  {
+    "slug": "solution-oem",
+    "unsplashId": "K4dBR3TiH4U",
+    "photographer": "Citadel Life Safety",
+    "photographerUrl": "https://unsplash.com/@citadellifesafety",
+    "photoUrl": "https://unsplash.com/photos/a-construction-worker-is-examining-a-door-K4dBR3TiH4U",
+    "isPlaceholder": true,
+    "addedAt": "2026-07-29T06:50:00.000Z"
+  }
+]
