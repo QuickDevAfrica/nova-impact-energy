@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@nova/content-model": "*",
-    "@nova/design-tokens": "*"
+    "@nova/design-tokens": "*",
+    "@tabler/icons-react": "^3.46.0"
   }
 }

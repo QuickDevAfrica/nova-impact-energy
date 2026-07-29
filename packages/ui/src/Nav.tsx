@@ -1,5 +1,6 @@
 'use client';
 import { useState } from 'react';
+import { IconMenu2, IconX } from '@tabler/icons-react';
 import { Button } from './Button';
 import { Logo } from './Logo';
 
@@ -87,13 +88,9 @@ export function Nav({
             onClick={() => setOpen((o) => !o)}
           >
             {open ? (
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-              </svg>
+              <IconX size={24} stroke={2} aria-hidden="true" />
             ) : (
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                <path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-              </svg>
+              <IconMenu2 size={24} stroke={2} aria-hidden="true" />
             )}
           </button>
         </div>
