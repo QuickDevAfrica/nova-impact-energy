@@ -1,5 +1,32 @@
 [
   {
+    "slug": "whatwedo-engineering",
+    "unsplashId": "CjYnf6YL0NY",
+    "photographer": "UK Black Tech",
+    "photographerUrl": "https://unsplash.com/@ukblacktech",
+    "photoUrl": "https://unsplash.com/photos/a-man-giving-a-presentation-to-a-group-of-people-CjYnf6YL0NY",
+    "isPlaceholder": true,
+    "addedAt": "2026-07-29T19:51:00.000Z"
+  },
+  {
+    "slug": "whatwedo-training",
+    "unsplashId": "XwsmcJrXa2I",
+    "photographer": "Stanley Masinde",
+    "photographerUrl": "https://unsplash.com/@stanleymasinde",
+    "photoUrl": "https://unsplash.com/photos/three-men-using-laptops-on-table-XwsmcJrXa2I",
+    "isPlaceholder": true,
+    "addedAt": "2026-07-29T19:51:00.000Z"
+  },
+  {
+    "slug": "whatwedo-oem",
+    "unsplashId": "N_nAAwnBDy8",
+    "photographer": "Ali Mkumbwa",
+    "photographerUrl": "https://unsplash.com/@mkumbwajr",
+    "photoUrl": "https://unsplash.com/photos/a-man-in-a-hard-hat-is-looking-at-a-piece-of-paper-N_nAAwnBDy8",
+    "isPlaceholder": true,
+    "addedAt": "2026-07-29T20:50:00.000Z"
+  },
+  {
     "slug": "hero-energy",
     "unsplashId": "_2AlIm-F6pw",
     "photographer": "Emmanuel Ikwuegbu",

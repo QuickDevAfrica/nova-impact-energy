@@ -46,6 +46,24 @@ const HOME_MAX = 'max-w-[1400px]';
 const HOME_PADDING = 'px-5 py-24 md:px-12 md:py-32 lg:py-40';
 
 // PLACEHOLDER -- Unsplash stock, tagged isPlaceholder in
+// apps/marketing/public/images/home/CREDITS.json. Keyed by exact
+// whatWeDoCards headline.
+const WHAT_WE_DO_IMAGES: Record<string, { src: string; alt: string }> = {
+  'Engineering & Technical Advisory': {
+    src: '/images/home/whatwedo-engineering.webp',
+    alt: 'Engineer presenting technical advisory at a whiteboard',
+  },
+  'Training & Installer Academy': {
+    src: '/images/home/whatwedo-training.webp',
+    alt: 'Installers training together on laptops',
+  },
+  'OEM Representation': {
+    src: '/images/home/whatwedo-oem.webp',
+    alt: 'Technician conducting a technical equipment inspection in a warehouse',
+  },
+};
+
+// PLACEHOLDER -- Unsplash stock, tagged isPlaceholder in
 // apps/marketing/public/images/home/CREDITS.json. Order matches
 // page!.splitCards (left card, right card).
 const HOME_SPLIT_IMAGES = [
@@ -223,6 +241,8 @@ export default async function HomePage() {
                 body={card.body}
                 ctaLabel={card.ctaLabel}
                 ctaHref={card.ctaHref}
+                imageSrc={WHAT_WE_DO_IMAGES[card.headline]?.src}
+                imageAlt={WHAT_WE_DO_IMAGES[card.headline]?.alt}
               />
             ))}
           </div>
