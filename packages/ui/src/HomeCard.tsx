@@ -1,3 +1,5 @@
+import Image from 'next/image';
+
 /**
  * Homepage content-standard redesign -- premium equal-height card: large
  * illustration, small heading, one sentence, CTA. Used for Section 3's
@@ -21,6 +23,8 @@ export function HomeCard({
   ctaHref,
   tone = 'dark',
   size = 'large',
+  imageSrc,
+  imageAlt,
 }: {
   headline: string;
   body: string;
@@ -28,6 +32,8 @@ export function HomeCard({
   ctaHref?: string;
   tone?: 'dark' | 'light';
   size?: 'large' | 'small';
+  imageSrc?: string;
+  imageAlt?: string;
 }) {
   const toneClasses =
     tone === 'dark' ? 'bg-white/[0.06] text-white' : 'bg-white text-nova-text border border-card-border';
@@ -35,11 +41,16 @@ export function HomeCard({
 
   return (
     <div className={`flex h-full flex-col overflow-hidden rounded-[32px] ${toneClasses}`}>
-      {size === 'large' && (
-        // illustration placeholder -- see comment at call site for the
-        // reserved filename; reserves the exact aspect ratio for later
-        <div className={`aspect-[4/3] ${tone === 'dark' ? 'bg-white/[0.06]' : 'bg-muted-bg'}`} aria-hidden="true" />
-      )}
+      {size === 'large' &&
+        (imageSrc ? (
+          <div className="relative aspect-[4/3]">
+            <Image src={imageSrc} alt={imageAlt ?? ''} fill className="object-cover" />
+          </div>
+        ) : (
+          // illustration placeholder -- see comment at call site for the
+          // reserved filename; reserves the exact aspect ratio for later
+          <div className={`aspect-[4/3] ${tone === 'dark' ? 'bg-white/[0.06]' : 'bg-muted-bg'}`} aria-hidden="true" />
+        ))}
       <div className={`flex flex-1 flex-col gap-2 ${size === 'large' ? 'p-8' : 'p-6'}`}>
         <h3 className="text-[length:var(--type-h3)] font-semibold">{headline}</h3>
         <p className={`text-[length:var(--type-body)] leading-normal ${tone === 'dark' ? 'text-text-on-dark' : ''}`}>{body}</p>
