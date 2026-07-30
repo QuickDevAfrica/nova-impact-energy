@@ -197,12 +197,12 @@ export default async function HomePage() {
           </div>
         </div>
         {/* PLACEHOLDER -- replace with real project/team photo. Unsplash
-            stock (Markus Spiske), tagged isPlaceholder in
+            stock (Ray ZHUANG), tagged isPlaceholder in
             apps/marketing/public/images/home/CREDITS.json. */}
         <div className="relative aspect-[16/9] w-full overflow-hidden rounded-[32px] bg-muted-bg">
           <Image
             src="/images/home/hero-energy.webp"
-            alt="Technician installing a solar panel"
+            alt="Rows of electrical distribution panels"
             fill
             className="object-cover"
             priority
